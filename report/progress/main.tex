@@ -54,14 +54,21 @@ bootstrap draws so its interval is for the difference itself.
 
 \section*{Models compared}
 All models share the same data, splits and input resolution, forming an ablation ladder over
-\emph{how much of the network is fitted to the contributors}:
+\emph{how much of the network is fitted to the contributors}.
+\textbf{Backbone.} Every network is the standard ResNet-18 \citep{he2016resnet}: a
+stride-2 $7\times7$ stem convolution with max-pooling, then four stages of two basic
+residual blocks ($x \mapsto x + F(x)$, two $3\times3$ convolutions with BatchNorm each),
+widening 64--128--256--512 channels with stride 2 between stages. For our $128\times170$
+inputs the final map is $4\times6$; global average pooling gives a 512-d feature, followed
+by dropout 0.2 and a 32-way linear head (11.2\,M parameters). The CPU runs freeze the stem
+and stages 1--2 (0.68\,M, 6\%; BatchNorm statistics fixed) and train stages 3--4 plus the
+head (10.5\,M):
 \textbf{(i)~Linear probe.} Frozen ImageNet \citep{deng2009imagenet,kornblith2019transfer}
 ResNet-18 features (512-d global average pool) with $L_2$-penalised softmax regression,
 $\min_{W,b}\tfrac1n\sum_i \mathrm{CE}(W^\top f_i+b,y_i)+\lambda\lVert W\rVert_F^2$, fitted by
 L-BFGS on 9{,}600 images (300 per country); $\lambda$ chosen on \emph{val} (unseen
-contributors). \textbf{(ii)~Partial fine-tune} (CPU interim, no GPU access so far): the stem
-and residual stages 1--2 stay frozen at ImageNet weights; stages 3--4 and the head train for
-24 epochs of 20{,}480 images ($\approx$4.7 passes) with SGD (Nesterov, lr $0.02$ per 256
+contributors). \textbf{(ii)~Partial fine-tune} (CPU interim, no GPU access so far): stages 3--4 and the
+head train for 24 epochs of 20{,}480 images ($\approx$4.7 passes) with SGD (Nesterov, lr $0.02$ per 256
 images scaled by batch, cosine decay after 0.5-epoch warm-up, weight decay $10^{-4}$ off
 BatchNorm/bias), dropout 0.2, label-smoothed cross-entropy
 ($\varepsilon=0.1$: $q_y=1-\varepsilon+\varepsilon/K$, $q_{k\neq y}=\varepsilon/K$), random
