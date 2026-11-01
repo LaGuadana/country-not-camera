@@ -1,0 +1,42 @@
+{
+ "probe": {
+  "n_test": 12800,
+  "error_rate": 0.864765625,
+  "median_km_errors": 5542.853896821474,
+  "median_km_correct": 222.59281849192425,
+  "share_errors_over_1500km": 0.7202095943626344,
+  "share_errors_over_4000km": 0.5504562291083205
+ },
+ "cpu_ft": {
+  "n_test": 12800,
+  "error_rate": 0.713125,
+  "median_km_errors": 2438.73847623179,
+  "median_km_correct": 215.40710100309764,
+  "share_errors_over_1500km": 0.6096625766871165,
+  "share_errors_over_4000km": 0.42857142857142855
+ },
+ "stage_1": {
+  "n_test": 12800,
+  "error_rate": 0.701875,
+  "median_km_errors": 2678.8435283038307,
+  "median_km_correct": 216.98208450735427,
+  "share_errors_over_1500km": 0.6326803205699021,
+  "share_errors_over_4000km": 0.43688780053428317
+ },
+ "stage_2": {
+  "n_test": 12800,
+  "error_rate": 0.69890625,
+  "median_km_errors": 2852.2566416998407,
+  "median_km_correct": 219.80156393026306,
+  "share_errors_over_1500km": 0.6412921976302258,
+  "share_errors_over_4000km": 0.4533869885982562
+ },
+ "stage_3": {
+  "n_test": 12800,
+  "error_rate": 0.6934375,
+  "median_km_errors": 2864.7577903994516,
+  "median_km_correct": 218.975530233188,
+  "share_errors_over_1500km": 0.6440964398377648,
+  "share_errors_over_4000km": 0.4539206849932402
+ }
+}

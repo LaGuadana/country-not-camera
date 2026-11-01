@@ -1,0 +1,345 @@
+<title>Dashcam Duel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&family=Overpass+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one narrow column; sign-board score + photo stay pinned while the country grid scrolls under them. */
+:root {
+  --bg: #eceeea;          /* concrete */
+  --surface: #f8f9f6;
+  --ink: #1c1f1d;         /* asphalt */
+  --muted: #5d6560;
+  --line: #cbd1ca;
+  --marking: #f2be22;     /* lane-marking yellow: the AI's colour, used as fill only */
+  --on-marking: #1c1f1d;
+  --signboard: #0f6b3f;   /* motorway sign green */
+  --on-sign: #ffffff;
+  --right: #1f7a4d;
+  --wrong: #c23b30;
+  --on-state: #ffffff;
+  --overlay: rgba(12, 14, 13, .62);
+  --font-ui: "Overpass", "Highway Gothic", "Arial Narrow", system-ui, sans-serif;
+  --font-data: "Overpass Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161917; --surface: #212522; --ink: #eceeea; --muted: #9aa39d; --line: #353b37;
+    --on-marking: #161917; --signboard: #0f6b3f; --right: #2e9e66; --wrong: #e05a4e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161917; --surface: #212522; --ink: #eceeea; --muted: #9aa39d; --line: #353b37;
+  --on-marking: #161917; --signboard: #0f6b3f; --right: #2e9e66; --wrong: #e05a4e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 15px;
+  padding-inline: 16px; -webkit-tap-highlight-color: transparent;
+}
+.app { max-width: 520px; margin: 0 auto; padding-block: 10px 28px; display: flex; flex-direction: column; gap: 14px; }
+
+.pin { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg);
+  display: flex; flex-direction: column; gap: 10px; padding-block: 6px 10px; }
+
+/* the sign board */
+.sign { background: var(--signboard); color: var(--on-sign); border-radius: 10px; padding: 4px; }
+.sign-in { border: 2px solid var(--on-sign); border-radius: 7px; padding: 6px 14px 4px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.side { display: flex; align-items: baseline; gap: 8px; font-weight: 800; }
+.side.ai { justify-content: flex-end; }
+.who { font-size: 13px; letter-spacing: .08em; }
+.pts { font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; }
+.ai .who { background: var(--marking); color: var(--on-marking); border-radius: 3px; padding: 2px 5px 0; }
+.mid { font-family: var(--font-data); font-size: 12px; text-align: center; opacity: .9; font-variant-numeric: tabular-nums; }
+
+.photo { position: relative; width: 100%; max-width: 100%; aspect-ratio: 170 / 128; border-radius: 6px;
+  overflow: hidden; background: var(--ink); }
+.photo .hi { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+/* the model's 4:3 centre crop; everything outside it is dimmed in the AI views */
+.crop { position: absolute; display: none; box-shadow: 0 0 0 100vmax var(--overlay); }
+.crop img, .crop canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.crop img { image-rendering: pixelated; }
+.photo[data-view="ai"] .crop, .photo[data-view="focus"] .crop { display: block; }
+.photo[data-view="ai"] .crop canvas, .photo[data-view="focus"] .crop img { display: none; }
+.views { position: absolute; left: 8px; top: 8px; display: flex; gap: 2px; padding: 2px; border-radius: 4px;
+  background: var(--overlay); }
+.views button { appearance: none; border: 0; border-radius: 3px; background: transparent; color: #fff;
+  font: 600 11px var(--font-data); padding: 7px 8px 5px; cursor: pointer; }
+.views button[aria-pressed="true"] { background: #fff; color: #1c1f1d; }
+.views button:disabled { opacity: .4; cursor: default; }
+.tag { position: absolute; left: 8px; bottom: 8px; background: var(--overlay); color: #fff; font-family: var(--font-data);
+  font-size: 11px; padding: 3px 6px 2px; border-radius: 3px; }
+
+.status { min-height: 52px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.prompt { color: var(--muted); font-size: 15px; }
+.verdict { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 800; font-size: 20px; }
+.chip { font-family: var(--font-data); font-size: 12px; font-weight: 600; padding: 3px 7px 2px; border-radius: 3px; }
+.chip.ok { background: var(--right); color: var(--on-state); }
+.chip.no { background: var(--wrong); color: var(--on-state); }
+.chip.aic { background: var(--marking); color: var(--on-marking); }
+.top3 { font-family: var(--font-data); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.next { appearance: none; border: 0; border-radius: 8px; background: var(--ink); color: var(--bg); font: 800 17px var(--font-ui);
+  padding: 14px 16px 11px; width: 100%; cursor: pointer; }
+
+.groups { display: flex; flex-direction: column; gap: 12px; }
+.group h2 { margin: 0 0 6px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.btns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.c { appearance: none; position: relative; min-height: 54px; padding: 6px 2px 4px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--ink); cursor: pointer; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 2px; font: 600 12px/1.15 var(--font-ui); transition: background-color .12s, border-color .12s; }
+.c .f { font-size: 20px; line-height: 1; }
+.c .n { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.c:active { transform: scale(.97); }
+.c.is-right { background: var(--right); border-color: var(--right); color: var(--on-state); }
+.c.is-wrong { background: var(--wrong); border-color: var(--wrong); color: var(--on-state); }
+.c.is-ai::after { content: "AI"; position: absolute; top: -6px; right: -4px; background: var(--marking); color: var(--on-marking);
+  font: 600 10px var(--font-data); padding: 2px 4px 1px; border-radius: 3px; }
+.answered .c:not(.is-right):not(.is-wrong) { opacity: .45; }
+button:focus-visible { outline: 3px solid var(--marking); outline-offset: 2px; }
+
+.end { display: flex; flex-direction: column; gap: 14px; }
+.end h1 { margin: 0; font-size: 30px; font-weight: 800; text-wrap: balance; }
+.track { display: grid; grid-template-columns: 34px repeat(10, minmax(0, 1fr)); gap: 4px; align-items: center;
+  font-family: var(--font-data); font-size: 12px; }
+.dot { height: 14px; border-radius: 2px; background: var(--wrong); }
+.dot.ok { background: var(--right); }
+.stats { font-family: var(--font-data); font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+footer { font-size: 11px; color: var(--muted); line-height: 1.5; }
+@media (max-height: 640px) { .c { min-height: 44px; } .c .f { font-size: 17px; } .pts { font-size: 28px; } }
+@media (prefers-reduced-motion: reduce) { .c { transition: none; } .c:active { transform: none; } }
+</style>
+
+<div class="app" id="app">
+  <div class="pin">
+    <div class="sign" role="group" aria-label="Score">
+      <div class="sign-in">
+        <div class="side"><span class="who">YOU</span><span class="pts" id="you">0</span></div>
+        <div class="mid" id="round">1 / 10</div>
+        <div class="side ai"><span class="pts" id="ai">0</span><span class="who">AI</span></div>
+      </div>
+    </div>
+    <div id="play"><div class="photo"></div></div>
+    <div class="status" id="status" aria-live="polite"></div>
+  </div>
+  <div class="groups" id="groups"></div>
+  <footer id="credit"></footer>
+</div>
+
+<script id="game-data" type="application/json">__GAME_DATA__</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("game-data").textContent);
+  const N = D.gameSize;
+  const GAMES = D.rounds.length / N;
+  const REGIONS = ["Europe", "Asia", "Americas", "Africa & Oceania"];
+  const byCode = Object.fromEntries(D.classes.map(c => [c.code, c]));
+  const $ = id => document.getElementById(id);
+  const flag = code => String.fromCodePoint(...[...code].map(ch => 0x1F1E6 + ch.charCodeAt(0) - 65));
+  const pct = p => Math.round(p * 100) + "%";
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+  const store = {
+    get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  };
+
+  // each game's photos are one file, g/<game>.json ({photo id: base64 JPEG}), fetched when needed
+  const packs = {};
+  const loadPack = g => packs[g] ??= fetch(`g/${g}.json`, { cache: "no-cache" })
+    .then(r => r.ok ? r.json() : Promise.reject(new Error(r.status)))
+    .catch(e => { delete packs[g]; throw e; });
+
+  let S, upNext;  // the current game; the game prefetched to follow it
+  const newGame = () => {  // an unplayed game on this phone; start over once all are played
+    const played = new Set(store.get("dd-played", []));
+    let free = [...Array(GAMES).keys()].filter(g => !played.has(g));
+    if (!free.length) { played.clear(); free = [...Array(GAMES).keys()]; }
+    const g = free.includes(upNext) ? upNext : free[Math.random() * free.length | 0];
+    played.add(g); store.set("dd-played", [...played]);
+    const rest = free.filter(x => x !== g);
+    upNext = rest.length ? rest[Math.random() * rest.length | 0] : undefined;
+    S = { v: D.version, g, order: shuffle([...Array(N).keys()]), round: 0, you: [], ai: [], picked: null, done: false };
+  };
+  const cur = () => D.rounds[S.g * N + S.order[S.round]];
+
+  // country buttons, grouped by region
+  const groups = $("groups");
+  const btn = {};
+  for (const r of REGIONS) {
+    const cs = D.classes.filter(c => c.region === r).sort((a, b) => a.name.localeCompare(b.name));
+    if (!cs.length) continue;
+    const sec = document.createElement("section");
+    sec.className = "group";
+    const h = document.createElement("h2");
+    h.textContent = r;
+    const grid = document.createElement("div");
+    grid.className = "btns";
+    sec.append(h, grid);
+    for (const c of cs) {
+      const b = document.createElement("button");
+      b.className = "c"; b.type = "button"; b.dataset.code = c.code; b.setAttribute("aria-label", c.name);
+      b.innerHTML = `<span class="f" aria-hidden="true">${flag(c.code)}</span><span class="n">${c.name}</span>`;
+      b.addEventListener("click", () => answer(c.code));
+      grid.append(b);
+      btn[c.code] = b;
+    }
+    groups.append(sec);
+  }
+  $("credit").textContent = `Photos: OpenStreetView-5M (Mapillary contributors), CC BY-SA 4.0, from photographers the AI never trained on. AI: ${D.model.label}${D.model.note ? " · " + D.model.note : ""}.`;
+
+  function score() {
+    $("you").textContent = S.you.filter(Boolean).length;
+    $("ai").textContent = S.ai.filter(Boolean).length;
+    $("round").textContent = `${Math.min(S.round + 1, N)} / ${N}`;
+  }
+
+  // photo views: the original, the model's input, and (after answering) Grad-CAM of its top guess
+  const VIEWS = [["photo", "Photo"], ["ai", "AI sees"], ["focus", "AI focus"]];
+  const HEAT = [[242, 190, 34], [224, 60, 40]];  // yellow -> red as the map rises; alpha rises with it
+
+  function drawHeat(cv, b64) {
+    const [h, w] = D.camSize, v = Uint8Array.from(atob(b64), ch => ch.charCodeAt(0));
+    const ctx = cv.getContext("2d"), im = ctx.createImageData(w, h);
+    v.forEach((x, i) => {
+      const t = x / 255;
+      im.data.set([...HEAT[0].map((c, k) => c + (HEAT[1][k] - c) * t), 255 * 0.65 * t ** 1.5], i * 4);
+    });
+    ctx.putImageData(im, 0, 0);
+  }
+
+  function renderPhoto(r, ph) {
+    const [x, y, w, h] = ph.crop.map(f => `${f * 100}%`);
+    const box = $("photo");
+    box.innerHTML = `<img class="hi" alt="Street-level photo to locate" src="data:image/jpeg;base64,${ph.hi}">
+      <div class="crop" style="left:${x};top:${y};width:${w};height:${h}">
+        <img alt="The part of the photo the AI gets, at its 170 × 128 resolution" src="data:image/jpeg;base64,${ph.lo}">
+        <canvas width="${D.camSize[1]}" height="${D.camSize[0]}"></canvas></div>
+      <div class="views" role="group" aria-label="Photo view">${VIEWS.map(([v, label]) =>
+        `<button type="button" data-v="${v}">${label}</button>`).join("")}</div>
+      <span class="tag" id="cap"></span>`;
+    drawHeat(box.querySelector("canvas"), ph.cam);
+    for (const b of box.querySelectorAll(".views button")) b.addEventListener("click", () => setView(b.dataset.v));
+    setView(S.picked ? "focus" : "photo");
+  }
+
+  function setView(v) {
+    const box = $("photo"), cap = $("cap");
+    if (!box || !cap) return;  // photo not loaded yet
+    const r = cur();
+    box.dataset.view = v;
+    for (const b of box.querySelectorAll(".views button")) {
+      b.setAttribute("aria-pressed", b.dataset.v === v);
+      b.disabled = b.dataset.v === "focus" && !S.picked;
+    }
+    cap.textContent = v === "photo" ? `Original · ${r.w} × ${r.h} px`
+      : v === "ai" ? "What the AI gets · 170 × 128 px"
+      : `Red = what made the AI say ${byCode[r.ai[0][0]].name}`;
+  }
+
+  function showRound() {
+    const r = cur(), s = S, round = S.round;
+    S.picked = null;
+    $("play").innerHTML = `<div class="photo" id="photo" style="aspect-ratio: ${r.w} / ${r.h}"></div>`;
+    $("status").innerHTML = `<div class="prompt">Loading photo…</div>`;
+    groups.hidden = false; groups.classList.remove("answered");
+    for (const b of Object.values(btn)) { b.className = "c"; b.disabled = true; }
+    score();
+    window.scrollTo({ top: 0, behavior: "instant" });
+    loadPack(s.g).then(p => {
+      if (S !== s || S.round !== round) return;
+      renderPhoto(r, p[r.id]);
+      if (!S.picked) {  // not already answered (page restored mid-round)
+        $("status").innerHTML = `<div class="prompt">Which country is this? Tap your guess.</div>`;
+        for (const b of Object.values(btn)) b.disabled = false;
+      }
+      if (upNext !== undefined) loadPack(upNext).catch(() => {});
+    }, () => {
+      if (S !== s || S.round !== round) return;
+      $("status").innerHTML = `<button class="next" id="retry" type="button">Couldn't load the photo. Retry</button>`;
+      $("retry").addEventListener("click", showRound);
+    });
+  }
+
+  function answer(code) {
+    if (S.picked) return;
+    S.picked = code;
+    const r = cur(), aiCode = r.ai[0][0];
+    const youOk = code === r.c, aiOk = aiCode === r.c;
+    S.you.push(youOk); S.ai.push(aiOk);
+    groups.classList.add("answered");
+    for (const b of Object.values(btn)) b.disabled = true;
+    btn[r.c].classList.add("is-right");
+    if (!youOk) btn[code].classList.add("is-wrong");
+    btn[aiCode].classList.add("is-ai");
+    const t = byCode[r.c];
+    const last = S.round + 1 >= N;
+    $("status").innerHTML = `
+      <div class="verdict"><span>${flag(t.code)} ${t.name}</span>
+        <span class="chip ${youOk ? "ok" : "no"}">YOU ${youOk ? "✓" : "✗"}</span>
+        <span class="chip ${aiOk ? "ok" : "no"}">AI ${aiOk ? "✓" : "✗"}</span></div>
+      <div class="top3"><span class="chip aic">AI</span> ${r.ai.map(([c, p]) => `${byCode[c].name} ${pct(p)}`).join(" · ")}</div>
+      <button class="next" id="next" type="button">${last ? "See result" : "Next photo"} →</button>`;
+    $("next").addEventListener("click", next);
+    $("next").focus({ preventScroll: true });
+    setView("focus");
+    score();
+  }
+
+  function next() {
+    S.round += 1;
+    if (S.round >= N) return finish();
+    showRound();
+  }
+
+  const readStats = () => store.get("dd-stats", { games: 0, wins: 0, you: 0, ai: 0 });
+
+  function finish() {
+    const y = S.you.filter(Boolean).length, a = S.ai.filter(Boolean).length;
+    const st = readStats();
+    st.games += 1; st.wins += y > a ? 1 : 0; st.you += y; st.ai += a;
+    store.set("dd-stats", st);
+    S.done = true;
+    renderEnd();
+  }
+
+  function renderEnd() {
+    const y = S.you.filter(Boolean).length, a = S.ai.filter(Boolean).length;
+    const st = readStats();
+    const head = y > a ? "You beat the AI" : y < a ? "The AI wins this one" : "Dead heat";
+    const row = (label, arr) => `<span>${label}</span>` + arr.map(ok => `<span class="dot ${ok ? "ok" : ""}"></span>`).join("");
+    $("play").innerHTML = `<div class="end">
+      <h1>${head}, ${y}–${a}</h1>
+      <div class="track" aria-label="Round by round">${row("YOU", S.you)}${row("AI", S.ai)}</div>
+      <div class="stats">On this phone: ${st.games} game${st.games === 1 ? "" : "s"}, ${st.wins} won.
+        You ${pct(st.you / (N * Math.max(st.games, 1)))} correct, AI ${pct(st.ai / (N * Math.max(st.games, 1)))}.</div>
+    </div>`;
+    $("status").innerHTML = `<button class="next" id="again" type="button">Play again →</button>`;
+    $("again").addEventListener("click", () => { newGame(); showRound(); });
+    groups.hidden = true;
+    $("round").textContent = "final";
+    $("you").textContent = y; $("ai").textContent = a;
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Enter" && S.picked && document.activeElement?.id !== "next") $("next")?.click();
+  });
+
+  function start(saved) {
+    if (saved?.S?.v === D.version) {  // page was updated mid-game: carry on where the player was
+      S = saved.S;
+      if (S.done) return renderEnd();
+      const picked = S.picked, answered = S.you.length > S.round;
+      showRound();
+      if (answered) { S.you.pop(); S.ai.pop(); answer(picked); }
+      return;
+    }
+    newGame(); showRound();
+  }
+  window.claude?.hot?.snapshot?.(() => ({ S }));
+  window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+})();
+</script>

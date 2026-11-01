@@ -1,0 +1,7 @@
+read 4,894,684 rows in 24s; dropped 119 without creator_id; 32 countries -> 3,828,850 rows
+recomputed split matches all 139,696 manifest rows
+261,572 extra training images (cap 100 per contributor and country) in 3 chunks; already in the manifest: 101,578
+  chunk 1: 87,190 images, 30 countries, per country 339-20213
+  chunk 2: 87,194 images, 30 countries, per country 340-20212
+  chunk 3: 87,188 images, 30 countries, per country 340-20212
+extra images per country: BE 1,019, HR 1,347, CZ 1,434, PT 1,611, ID 1,783, TH 1,898, NL 2,069, GR 2,075, DK 2,328, CH 2,438, CO 2,494, HU 2,635, TW 2,970, TR 3,467, MX 4,238, AU 4,919, CA 4,979, JP 4,997, AT 5,188, BR 8,603, IN 8,623, PL 8,922, GB 9,106, SE 9,422, ES 9,925, RU 15,044, IT 15,227, FR 23,368, DE 38,806, US 60,637

@@ -1,0 +1,8 @@
+train: 9,600 images, 28 img/s
+val: 1,600 images, 30 img/s
+l2 0.0001: train top1 0.487  val top1 0.128  bacc 0.128  top3 0.283
+l2 0.0003: train top1 0.473  val top1 0.140  bacc 0.140  top3 0.299
+l2 0.001: train top1 0.445  val top1 0.149  bacc 0.149  top3 0.310
+l2 0.003: train top1 0.401  val top1 0.159  bacc 0.159  top3 0.329
+l2 0.01: train top1 0.343  val top1 0.167  bacc 0.167  top3 0.337
+chose l2 0.01; wrote runs/probe/best.pt

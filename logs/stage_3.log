@@ -1,0 +1,29 @@
+chunk 3: 87,188 new images + 15,932 earlier ones (countries topped up to 1600)
+device cpu; train 103,120 images, 32 classes (1600-20212 per class); eval val 1,600, val_shared 1,600
+initialised from runs/stage_2/best.pt
+  epoch 0 step 80/323  loss 2.4226  acc 0.3678  lr 0.00100  13 img/s
+  epoch 0 step 160/323  loss 2.4518  acc 0.3603  lr 0.00099  14 img/s
+  epoch 0 step 240/323  loss 2.4464  acc 0.3579  lr 0.00097  15 img/s
+  epoch 0 step 320/323  loss 2.4436  acc 0.3602  lr 0.00094  16 img/s
+epoch 0: train loss 2.4448 top1 0.3599 | val top1 0.3262 bacc 0.3273 | val_shared top1 0.3781 bacc 0.3747 | 23.8 min  *best*
+  epoch 1 step 80/323  loss 2.4079  acc 0.3662  lr 0.00090  17 img/s
+  epoch 1 step 160/323  loss 2.4238  acc 0.3663  lr 0.00084  17 img/s
+  epoch 1 step 240/323  loss 2.4211  acc 0.3674  lr 0.00078  17 img/s
+  epoch 1 step 320/323  loss 2.4276  acc 0.3679  lr 0.00070  17 img/s
+epoch 1: train loss 2.4291 top1 0.3677 | val top1 0.3119 bacc 0.3128 | val_shared top1 0.3925 bacc 0.3888 | 22.4 min
+  epoch 2 step 80/323  loss 2.4537  acc 0.3646  lr 0.00062  16 img/s
+  epoch 2 step 160/323  loss 2.4425  acc 0.3658  lr 0.00054  17 img/s
+  epoch 2 step 240/323  loss 2.4477  acc 0.3628  lr 0.00046  18 img/s
+  epoch 2 step 320/323  loss 2.4363  acc 0.3645  lr 0.00038  18 img/s
+epoch 2: train loss 2.4360 top1 0.3644 | val top1 0.3206 bacc 0.3211 | val_shared top1 0.3837 bacc 0.3798 | 20.9 min
+  epoch 3 step 80/323  loss 2.4127  acc 0.3670  lr 0.00030  19 img/s
+  epoch 3 step 160/323  loss 2.4248  acc 0.3709  lr 0.00023  19 img/s
+  epoch 3 step 240/323  loss 2.4105  acc 0.3761  lr 0.00016  19 img/s
+  epoch 3 step 320/323  loss 2.4227  acc 0.3720  lr 0.00011  19 img/s
+epoch 3: train loss 2.4255 top1 0.3715 | val top1 0.3225 bacc 0.3250 | val_shared top1 0.3919 bacc 0.3885 | 20.2 min
+  epoch 4 step 80/323  loss 2.3845  acc 0.3793  lr 0.00006  19 img/s
+  epoch 4 step 160/323  loss 2.3879  acc 0.3798  lr 0.00003  19 img/s
+  epoch 4 step 240/323  loss 2.3883  acc 0.3798  lr 0.00001  19 img/s
+  epoch 4 step 320/323  loss 2.4015  acc 0.3769  lr 0.00000  19 img/s
+epoch 4: train loss 2.4009 top1 0.3771 | val top1 0.3294 bacc 0.3312 | val_shared top1 0.3869 bacc 0.3830 | 20.1 min  *best*
+done; best val balanced acc 0.3312; checkpoints in runs/stage_3

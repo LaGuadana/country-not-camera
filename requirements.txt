@@ -1,0 +1,10 @@
+# Tested with: torch 2.14.1+cpu, torchvision 0.29.1, numpy 2.5.2, pandas 3.0.6, pyarrow 26.0.0,
+# scipy 1.18.1, pillow 12.3.0, requests 2.34.2 (Python 3.12). Kaggle's preinstalled stack covers training.
+torch>=2.3
+torchvision>=0.18
+numpy
+pandas>=2.2
+pyarrow
+scipy
+pillow
+requests

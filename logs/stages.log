@@ -1,0 +1,13 @@
+2026-10-12 13:01:13 stage 1: fetching chunk 1
+2026-10-12 14:15:19 stage 1: training from runs/cpu_ft/best.pt
+2026-10-12 16:09:11 stage 1 done: done; best val balanced acc 0.3217; checkpoints in runs/stage_1
+2026-10-12 16:09:11 stage 2: fetching chunk 2
+2026-10-12 16:09:47 stage 2: training from runs/stage_1/best.pt
+2026-10-12 16:11:15 restarting: stages 2+ at --lr 0.004
+2026-10-12 16:11:18 stage 2: fetching chunk 2
+2026-10-12 16:11:56 stage 2: training from runs/stage_1/best.pt
+2026-10-12 18:05:34 stage 2 done: done; best val balanced acc 0.3343; checkpoints in runs/stage_2
+2026-10-12 18:05:34 stage 3: fetching chunk 3
+2026-10-12 18:06:27 stage 3: training from runs/stage_2/best.pt
+2026-10-12 19:54:19 stage 3 done: done; best val balanced acc 0.3312; checkpoints in runs/stage_3
+2026-10-12 19:54:19 all 3 stages done

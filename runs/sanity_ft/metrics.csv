@@ -1,0 +1,2 @@
+epoch,lr,frozen_backbone,train_loss,train_top1,train_img_per_s,epoch_min,val_top1,val_top3,val_balanced_acc,val_shared_top1,val_shared_top3,val_shared_balanced_acc,shared_minus_disjoint_bacc
+0,1.5229324522605948e-06,0,3.928663330078125,0.0721875,10.653095549903272,11.843907340367634,0.1125,0.241875,0.11188710440749502,0.10625,0.229375,0.10610891945779838,-0.005778184949696646

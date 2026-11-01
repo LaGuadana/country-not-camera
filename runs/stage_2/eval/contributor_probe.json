@@ -1,0 +1,30 @@
+{
+ "pairs": 20000,
+ "seed": 0,
+ "splits": {
+  "test": {
+   "neg_pairs": 20000,
+   "auc_any": 0.5930000124968758,
+   "auc_any_pairs": 4001,
+   "auc_diff_seq": 0.5670776994680852,
+   "auc_diff_seq_pairs": 3760,
+   "n_images": 12800,
+   "contributors": 3043,
+   "nn_same_contributor": 0.139,
+   "nn_same_sequence": 0.04700000000000004,
+   "nn_same_chance": 0.00107261962890625
+  },
+  "test_shared": {
+   "neg_pairs": 20000,
+   "auc_any": 0.5967459895975911,
+   "auc_any_pairs": 3653,
+   "auc_diff_seq": 0.5688048428571428,
+   "auc_diff_seq_pairs": 3500,
+   "n_images": 12559,
+   "contributors": 3037,
+   "nn_same_contributor": 0.164,
+   "nn_same_sequence": 0.07699999999999996,
+   "nn_same_chance": 0.0010082199422182985
+  }
+ }
+}

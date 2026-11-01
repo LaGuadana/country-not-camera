@@ -1,0 +1,11 @@
+test         n=12,800  top1 0.287 [0.273, 0.301]  bacc 0.287 [0.275, 0.298]  top3 0.511
+test_shared  n=12,559  top1 0.342 [0.328, 0.356]  bacc 0.345 [0.331, 0.357]  top3 0.567
+val          n= 6,400  top1 0.305 [0.286, 0.324]  bacc 0.305 [0.288, 0.321]  top3 0.529
+val_shared   n= 6,359  top1 0.361 [0.340, 0.385]  bacc 0.363 [0.342, 0.378]  top3 0.584
+gap test_shared - test: top1 +0.055 [0.035, 0.075]  bacc +0.058 [0.041, 0.075]
+gap val_shared - val: top1 +0.056 [0.028, 0.086]  bacc +0.058 [0.031, 0.080]
+wrote /home/betzler/CNN/runs/cpu_ft/eval
+
+real	20m42,844s
+user	72m15,823s
+sys	9m49,167s

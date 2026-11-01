@@ -1,0 +1,7 @@
+test         n=12,800  top1 0.135 [0.126, 0.145]  bacc 0.135 [0.128, 0.143]  top3 0.294
+test_shared  n=12,559  top1 0.134 [0.124, 0.145]  bacc 0.137 [0.127, 0.147]  top3 0.292
+val          n= 6,400  top1 0.151 [0.137, 0.166]  bacc 0.151 [0.139, 0.162]  top3 0.315
+val_shared   n= 6,359  top1 0.143 [0.125, 0.163]  bacc 0.145 [0.131, 0.157]  top3 0.305
+gap test_shared - test: top1 -0.002 [-0.015, 0.013]  bacc +0.002 [-0.011, 0.014]
+gap val_shared - val: top1 -0.008 [-0.031, 0.017]  bacc -0.006 [-0.024, 0.011]
+wrote /home/betzler/CNN/runs/probe/eval
