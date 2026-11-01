@@ -1,5 +1,10 @@
 # Learning the Country, Not the Camera: ResNet-18 on OSV-5M
 
+Public repository: <https://github.com/LaGuadana/country-not-camera> (code MIT; data and
+embedded photos CC-BY-SA-4.0, cite Astruc et al., CVPR 2024). Progress report:
+[`report/progress/main.pdf`](report/progress/main.pdf); the playable demo is
+[`game/dashcam_duel.html`](game/dashcam_duel.html) (see section 4).
+
 Country classification from OpenStreetView-5M street-level images with a ResNet-18, either
 fine-tuned from ImageNet or trained from scratch, evaluated on contributors the model never saw.
 The earlier EDA and linear-probe baselines are in `~/ML/geo_cnn`. This folder holds the CNN
