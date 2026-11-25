@@ -30,7 +30,7 @@ from torch import nn
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from geocnn.data import AugConfig, Prep, make_loader, open_data  # noqa: E402
-from geocnn.engine import amp_dtype, predict  # noqa: E402
+from geocnn.engine import amp_dtype, get_device, predict  # noqa: E402
 from geocnn.metrics import summarize  # noqa: E402
 from geocnn.model import CountryNet, freeze_backbone, param_groups  # noqa: E402
 
@@ -144,7 +144,7 @@ def main(argv=None):
     random.seed(a.seed)
     np.random.seed(a.seed)
     torch.manual_seed(a.seed)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = get_device()
     torch.backends.cudnn.benchmark = True
     channels_last = device.type == "cuda" and not a.no_channels_last
     os.makedirs(a.out_dir, exist_ok=True)

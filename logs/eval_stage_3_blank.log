@@ -1,0 +1,8 @@
+note: 29,020 of 139,696 manifest images are not packed yet; using the rest
+test         n=12,800  top1 0.209 [0.197, 0.220]  bacc 0.209 [0.200, 0.218]  top3 0.400
+test_shared  n=12,559  top1 0.237 [0.222, 0.252]  bacc 0.239 [0.227, 0.250]  top3 0.435
+val          n= 6,400  top1 0.225 [0.207, 0.244]  bacc 0.225 [0.211, 0.240]  top3 0.418
+val_shared   n= 6,359  top1 0.242 [0.219, 0.269]  bacc 0.244 [0.225, 0.256]  top3 0.442
+gap test_shared - test: top1 +0.028 [0.010, 0.047]  bacc +0.030 [0.016, 0.045]
+gap val_shared - val: top1 +0.017 [-0.014, 0.047]  bacc +0.019 [-0.005, 0.038]
+wrote /Users/kwanhyungkim/Library/Application Support/Claude/scratch-workspaces/5db1a332-082e-4484-8db2-c37fec219b6a/e3954a4e-2847-44a9-abba-541832f80820/scratch-2026-11-25-55b51d/country-not-camera/runs/stage_3/eval_blank

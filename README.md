@@ -1,8 +1,9 @@
 # Learning the Country, Not the Camera: ResNet-18 on OSV-5M
 
 Public repository: <https://github.com/LaGuadana/country-not-camera> (code MIT; data and
-embedded photos CC-BY-SA-4.0, cite Astruc et al., CVPR 2024). Progress report:
-[`report/progress/main.pdf`](report/progress/main.pdf); the playable demo is
+embedded photos CC-BY-SA-4.0, cite Astruc et al., CVPR 2024). **Final report:**
+[`report/final/main.pdf`](report/final/main.pdf) (section 8 below summarises its new results);
+progress report: [`report/progress/main.pdf`](report/progress/main.pdf); the playable demo is
 [`game/dashcam_duel.html`](game/dashcam_duel.html) (see section 4).
 
 Country classification from OpenStreetView-5M street-level images with a ResNet-18, either
@@ -20,7 +21,7 @@ geocnn/            library
   fingerprint.py     static-pixel masks, bottom-band blanking
   data.py            Dataset (CPU: decode, blank, crop, JPEG) + Prep (GPU: colour jitter, normalise)
   model.py           CountryNet = torchvision ResNet-18 + dropout + linear head; param groups
-  engine.py          inference loop
+  engine.py          inference loop; device choice (CUDA, Apple MPS, CPU) and mixed precision
   metrics.py         top-1/top-3/balanced accuracy, contributor-clustered bootstrap
 scripts/
   select_subset.py   manifest: 32 countries, contributor-disjoint splits, per-country budgets
@@ -33,11 +34,21 @@ scripts/
   export_game.py     build the Dashcam Duel phone game from any checkpoint
   evaluate.py        test metrics with CIs, shared-minus-disjoint gap, feature export
   compare_runs.py    paired bootstrap of accuracy and gap changes between evaluated runs
+  restore_manifest.py  rebuild data/c32 with the original eval splits on another platform (section 8)
+  final_analysis.py  paired changes, trip aggregation, Grad-CAM region shares (final report)
+  final_extra.py     per-country recall/gap, exposure dose-response, error structure (final report)
+  final_figures.py   final-report figures (report/final/figures)
+runs/
+  run_e2e.sh, finish_e2e.sh   end-to-end training on Apple MPS (section 8)
+  final_step.sh      all final-report analyses
+results/final/     final-report analysis outputs (JSON)
+report/final/      final report: main.tex, main.pdf, figures/
 kaggle/
   make_bundles.sh    stage the code and data as Kaggle datasets
   train_kaggle.ipynb GPU training notebook (one condition per notebook version)
 game/template.html Dashcam Duel page; export_game.py fills in photos and guesses
-data/c32/          the subset (not in git): manifest.csv, images.bin, masks.npz, stats
+data/c32/          the subset: manifest.csv, classes.json, subset_stats.json are tracked;
+                   images.bin / images_index.csv (1 GB) are not (regenerate with fetch_images.py)
 ```
 
 ## Setup
@@ -99,8 +110,10 @@ $PY scripts/train.py --data-dir data/smoke --out-dir runs/smoke --init imagenet 
 $PY scripts/evaluate.py --ckpt runs/smoke/best.pt --features --workers 2
 ```
 
-> **Final model:** the stage-3 ResNet-18 weights are committed at `runs/stage_3/best.pt` (43 MB).
-> Other checkpoints are not tracked; regenerate them by training.
+> **Committed checkpoints:** the stage-3 partial fine-tune (`runs/stage_3/best.pt`) and the two
+> end-to-end models of the final report (`runs/ft_imagenet/best.pt`, best on unseen contributors,
+> and `runs/ft_imagenet_fp/best.pt`, trained with fingerprint removal), 43 MB each. Other
+> checkpoints are not tracked; regenerate them by training.
 
 ## 3. Training on Kaggle
 
@@ -323,3 +336,74 @@ $PY scripts/report_figures.py        # report/progress/figures/*.pdf
 
 The progress report itself is `report/progress/main.tex` (+ `references.bib`,
 `figures/`); compile with `tectonic main.tex` → 2 pages + references.
+
+## 8. End-to-end training and the final report
+
+The final report ([`report/final/main.pdf`](report/final/main.pdf)) adds the end-to-end ResNet-18
+fine-tune with and without fingerprint removal, test-time blanking, Grad-CAM, trip aggregation and
+per-country / error-structure analyses. All numbers come from `results/final/*.json` and the runs'
+`eval/metrics.json`.
+
+**Data on a new machine.** `select_subset.py` is not bit-reproducible across platforms: an unstable
+sort breaks ties between equally large trip groups (494 contributors) differently on x86 and Apple
+ARM, which shifts every later random draw. The contributor split is unaffected. The end-to-end runs
+therefore use `data/c32/manifest.csv` from `restore_manifest.py`: the original 38,118 evaluation
+images (taken from the committed `predictions.csv`), and a fresh water-filled training split of
+101,578 images by the same 11,132 contributors that excludes every held-out trip group. The manifest
+is committed, so only the images need fetching:
+
+```sh
+$PY scripts/index_zips.py --out-dir data/zip_index
+$PY scripts/fetch_images.py --manifest data/c32/manifest.csv --index-dir data/zip_index --out data/c32/images.bin
+# (optional) rebuild the manifest itself: needs ~/ML/geo_cnn/data/raw/train.csv
+$PY scripts/restore_manifest.py --train-csv ../geo_cnn/data/raw/train.csv \
+    --predictions runs/stage_3/eval/predictions.csv --out-dir data/c32
+```
+
+Re-evaluating `runs/stage_3/best.pt` on the restored data on an Apple M5 reproduces all 38,118
+committed predictions exactly (`runs/stage_3/eval_repro/metrics.json`).
+
+**Training** (Apple M5, MPS, bf16 autocast for training, fp32 for evaluation; `train.py` and
+`evaluate.py` pick CUDA, MPS or CPU automatically):
+
+```sh
+runs/run_e2e.sh      # both runs, 8-epoch cosine schedule; stopped by hand after epoch 4 (see header)
+runs/finish_e2e.sh   # resume each from last.pt with the schedule cut to 6 epochs, then evaluate
+runs/final_step.sh   # all analyses and figures of the final report
+```
+
+- lr 0.01 per 256 images for all layers, 1 warm-up epoch, cosine decay, SGD Nesterov, batch 256,
+  weight decay 1e-4, label smoothing 0.1, dropout 0.2, random resized crops, no flips. The
+  `train.py` default for ImageNet runs (0.02/256 with head lr x10) collapsed to chance accuracy in a
+  trial on this hardware.
+- Running both models at once on a 16 GB machine made it swap (each MPS process grew to ~7 GB):
+  13-21 min per epoch instead of ~4.5 min alone. Both runs were stopped after epoch 4 and finished
+  sequentially with the same shortened schedule, so the comparison stays paired.
+- The planned from-scratch pair (`--init scratch`) was not run.
+- `evaluate.py --blank-bottom 0.2` evaluates any checkpoint with the bottom band blanked at test
+  time (writes `eval_blank/`); `evaluate.py` also saves per-image logits (`logits_<split>.npz`, not
+  tracked) for trip aggregation.
+
+**Results** (balanced accuracy %, 95% contributor-bootstrap CIs; chance 3.1%):
+
+| model | test (unseen contributors) | test_shared (seen) | gap |
+|---|---|---|---|
+| stage 3: partial fine-tune, 363k images | 30.7 [29.4, 31.9] | 38.0 | +7.4 [5.6, 9.2] |
+| stage 3, bottom 20% blanked at test time | 20.9 [20.0, 21.8] | 23.9 | +3.0 [1.6, 4.5] |
+| **end-to-end, 101k images** | **31.9** [30.6, 33.1] | 37.0 | +5.2 [3.4, 6.9] |
+| end-to-end, blanked at test time | 22.6 [21.7, 23.5] | 25.3 | +2.7 [1.3, 4.2] |
+| end-to-end + fingerprint removal | 28.2 [27.1, 29.3] | 31.3 | +3.1 [1.3, 4.8] |
+
+- Paired: fingerprint removal changes test BA by -3.6 pp [-4.5, -2.8] and the gap by -2.1 pp
+  [-3.3, -0.9] (`results/final/paired_fp_vs_standard.json`); end-to-end vs stage 3: test +1.2 pp
+  [0.4, 1.9], gap -2.2 pp [-3.3, -1.1] (`paired_vs_stage3.json`).
+- Exposure dose-response persists end to end: +8.9 pp [6.8, 10.8] for contributors with >25 training
+  images, +6.3 pp with fingerprint removal (`extra.json`).
+- Trips: on test trips with >= 2 frames, voting over frames lifts the end-to-end model from 33.9% to
+  40.7% (`trips.json`), and doubles the seen-contributor advantage.
+- Errors: 62% of the end-to-end model's errors stay in the right world region (chance 43%); 70% of
+  left-hand-traffic images go to a left-hand-traffic country (`extra.json`). OSV-5M's `drive_side`
+  marks the UK as right-hand traffic; `final_extra.py` uses real-world driving sides.
+
+The final report is `report/final/main.tex` (figures in `report/final/figures/`, plus
+`report/progress/figures/scaling_decomposition`); compile with `tectonic -X compile main.tex`.

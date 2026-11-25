@@ -1,0 +1,60 @@
+{
+ "ks": [
+  1,
+  15
+ ],
+ "protocols": {
+  "ft_imagenet:val->test": {
+   "gallery": "val",
+   "query": "test",
+   "n_query": 4,
+   "nn_same_contributor": 0.0,
+   "top1_k1": 0.20640625,
+   "top1_k1_nn_same": null,
+   "top1_k1_nn_diff": 0.20640625,
+   "n_same": 0,
+   "top1_k15": 0.27,
+   "top1_k15_nn_same": null,
+   "top1_k15_nn_diff": 0.27
+  },
+  "ft_imagenet:val_shared->test_shared": {
+   "gallery": "val_shared",
+   "query": "test_shared",
+   "n_query": 4,
+   "nn_same_contributor": 0.0625049765108687,
+   "top1_k1": 0.2559120949120153,
+   "top1_k1_nn_same": 0.9121019108280255,
+   "top1_k1_nn_diff": 0.21216239171054865,
+   "n_same": 785,
+   "top1_k15": 0.3124452583804443,
+   "top1_k15_nn_same": 0.7401273885350318,
+   "top1_k15_nn_diff": 0.2839306947511466
+  },
+  "ft_imagenet_fp:val->test": {
+   "gallery": "val",
+   "query": "test",
+   "n_query": 4,
+   "nn_same_contributor": 0.0,
+   "top1_k1": 0.173125,
+   "top1_k1_nn_same": null,
+   "top1_k1_nn_diff": 0.173125,
+   "n_same": 0,
+   "top1_k15": 0.22484375,
+   "top1_k15_nn_same": null,
+   "top1_k15_nn_diff": 0.22484375
+  },
+  "ft_imagenet_fp:val_shared->test_shared": {
+   "gallery": "val_shared",
+   "query": "test_shared",
+   "n_query": 4,
+   "nn_same_contributor": 0.039334341906202726,
+   "top1_k1": 0.19436260848793693,
+   "top1_k1_nn_same": 0.9251012145748988,
+   "top1_k1_nn_diff": 0.16444260256941567,
+   "n_same": 494,
+   "top1_k15": 0.2444462138705311,
+   "top1_k15_nn_same": 0.6821862348178138,
+   "top1_k15_nn_diff": 0.2265230004144219
+  }
+ }
+}

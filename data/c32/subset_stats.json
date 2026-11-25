@@ -1,0 +1,920 @@
+{
+ "method": "restore_manifest.py: original eval splits + fresh water-filled train split",
+ "args": {
+  "train_csv": "../geo_cnn/data/raw/train.csv",
+  "predictions": "runs/stage_3/eval/predictions.csv",
+  "out_dir": "data/c32",
+  "train_budget": 3200,
+  "max_per_contributor": 100,
+  "cell_deg": 0.1,
+  "seed": 0
+ },
+ "read": {
+  "rows_total": 4894684,
+  "rows_without_creator": 119
+ },
+ "classes": [
+  "AT",
+  "AU",
+  "BE",
+  "BR",
+  "CA",
+  "CH",
+  "CO",
+  "CZ",
+  "DE",
+  "DK",
+  "ES",
+  "ET",
+  "FR",
+  "GB",
+  "GR",
+  "HR",
+  "HU",
+  "ID",
+  "IN",
+  "IT",
+  "JP",
+  "MX",
+  "MY",
+  "NL",
+  "PL",
+  "PT",
+  "RU",
+  "SE",
+  "TH",
+  "TR",
+  "TW",
+  "US"
+ ],
+ "checks": {
+  "contributors train & (val|test)": 0,
+  "contributors val & test": 0,
+  "sequences train & any eval split": 0,
+  "groups train & (val_shared|test_shared)": 0,
+  "duplicate ids": 0
+ },
+ "shared_images_whose_contributor_has_no_train_image": {
+  "val_shared": 0,
+  "test_shared": 0
+ },
+ "train_pool_images": 2478912,
+ "excluded_groups": 10438,
+ "splits": {
+  "train": {
+   "images": 101578,
+   "contributors": 11132,
+   "sequences": 68669,
+   "images_per_contributor_median_max": [
+    3.0,
+    556
+   ],
+   "per_country": {
+    "AT": {
+     "images": 3200,
+     "contributors": 258,
+     "eff_contributors": 177.0
+    },
+    "AU": {
+     "images": 3200,
+     "contributors": 197,
+     "eff_contributors": 131.5
+    },
+    "BE": {
+     "images": 3200,
+     "contributors": 135,
+     "eff_contributors": 60.4
+    },
+    "BR": {
+     "images": 3200,
+     "contributors": 349,
+     "eff_contributors": 256.2
+    },
+    "CA": {
+     "images": 3200,
+     "contributors": 212,
+     "eff_contributors": 146.5
+    },
+    "CH": {
+     "images": 3200,
+     "contributors": 210,
+     "eff_contributors": 104.5
+    },
+    "CO": {
+     "images": 3200,
+     "contributors": 310,
+     "eff_contributors": 144.2
+    },
+    "CZ": {
+     "images": 3200,
+     "contributors": 150,
+     "eff_contributors": 73.8
+    },
+    "DE": {
+     "images": 3200,
+     "contributors": 1473,
+     "eff_contributors": 1329.2
+    },
+    "DK": {
+     "images": 3200,
+     "contributors": 230,
+     "eff_contributors": 104.6
+    },
+    "ES": {
+     "images": 3200,
+     "contributors": 419,
+     "eff_contributors": 306.0
+    },
+    "ET": {
+     "images": 2649,
+     "contributors": 143,
+     "eff_contributors": 45.3
+    },
+    "FR": {
+     "images": 3200,
+     "contributors": 816,
+     "eff_contributors": 697.1
+    },
+    "GB": {
+     "images": 3200,
+     "contributors": 383,
+     "eff_contributors": 270.3
+    },
+    "GR": {
+     "images": 3200,
+     "contributors": 153,
+     "eff_contributors": 82.9
+    },
+    "HR": {
+     "images": 3200,
+     "contributors": 144,
+     "eff_contributors": 68.9
+    },
+    "HU": {
+     "images": 3200,
+     "contributors": 167,
+     "eff_contributors": 97.9
+    },
+    "ID": {
+     "images": 3200,
+     "contributors": 138,
+     "eff_contributors": 77.0
+    },
+    "IN": {
+     "images": 3200,
+     "contributors": 907,
+     "eff_contributors": 698.4
+    },
+    "IT": {
+     "images": 3200,
+     "contributors": 855,
+     "eff_contributors": 706.3
+    },
+    "JP": {
+     "images": 3200,
+     "contributors": 377,
+     "eff_contributors": 173.2
+    },
+    "MX": {
+     "images": 3200,
+     "contributors": 305,
+     "eff_contributors": 157.4
+    },
+    "MY": {
+     "images": 2929,
+     "contributors": 145,
+     "eff_contributors": 45.2
+    },
+    "NL": {
+     "images": 3200,
+     "contributors": 240,
+     "eff_contributors": 103.7
+    },
+    "PL": {
+     "images": 3200,
+     "contributors": 331,
+     "eff_contributors": 236.2
+    },
+    "PT": {
+     "images": 3200,
+     "contributors": 147,
+     "eff_contributors": 76.7
+    },
+    "RU": {
+     "images": 3200,
+     "contributors": 558,
+     "eff_contributors": 425.7
+    },
+    "SE": {
+     "images": 3200,
+     "contributors": 476,
+     "eff_contributors": 332.5
+    },
+    "TH": {
+     "images": 3200,
+     "contributors": 151,
+     "eff_contributors": 77.8
+    },
+    "TR": {
+     "images": 3200,
+     "contributors": 215,
+     "eff_contributors": 121.8
+    },
+    "TW": {
+     "images": 3200,
+     "contributors": 492,
+     "eff_contributors": 300.8
+    },
+    "US": {
+     "images": 3200,
+     "contributors": 1731,
+     "eff_contributors": 1664.5
+    }
+   }
+  },
+  "val": {
+   "images": 6400,
+   "contributors": 1521,
+   "sequences": 5210,
+   "images_per_contributor_median_max": [
+    2.0,
+    71
+   ],
+   "per_country": {
+    "AT": {
+     "images": 200,
+     "contributors": 47,
+     "eff_contributors": 38.4
+    },
+    "AU": {
+     "images": 200,
+     "contributors": 28,
+     "eff_contributors": 25.2
+    },
+    "BE": {
+     "images": 200,
+     "contributors": 19,
+     "eff_contributors": 12.5
+    },
+    "BR": {
+     "images": 200,
+     "contributors": 48,
+     "eff_contributors": 42.3
+    },
+    "CA": {
+     "images": 200,
+     "contributors": 31,
+     "eff_contributors": 21.9
+    },
+    "CH": {
+     "images": 200,
+     "contributors": 34,
+     "eff_contributors": 23.8
+    },
+    "CO": {
+     "images": 200,
+     "contributors": 43,
+     "eff_contributors": 29.2
+    },
+    "CZ": {
+     "images": 200,
+     "contributors": 20,
+     "eff_contributors": 15.2
+    },
+    "DE": {
+     "images": 200,
+     "contributors": 200,
+     "eff_contributors": 200.0
+    },
+    "DK": {
+     "images": 200,
+     "contributors": 34,
+     "eff_contributors": 26.2
+    },
+    "ES": {
+     "images": 200,
+     "contributors": 65,
+     "eff_contributors": 55.7
+    },
+    "ET": {
+     "images": 200,
+     "contributors": 20,
+     "eff_contributors": 13.0
+    },
+    "FR": {
+     "images": 200,
+     "contributors": 120,
+     "eff_contributors": 111.1
+    },
+    "GB": {
+     "images": 200,
+     "contributors": 53,
+     "eff_contributors": 45.9
+    },
+    "GR": {
+     "images": 200,
+     "contributors": 22,
+     "eff_contributors": 12.9
+    },
+    "HR": {
+     "images": 200,
+     "contributors": 19,
+     "eff_contributors": 12.0
+    },
+    "HU": {
+     "images": 200,
+     "contributors": 25,
+     "eff_contributors": 19.3
+    },
+    "ID": {
+     "images": 200,
+     "contributors": 21,
+     "eff_contributors": 16.6
+    },
+    "IN": {
+     "images": 200,
+     "contributors": 128,
+     "eff_contributors": 116.3
+    },
+    "IT": {
+     "images": 200,
+     "contributors": 128,
+     "eff_contributors": 116.3
+    },
+    "JP": {
+     "images": 200,
+     "contributors": 55,
+     "eff_contributors": 41.4
+    },
+    "MX": {
+     "images": 200,
+     "contributors": 45,
+     "eff_contributors": 36.3
+    },
+    "MY": {
+     "images": 200,
+     "contributors": 21,
+     "eff_contributors": 10.4
+    },
+    "NL": {
+     "images": 200,
+     "contributors": 37,
+     "eff_contributors": 26.3
+    },
+    "PL": {
+     "images": 200,
+     "contributors": 45,
+     "eff_contributors": 36.3
+    },
+    "PT": {
+     "images": 200,
+     "contributors": 23,
+     "eff_contributors": 12.3
+    },
+    "RU": {
+     "images": 200,
+     "contributors": 79,
+     "eff_contributors": 71.9
+    },
+    "SE": {
+     "images": 200,
+     "contributors": 67,
+     "eff_contributors": 58.3
+    },
+    "TH": {
+     "images": 200,
+     "contributors": 24,
+     "eff_contributors": 17.7
+    },
+    "TR": {
+     "images": 200,
+     "contributors": 30,
+     "eff_contributors": 19.5
+    },
+    "TW": {
+     "images": 200,
+     "contributors": 73,
+     "eff_contributors": 68.3
+    },
+    "US": {
+     "images": 200,
+     "contributors": 200,
+     "eff_contributors": 200.0
+    }
+   }
+  },
+  "test": {
+   "images": 12800,
+   "contributors": 3043,
+   "sequences": 10658,
+   "images_per_contributor_median_max": [
+    2.0,
+    120
+   ],
+   "per_country": {
+    "AT": {
+     "images": 400,
+     "contributors": 89,
+     "eff_contributors": 70.9
+    },
+    "AU": {
+     "images": 400,
+     "contributors": 62,
+     "eff_contributors": 54.0
+    },
+    "BE": {
+     "images": 400,
+     "contributors": 46,
+     "eff_contributors": 29.6
+    },
+    "BR": {
+     "images": 400,
+     "contributors": 101,
+     "eff_contributors": 76.9
+    },
+    "CA": {
+     "images": 400,
+     "contributors": 61,
+     "eff_contributors": 44.3
+    },
+    "CH": {
+     "images": 400,
+     "contributors": 67,
+     "eff_contributors": 52.4
+    },
+    "CO": {
+     "images": 400,
+     "contributors": 85,
+     "eff_contributors": 56.9
+    },
+    "CZ": {
+     "images": 400,
+     "contributors": 43,
+     "eff_contributors": 24.8
+    },
+    "DE": {
+     "images": 400,
+     "contributors": 400,
+     "eff_contributors": 400.0
+    },
+    "DK": {
+     "images": 400,
+     "contributors": 75,
+     "eff_contributors": 55.1
+    },
+    "ES": {
+     "images": 400,
+     "contributors": 138,
+     "eff_contributors": 122.0
+    },
+    "ET": {
+     "images": 400,
+     "contributors": 38,
+     "eff_contributors": 26.5
+    },
+    "FR": {
+     "images": 400,
+     "contributors": 234,
+     "eff_contributors": 218.6
+    },
+    "GB": {
+     "images": 400,
+     "contributors": 110,
+     "eff_contributors": 92.4
+    },
+    "GR": {
+     "images": 400,
+     "contributors": 39,
+     "eff_contributors": 25.7
+    },
+    "HR": {
+     "images": 400,
+     "contributors": 37,
+     "eff_contributors": 21.0
+    },
+    "HU": {
+     "images": 400,
+     "contributors": 52,
+     "eff_contributors": 35.1
+    },
+    "ID": {
+     "images": 400,
+     "contributors": 44,
+     "eff_contributors": 30.7
+    },
+    "IN": {
+     "images": 400,
+     "contributors": 261,
+     "eff_contributors": 236.0
+    },
+    "IT": {
+     "images": 400,
+     "contributors": 247,
+     "eff_contributors": 226.6
+    },
+    "JP": {
+     "images": 400,
+     "contributors": 111,
+     "eff_contributors": 74.8
+    },
+    "MX": {
+     "images": 400,
+     "contributors": 89,
+     "eff_contributors": 72.7
+    },
+    "MY": {
+     "images": 400,
+     "contributors": 40,
+     "eff_contributors": 22.7
+    },
+    "NL": {
+     "images": 400,
+     "contributors": 76,
+     "eff_contributors": 57.6
+    },
+    "PL": {
+     "images": 400,
+     "contributors": 103,
+     "eff_contributors": 84.5
+    },
+    "PT": {
+     "images": 400,
+     "contributors": 52,
+     "eff_contributors": 43.0
+    },
+    "RU": {
+     "images": 400,
+     "contributors": 161,
+     "eff_contributors": 145.7
+    },
+    "SE": {
+     "images": 400,
+     "contributors": 136,
+     "eff_contributors": 117.3
+    },
+    "TH": {
+     "images": 400,
+     "contributors": 45,
+     "eff_contributors": 36.2
+    },
+    "TR": {
+     "images": 400,
+     "contributors": 57,
+     "eff_contributors": 47.2
+    },
+    "TW": {
+     "images": 400,
+     "contributors": 138,
+     "eff_contributors": 114.0
+    },
+    "US": {
+     "images": 400,
+     "contributors": 400,
+     "eff_contributors": 400.0
+    }
+   }
+  },
+  "val_shared": {
+   "images": 6359,
+   "contributors": 2089,
+   "sequences": 5083,
+   "images_per_contributor_median_max": [
+    2.0,
+    98
+   ],
+   "per_country": {
+    "AT": {
+     "images": 200,
+     "contributors": 87,
+     "eff_contributors": 76.0
+    },
+    "AU": {
+     "images": 200,
+     "contributors": 65,
+     "eff_contributors": 56.5
+    },
+    "BE": {
+     "images": 200,
+     "contributors": 49,
+     "eff_contributors": 38.3
+    },
+    "BR": {
+     "images": 200,
+     "contributors": 91,
+     "eff_contributors": 82.6
+    },
+    "CA": {
+     "images": 200,
+     "contributors": 51,
+     "eff_contributors": 41.4
+    },
+    "CH": {
+     "images": 200,
+     "contributors": 58,
+     "eff_contributors": 46.6
+    },
+    "CO": {
+     "images": 200,
+     "contributors": 46,
+     "eff_contributors": 34.0
+    },
+    "CZ": {
+     "images": 200,
+     "contributors": 47,
+     "eff_contributors": 37.9
+    },
+    "DE": {
+     "images": 200,
+     "contributors": 200,
+     "eff_contributors": 200.0
+    },
+    "DK": {
+     "images": 200,
+     "contributors": 58,
+     "eff_contributors": 44.7
+    },
+    "ES": {
+     "images": 200,
+     "contributors": 107,
+     "eff_contributors": 99.5
+    },
+    "ET": {
+     "images": 169,
+     "contributors": 23,
+     "eff_contributors": 2.8
+    },
+    "FR": {
+     "images": 200,
+     "contributors": 200,
+     "eff_contributors": 200.0
+    },
+    "GB": {
+     "images": 200,
+     "contributors": 107,
+     "eff_contributors": 97.1
+    },
+    "GR": {
+     "images": 200,
+     "contributors": 40,
+     "eff_contributors": 25.9
+    },
+    "HR": {
+     "images": 200,
+     "contributors": 37,
+     "eff_contributors": 25.9
+    },
+    "HU": {
+     "images": 200,
+     "contributors": 58,
+     "eff_contributors": 46.2
+    },
+    "ID": {
+     "images": 200,
+     "contributors": 29,
+     "eff_contributors": 16.5
+    },
+    "IN": {
+     "images": 200,
+     "contributors": 71,
+     "eff_contributors": 56.7
+    },
+    "IT": {
+     "images": 200,
+     "contributors": 161,
+     "eff_contributors": 143.9
+    },
+    "JP": {
+     "images": 200,
+     "contributors": 75,
+     "eff_contributors": 67.1
+    },
+    "MX": {
+     "images": 200,
+     "contributors": 49,
+     "eff_contributors": 40.0
+    },
+    "MY": {
+     "images": 190,
+     "contributors": 21,
+     "eff_contributors": 9.1
+    },
+    "NL": {
+     "images": 200,
+     "contributors": 63,
+     "eff_contributors": 52.4
+    },
+    "PL": {
+     "images": 200,
+     "contributors": 101,
+     "eff_contributors": 92.2
+    },
+    "PT": {
+     "images": 200,
+     "contributors": 49,
+     "eff_contributors": 39.9
+    },
+    "RU": {
+     "images": 200,
+     "contributors": 146,
+     "eff_contributors": 129.9
+    },
+    "SE": {
+     "images": 200,
+     "contributors": 112,
+     "eff_contributors": 105.8
+    },
+    "TH": {
+     "images": 200,
+     "contributors": 50,
+     "eff_contributors": 41.8
+    },
+    "TR": {
+     "images": 200,
+     "contributors": 56,
+     "eff_contributors": 46.4
+    },
+    "TW": {
+     "images": 200,
+     "contributors": 38,
+     "eff_contributors": 19.4
+    },
+    "US": {
+     "images": 200,
+     "contributors": 200,
+     "eff_contributors": 200.0
+    }
+   }
+  },
+  "test_shared": {
+   "images": 12559,
+   "contributors": 3037,
+   "sequences": 10027,
+   "images_per_contributor_median_max": [
+    2.0,
+    125
+   ],
+   "per_country": {
+    "AT": {
+     "images": 400,
+     "contributors": 128,
+     "eff_contributors": 103.1
+    },
+    "AU": {
+     "images": 400,
+     "contributors": 78,
+     "eff_contributors": 65.0
+    },
+    "BE": {
+     "images": 400,
+     "contributors": 63,
+     "eff_contributors": 44.4
+    },
+    "BR": {
+     "images": 400,
+     "contributors": 116,
+     "eff_contributors": 102.7
+    },
+    "CA": {
+     "images": 400,
+     "contributors": 87,
+     "eff_contributors": 68.8
+    },
+    "CH": {
+     "images": 400,
+     "contributors": 83,
+     "eff_contributors": 62.7
+    },
+    "CO": {
+     "images": 400,
+     "contributors": 61,
+     "eff_contributors": 39.7
+    },
+    "CZ": {
+     "images": 400,
+     "contributors": 63,
+     "eff_contributors": 43.9
+    },
+    "DE": {
+     "images": 400,
+     "contributors": 400,
+     "eff_contributors": 400.0
+    },
+    "DK": {
+     "images": 400,
+     "contributors": 73,
+     "eff_contributors": 51.1
+    },
+    "ES": {
+     "images": 400,
+     "contributors": 168,
+     "eff_contributors": 150.7
+    },
+    "ET": {
+     "images": 287,
+     "contributors": 34,
+     "eff_contributors": 12.6
+    },
+    "FR": {
+     "images": 400,
+     "contributors": 329,
+     "eff_contributors": 295.2
+    },
+    "GB": {
+     "images": 400,
+     "contributors": 153,
+     "eff_contributors": 135.4
+    },
+    "GR": {
+     "images": 400,
+     "contributors": 61,
+     "eff_contributors": 38.0
+    },
+    "HR": {
+     "images": 400,
+     "contributors": 64,
+     "eff_contributors": 42.3
+    },
+    "HU": {
+     "images": 400,
+     "contributors": 79,
+     "eff_contributors": 63.3
+    },
+    "ID": {
+     "images": 400,
+     "contributors": 50,
+     "eff_contributors": 27.3
+    },
+    "IN": {
+     "images": 400,
+     "contributors": 116,
+     "eff_contributors": 88.5
+    },
+    "IT": {
+     "images": 400,
+     "contributors": 246,
+     "eff_contributors": 226.0
+    },
+    "JP": {
+     "images": 400,
+     "contributors": 99,
+     "eff_contributors": 83.9
+    },
+    "MX": {
+     "images": 400,
+     "contributors": 66,
+     "eff_contributors": 50.5
+    },
+    "MY": {
+     "images": 272,
+     "contributors": 23,
+     "eff_contributors": 5.7
+    },
+    "NL": {
+     "images": 400,
+     "contributors": 98,
+     "eff_contributors": 71.9
+    },
+    "PL": {
+     "images": 400,
+     "contributors": 141,
+     "eff_contributors": 126.2
+    },
+    "PT": {
+     "images": 400,
+     "contributors": 57,
+     "eff_contributors": 42.5
+    },
+    "RU": {
+     "images": 400,
+     "contributors": 186,
+     "eff_contributors": 169.9
+    },
+    "SE": {
+     "images": 400,
+     "contributors": 158,
+     "eff_contributors": 138.9
+    },
+    "TH": {
+     "images": 400,
+     "contributors": 66,
+     "eff_contributors": 44.1
+    },
+    "TR": {
+     "images": 400,
+     "contributors": 78,
+     "eff_contributors": 58.5
+    },
+    "TW": {
+     "images": 400,
+     "contributors": 66,
+     "eff_contributors": 27.7
+    },
+    "US": {
+     "images": 400,
+     "contributors": 400,
+     "eff_contributors": 400.0
+    }
+   }
+  }
+ }
+}

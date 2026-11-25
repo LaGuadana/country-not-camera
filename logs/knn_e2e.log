@@ -1,0 +1,5 @@
+ft_imagenet val       ->test        1-NN 0.206  15-NN 0.270  NN same contributor 0.000 (top1 | same - vs diff 0.206)
+ft_imagenet val_shared->test_shared 1-NN 0.256  15-NN 0.312  NN same contributor 0.063 (top1 | same 0.912 vs diff 0.212)
+ft_imagenet_fp val       ->test        1-NN 0.173  15-NN 0.225  NN same contributor 0.000 (top1 | same - vs diff 0.173)
+ft_imagenet_fp val_shared->test_shared 1-NN 0.194  15-NN 0.244  NN same contributor 0.039 (top1 | same 0.925 vs diff 0.164)
+wrote results/final/knn_probe_e2e.json

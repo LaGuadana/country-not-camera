@@ -1,0 +1,19 @@
+runs/ft_imagenet_fp/eval vs runs/ft_imagenet/eval: test -3.6 [-4.5, -2.8]  gap -2.1 [-3.3, -0.9]
+runs/ft_imagenet/eval_blank vs runs/ft_imagenet/eval: test -9.2 [-10.2, -8.3]  gap -2.4 [-3.8, -1.1]
+runs/ft_imagenet/eval vs runs/stage_3/eval: test +1.2 [0.4, 1.9]  gap -2.2 [-3.3, -1.1]
+runs/ft_imagenet_fp/eval vs runs/stage_3/eval: test -2.5 [-3.4, -1.6]  gap -4.2 [-5.5, -2.9]
+runs/stage_3/eval_repro test: image BA 30.7  trip BA 31.1 [29.8, 32.3] (10658 trips, 1126 with >=2 frames: 32.2 -> 40.0)
+runs/stage_3/eval_repro test_shared: image BA 38.0  trip BA 39.5 [38.0, 40.9] (10027 trips, 1340 with >=2 frames: 37.3 -> 50.1)
+runs/ft_imagenet/eval test: image BA 31.9  trip BA 32.2 [31.0, 33.4] (10658 trips, 1126 with >=2 frames: 33.9 -> 40.7)
+runs/ft_imagenet/eval test_shared: image BA 37.0  trip BA 37.9 [36.4, 39.4] (10027 trips, 1340 with >=2 frames: 36.9 -> 47.7)
+runs/ft_imagenet_fp/eval test: image BA 28.2  trip BA 28.3 [27.0, 29.5] (10658 trips, 1126 with >=2 frames: 30.1 -> 36.4)
+runs/ft_imagenet_fp/eval test_shared: image BA 31.3  trip BA 31.8 [30.4, 33.3] (10027 trips, 1340 with >=2 frames: 31.3 -> 40.2)
+stage_3: bottom20 19.5% (area 20%)  top25 12.9%  centre 33.9%  | correct 20.3 / incorrect 19.1
+ft_imagenet: bottom20 19.7% (area 20%)  top25 13.8%  centre 37.1%  | correct 20.2 / incorrect 19.4
+ft_imagenet_fp: bottom20 17.0% (area 20%)  top25 16.9%  centre 36.9%  | correct 16.6 / incorrect 17.1
+wrote results/final/gradcam.json and figures/gradcam_panel
+stage_3    errors 0.693: median distance   2865 km (correct:  219 km), >1500 km 0.64, >4000 km 0.45
+ft_imagenet errors 0.681: median distance   2457 km (correct:  221 km), >1500 km 0.62, >4000 km 0.42
+ft_imagenet_fp errors 0.718: median distance   2743 km (correct:  222 km), >1500 km 0.63, >4000 km 0.45
+wrote results/final/error_geography.json
+wrote report/final/figures

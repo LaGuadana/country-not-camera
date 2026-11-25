@@ -1,0 +1,57 @@
+device mps; train 101,578 images, 32 classes (2649-3200 per class); eval val 6,400, val_shared 6,359
+  epoch 0 step 50/396  loss 3.6442  acc 0.0356  lr 0.00126  388 img/s
+  epoch 0 step 100/396  loss 3.5702  acc 0.0450  lr 0.00253  309 img/s
+  epoch 0 step 150/396  loss 3.4926  acc 0.0633  lr 0.00379  232 img/s
+  epoch 0 step 200/396  loss 3.4173  acc 0.0815  lr 0.00505  199 img/s
+  epoch 0 step 250/396  loss 3.3448  acc 0.1003  lr 0.00631  178 img/s
+  epoch 0 step 300/396  loss 3.2829  acc 0.1165  lr 0.00758  167 img/s
+  epoch 0 step 350/396  loss 3.2276  acc 0.1308  lr 0.00884  158 img/s
+epoch 0: train loss 3.1828 top1 0.1430 | val top1 0.2291 bacc 0.2291 | val_shared top1 0.2235 bacc 0.2257 | 13.2 min  *best*
+  epoch 1 step 50/396  loss 2.7290  acc 0.2779  lr 0.00999  26 img/s
+  epoch 1 step 100/396  loss 2.7130  acc 0.2830  lr 0.00997  48 img/s
+  epoch 1 step 150/396  loss 2.7035  acc 0.2856  lr 0.00993  66 img/s
+  epoch 1 step 200/396  loss 2.6876  acc 0.2911  lr 0.00987  82 img/s
+  epoch 1 step 250/396  loss 2.6789  acc 0.2937  lr 0.00980  95 img/s
+  epoch 1 step 300/396  loss 2.6697  acc 0.2962  lr 0.00972  107 img/s
+  epoch 1 step 350/396  loss 2.6580  acc 0.2995  lr 0.00961  118 img/s
+epoch 1: train loss 2.6480 top1 0.3025 | val top1 0.2687 bacc 0.2687 | val_shared top1 0.2856 bacc 0.2880 | 15.0 min  *best*
+  epoch 2 step 50/396  loss 2.4366  acc 0.3788  lr 0.00938  101 img/s
+  epoch 2 step 100/396  loss 2.4393  acc 0.3759  lr 0.00923  143 img/s
+  epoch 2 step 150/396  loss 2.4369  acc 0.3759  lr 0.00908  178 img/s
+  epoch 2 step 200/396  loss 2.4311  acc 0.3767  lr 0.00891  102 img/s
+  epoch 2 step 250/396  loss 2.4290  acc 0.3767  lr 0.00872  118 img/s
+  epoch 2 step 300/396  loss 2.4256  acc 0.3772  lr 0.00853  111 img/s
+  epoch 2 step 350/396  loss 2.4206  acc 0.3792  lr 0.00832  119 img/s
+epoch 2: train loss 2.4186 top1 0.3796 | val top1 0.2822 bacc 0.2822 | val_shared top1 0.3084 bacc 0.3103 | 15.2 min  *best*
+  epoch 3 step 50/396  loss 2.2486  acc 0.4389  lr 0.00790  99 img/s
+  epoch 3 step 100/396  loss 2.2497  acc 0.4410  lr 0.00766  131 img/s
+  epoch 3 step 150/396  loss 2.2555  acc 0.4381  lr 0.00742  150 img/s
+  epoch 3 step 200/396  loss 2.2578  acc 0.4376  lr 0.00716  160 img/s
+  epoch 3 step 250/396  loss 2.2541  acc 0.4385  lr 0.00691  168 img/s
+  epoch 3 step 300/396  loss 2.2520  acc 0.4398  lr 0.00664  166 img/s
+  epoch 3 step 350/396  loss 2.2528  acc 0.4397  lr 0.00637  168 img/s
+epoch 3: train loss 2.2473 top1 0.4412 | val top1 0.3133 bacc 0.3133 | val_shared top1 0.3493 bacc 0.3513 | 20.8 min  *best*
+  epoch 4 step 50/396  loss 2.1049  acc 0.4914  lr 0.00584  19 img/s
+  epoch 4 step 100/396  loss 2.1099  acc 0.4916  lr 0.00556  36 img/s
+  epoch 4 step 150/396  loss 2.1093  acc 0.4922  lr 0.00528  50 img/s
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/resource_tracker.py:475: UserWarning: resource_tracker: There appear to be 17 leaked semaphore objects to clean up at shutdown: {'/mp-5m8tyn81', '/mp-uv108cbo', '/mp-_1gexfe1', '/mp-45wvweg1', '/mp-fjrpovt1', '/mp-vs5wx32l', '/mp-8whspkzs', '/mp-sajapol2', '/mp-vf8lxqmj', '/mp-i9q_smk6', '/mp-7zmh99ek', '/mp-6d_5nw8m', '/mp-xq7nyv98', '/mp-lw70bxi0', '/mp-rryg6kys', '/mp-hdabv5yi', '/mp-75hj0o3k'}
+  warnings.warn(
+device mps; train 101,578 images, 32 classes (2649-3200 per class); eval val 6,400, val_shared 6,359
+resumed from epoch 3 (best val balanced acc 0.3133)
+  epoch 4 step 50/396  loss 2.0833  acc 0.5002  lr 0.00309  279 img/s
+  epoch 4 step 100/396  loss 2.0824  acc 0.5027  lr 0.00273  309 img/s
+  epoch 4 step 150/396  loss 2.0766  acc 0.5032  lr 0.00238  321 img/s
+  epoch 4 step 200/396  loss 2.0761  acc 0.5039  lr 0.00205  328 img/s
+  epoch 4 step 250/396  loss 2.0719  acc 0.5050  lr 0.00174  333 img/s
+  epoch 4 step 300/396  loss 2.0681  acc 0.5067  lr 0.00145  308 img/s
+  epoch 4 step 350/396  loss 2.0655  acc 0.5081  lr 0.00119  118 img/s
+epoch 4: train loss 2.0628 top1 0.5087 | val top1 0.3412 bacc 0.3412 | val_shared top1 0.3807 bacc 0.3826 | 14.3 min  *best*
+  epoch 5 step 50/396  loss 1.9764  acc 0.5384  lr 0.00074  471 img/s
+  epoch 5 step 100/396  loss 1.9766  acc 0.5392  lr 0.00054  526 img/s
+  epoch 5 step 150/396  loss 1.9808  acc 0.5363  lr 0.00038  549 img/s
+  epoch 5 step 200/396  loss 1.9824  acc 0.5363  lr 0.00024  561 img/s
+  epoch 5 step 250/396  loss 1.9814  acc 0.5374  lr 0.00014  568 img/s
+  epoch 5 step 300/396  loss 1.9852  acc 0.5361  lr 0.00006  570 img/s
+  epoch 5 step 350/396  loss 1.9821  acc 0.5378  lr 0.00001  572 img/s
+epoch 5: train loss 1.9811 top1 0.5381 | val top1 0.3439 bacc 0.3439 | val_shared top1 0.3809 bacc 0.3828 | 4.2 min  *best*
+done; best val balanced acc 0.3439; checkpoints in runs/ft_imagenet

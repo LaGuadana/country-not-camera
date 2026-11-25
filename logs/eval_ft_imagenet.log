@@ -1,0 +1,7 @@
+test         n=12,800  top1 0.319 [0.304, 0.332]  bacc 0.319 [0.306, 0.331]  top3 0.542
+test_shared  n=12,559  top1 0.367 [0.353, 0.383]  bacc 0.370 [0.356, 0.383]  top3 0.593
+val          n= 6,400  top1 0.344 [0.323, 0.363]  bacc 0.344 [0.324, 0.360]  top3 0.560
+val_shared   n= 6,359  top1 0.381 [0.360, 0.405]  bacc 0.383 [0.360, 0.398]  top3 0.606
+gap test_shared - test: top1 +0.049 [0.029, 0.069]  bacc +0.052 [0.034, 0.069]
+gap val_shared - val: top1 +0.037 [0.010, 0.068]  bacc +0.039 [0.012, 0.063]
+wrote /Users/kwanhyungkim/Library/Application Support/Claude/scratch-workspaces/5db1a332-082e-4484-8db2-c37fec219b6a/e3954a4e-2847-44a9-abba-541832f80820/scratch-2026-11-25-55b51d/country-not-camera/runs/ft_imagenet/eval

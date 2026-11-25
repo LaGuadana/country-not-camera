@@ -24,7 +24,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from geocnn.data import AugConfig, Prep, make_loader, open_data  # noqa: E402
-from geocnn.engine import predict  # noqa: E402
+from geocnn.engine import get_device, predict  # noqa: E402
 from geocnn.metrics import ci, cluster_bootstrap, summarize  # noqa: E402
 from geocnn.model import CountryNet  # noqa: E402
 
@@ -43,20 +43,24 @@ def main():
     ap.add_argument("--n-boot", type=int, default=1000)
     ap.add_argument("--batch-size", type=int, default=512)
     ap.add_argument("--workers", type=int, default=min(8, os.cpu_count() or 1))
+    ap.add_argument("--blank-bottom", type=float, default=None, help="test-time: blank this bottom fraction")
     a = ap.parse_args()
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = get_device()
     ck = torch.load(a.ckpt, map_location="cpu", weights_only=False)
     cfg = ck["config"]
     targs = cfg["args"]
     data_dir = a.data_dir or targs["data_dir"]
-    out_dir = a.out_dir or os.path.join(os.path.dirname(os.path.abspath(a.ckpt)), "eval")
+    out_dir = a.out_dir or os.path.join(os.path.dirname(os.path.abspath(a.ckpt)),
+                                        "eval" if a.blank_bottom is None else "eval_blank")
     os.makedirs(out_dir, exist_ok=True)
 
     man, classes, reader, masks = open_data(data_dir)
     if classes != cfg["classes"]:
         raise SystemExit("class list of --data-dir differs from the checkpoint's")
     aug = AugConfig(**{k: tuple(v) if isinstance(v, list) else v for k, v in cfg["aug"].items()})
+    if a.blank_bottom is not None:
+        aug.fingerprint, aug.bottom_frac = True, a.blank_bottom
     if aug.fingerprint and aug.static_mask and masks is None:
         print("WARNING: the model was trained with static masks but --data-dir has no masks.npz")
     # architecture only; the weights come from the checkpoint
@@ -97,6 +101,8 @@ def main():
             "id": rows["id"], "split": split, "creator_id": rows["creator_id"], "country": rows["country"],
             "pred": [classes[k] for k in top3[:, 0]], "p_true": prob[np.arange(len(prob)), r["labels"]],
             "top3": ["|".join(classes[k] for k in t) for t in top3]}))
+        np.savez_compressed(os.path.join(out_dir, f"logits_{split}.npz"), logits=r["logits"].astype(np.float32),
+                            ids=rows["id"].to_numpy(str), labels=r["labels"])
         if a.features:
             np.savez_compressed(os.path.join(out_dir, f"features_{split}.npz"), features=r["features"],
                                 ids=rows["id"].to_numpy(str), labels=r["labels"],

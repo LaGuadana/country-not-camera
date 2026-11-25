@@ -1,0 +1,7 @@
+ft_imagenet test         AUC(any) 0.582  AUC(diff-seq) 0.559  NN-same 0.140 (chance 0.001)
+ft_imagenet test_shared  AUC(any) 0.594  AUC(diff-seq) 0.567  NN-same 0.158 (chance 0.001)
+wrote runs/ft_imagenet/eval/contributor_probe.json
+ft_imagenet_fp test         AUC(any) 0.580  AUC(diff-seq) 0.550  NN-same 0.095 (chance 0.001)
+ft_imagenet_fp test_shared  AUC(any) 0.578  AUC(diff-seq) 0.557  NN-same 0.118 (chance 0.001)
+wrote runs/ft_imagenet_fp/eval/contributor_probe.json
+done
