@@ -25,6 +25,10 @@
 \lhead{\small Street-Level Country Classification}\rhead{\small Bachelor in Applied Mathematics}
 \cfoot{\thepage}
 \setlength{\headheight}{14pt}
+\raggedbottom
+\interlinepenalty=10000
+\predisplaypenalty=10000
+\postdisplaypenalty=10000
 \widowpenalty=10000
 \clubpenalty=10000
 \displaywidowpenalty=10000
@@ -430,8 +434,7 @@ These confusions suggest that at $128\times170$ pixels the network relies on coa
 within a region (vegetation, terrain, road layout) rather than on signs or plates, which are only a few
 pixels large.
 
-Compared with the partially fine-tuned model, end-to-end training gains most in Sweden, the United States
-and Germany ($+9$ to $+12$\pp) and loses most in Russia, Taiwan and Ethiopia ($-5$ to $-7$\pp). The gainers
+Against the partially fine-tuned model, end-to-end training gains most in Sweden, the United States and Germany ($+9$ to $+12$\pp) and loses most in Russia, Taiwan and Ethiopia ($-5$ to $-7$\pp). The gainers
 are the countries that inverse-frequency class weights had down-weighted in the data chunks, and Ethiopia
 had been up-weighted about twelve-fold, so part of the earlier model's country profile reflects its
 training objective rather than the images.
@@ -574,10 +577,7 @@ OSV-5M / Mapillary photographers, CC BY-SA 4.0.}
 Blanking the bottom 20\% of every evaluation image without retraining lowers the final partially
 fine-tuned model's BA from 30.7\% to 20.9\% on unseen and from 38.0\% to 23.9\% on seen photographers: a paired
 change of $-9.8$\pp\ [$-10.8$, $-8.8$] in test BA and $-4.3$\pp\ [$-5.8$, $-2.9$] in the gap, which falls to
-$+3.0$\pp. For the end-to-end model the changes are $-9.2$\pp\ and $-2.4$\pp\ (gap $+2.7$\pp). The band holds
-roughly half of each gap but only a third of the accuracy, so both models read the bonnet and dashboard
-disproportionately for photographers they know; part of the accuracy loss, however, is simply a
-distribution shift, since neither model saw a blanked image in training.
+$+3.0$\pp. For the end-to-end model the changes are $-9.2$\pp\ and $-2.4$\pp\ (gap $+2.7$\pp). The band holds roughly half of each gap but a third of the accuracy, so both models read the bonnet and dashboard disproportionately for familiar photographers; part of the loss, however, is distribution shift, since neither model saw a blanked image in training.
 
 \subsection{During training}
 Trained with fingerprint removal, the end-to-end model reaches 28.2\% on unseen and 31.3\% on seen
@@ -591,9 +591,7 @@ Per country (Figure~\ref{fig:countries}b), the gap shrinks in 21 of 32 countries
 largest (Thailand $-12$\pp, Denmark $-10$\pp), but the per-country gaps of the two models stay highly
 correlated ($r=0.91$): fingerprint removal scales the shortcut down rather than moving it. The accuracy
 cost falls on countries such as Switzerland, Thailand and Mexico ($-7$ to $-8$\pp), because the bottom of
-the frame shows road surface and markings, which are genuine country cues. Taiwan and India have strongly
-negative gaps under both models, plausibly because a few heavy photographers gave the model a narrow view
-of those countries; with 400 images per country this is a hypothesis, not a finding.
+the frame shows road surface and markings, which are genuine country cues. Taiwan and India have strongly negative gaps under both models, plausibly because a few heavy photographers gave a narrow view of those countries; with 400 images per country this is a hypothesis.
 
 \begin{figure}[H]
 \centering
@@ -607,16 +605,12 @@ all models and interventions. Bottom: end-to-end training curves without and wit
 Averaging log-probabilities over the frames of a trip barely changes overall accuracy, because most trips
 in our test set have a single frame (10{,}658 trips for 12{,}800 images). On the 1{,}126 test trips with two
 or more frames, however, it lifts the end-to-end model from 33.9\% to 40.7\%: a few frames of one trip add
-about 7\pp, more than tripling the training data did. It also amplifies the photographer gap on those trips,
-from 3.0 to 7.0\pp\ (from 1.2 to 3.8\pp\ with fingerprint removal), since frames of one trip share the
-camera and their votes compound photographer evidence as well as country evidence.
+about 7\pp, more than tripling the training data did. It also amplifies the photographer gap on those trips, from 3.0 to 7.0\pp\ (1.2 to 3.8\pp\ with fingerprint removal), since frames of one trip share the camera, so their votes compound photographer as well as country evidence.
 
 \section{Discussion}
 \subsection{Countries are learned}
 On photographers it has never seen, the end-to-end ResNet-18 is right on 31.9\% of images over 32
-countries, ten times chance, and its errors respect driving side and world region. These are country
-cues, not camera cues, because they hold for unseen photographers, and most of them come from adapting
-the network to street scenes: colour and gradient statistics give 5.6\%, frozen ImageNet features 13.5\%.
+countries, ten times chance, and its errors respect driving side and world region. These are country cues, not camera cues, because they hold for unseen photographers, and most come from adapting the network to street scenes: colour and gradient statistics give 5.6\%, frozen ImageNet features 13.5\%.
 
 \subsection{Photographers are learned too}
 The same network is 5.2\pp\ more accurate on new trips of photographers it was trained on (7.4\pp\ for the
@@ -624,18 +618,14 @@ model that saw more images of them). The gap is absent from frozen features, ris
 training images, is carried mostly by same-photographer retrieval, and shrinks when camera cues are
 removed, so it lies in the photographers rather than in geography in general; the distance analysis shows
 that it is concentrated near the places they drove in training, where a familiar camera and familiar roads
-combine (Section~\ref{sec:place}). Minimising the training cross-entropy
-rewards any feature correlated with the label, and gradient descent cannot tell a feature correlated
-because of geography from one correlated because of who happened to drive there: a camera that only ever
+combine (Section~\ref{sec:place}). Minimising the training cross-entropy rewards any feature correlated with the label, and gradient descent cannot tell geography from who happened to drive there: a camera that only ever
 drives in Thailand is a perfect, cheap feature for ``Thailand''. The photographer is a confounder of the
 image--country relation, the classic setting for shortcut learning (Geirhos et al.).
 
 \subsection{More of the same data is not the cure}
 The extra 261k images mostly repeat photographers already in training; they bought 2.0\pp\ on unseen but
 3.5\pp\ on seen photographers, and the end-to-end model trained on 101k images did at least as well on
-unseen photographers with a smaller gap. Images by one photographer are not independent observations: a hundred
-more of them add little information about the country but much about the photographer, so the effective
-sample size is closer to the number of photographers than to the number of images. This is why the United
+unseen photographers with a smaller gap. Images by one photographer are not independent: a hundred more add little about the country but much about the photographer, so the effective sample size is closer to the number of photographers than of images. This is why the United
 States, with 1.2M training images but an effective number of photographers of 14, is not an easy class, and
 why the number of distinct photographers per country is the quantity worth growing.
 
@@ -650,8 +640,7 @@ accuracies, including the 68.0\% of a fine-tuned ViT-L/14 (Astruc et al.), mix c
 recognition. For our ResNet-18 the photographer share is worth several points. For larger models it could
 go either way: the gap grew with images per photographer, which larger models trained on all 4.9M images
 see in abundance, but at higher resolution signs, plates and text become legible, which could reduce
-reliance on the camera. We cannot measure this here, but it argues for reporting a photographer-disjoint test accuracy alongside the
-official one.
+reliance on the camera. We cannot measure this here, but it argues for reporting photographer-disjoint accuracy alongside the official one.
 
 \subsection{Limitations}\label{sec:limits}
 All runs use one seed and one split, and the CIs ignore model selection and training randomness, so the
@@ -673,18 +662,12 @@ reproduces all 38{,}118 committed predictions exactly on the new machine.
 \subsection{Photographer identification}
 Our central finding is also a privacy risk. The features place two photos by the same photographer next to
 each other 10 to 16\% of the time against 0.1\% by chance, even for photographers never seen in training,
-so they could link anonymous uploads to the same person or vehicle and, with GPS metadata, reconstruct
-where someone drives. This is camera identification (Luk\'a\v{s} et al.) learned implicitly by a model
-trained for something else, so geolocation models should be checked for photographer leakage, and
-fingerprint removal doubles as a privacy measure.
+so they could link anonymous uploads to one person or vehicle and, with GPS metadata, reconstruct where someone drives. This is camera identification (Luk\'a\v{s} et al.) learned implicitly, so geolocation models should be checked for photographer leakage, and fingerprint removal doubles as a privacy measure.
 
 \subsection{Geolocation and data}
 The same methods scale towards street-level geolocation (Haas et al.), which can expose where people live
 or travel. OSV-5M is CC BY-SA with faces and licence plates blurred by Mapillary; we use it for research
-only, show a few attributed examples and redistribute no images. The data are also geographically
-unbalanced: requiring 200 photographers leaves out almost all of Africa and much of Asia and Latin America,
-so ``country recognition'' accuracy describes well-mapped countries, and such models serve under-mapped
-regions worst.
+only, show a few attributed examples and redistribute no images. The data are also geographically unbalanced: requiring 200 photographers leaves out almost all of Africa and much of Asia and Latin America, so such accuracy describes well-mapped countries, and such models serve under-mapped regions worst.
 
 \section{Future work}
 The first step is to complete the planned $2\times2$ design and repeat each condition with several seeds,
@@ -693,10 +676,7 @@ from scratch, without ImageNet features to fall back on, should lean more on the
 hand-designed fingerprint removal, an adversarial photographer classifier trained through gradient reversal
 (Ganin et al.) could remove photographer information from the features wherever it comes from, and
 per-photographer reweighting or a group-robust objective (Sagawa et al.) could stop heavy photographers from
-dominating the fit; our verification AUC and exposure analysis are ready-made measures of success. Training
-on whole trips and at higher resolution, where signs and plates become legible, should raise accuracy, and
-a photographer-disjoint re-split of the official OSV-5M test set would let others measure the photographer
-advantage of much larger models.
+dominating the fit; our verification AUC and exposure analysis are ready-made measures of success. Training on whole trips and at higher resolution, where signs become legible, should raise accuracy, and a photographer-disjoint re-split of the OSV-5M test set would let others measure the photographer advantage of larger models.
 
 \section{Conclusion}
 A ResNet-18 trained on crowd-sourced street views learns country cues that transfer to photographers it
