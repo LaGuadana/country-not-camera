@@ -1,0 +1,10 @@
+{
+  "kind": "resnet18",
+  "n": 1620,
+  "dim": 512,
+  "seconds": 303.2243564128876,
+  "img_per_s_end_to_end": 5.342578739928515,
+  "threads": 2,
+  "img_per_s_forward_only": 7.938546911286205,
+  "batch": 32
+}
