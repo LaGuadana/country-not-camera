@@ -1,0 +1,98 @@
+{
+ "runs/stage_3/eval_repro": {
+  "test": {
+   "images": 12800,
+   "trips": 10658,
+   "frames_per_trip_mean": 1.2009757928316758,
+   "share_images_in_multiframe_trips": 0.2553125,
+   "image_ba": 0.30656249999999996,
+   "trip_ba": 0.31082689980481737,
+   "trip_ba_ci95": [
+    0.29767438008920627,
+    0.32318456354655567
+   ],
+   "multiframe_trips": 1126,
+   "multiframe_trip_ba": 0.39968576261520855,
+   "multiframe_single_image_ba": 0.32249495824178864
+  },
+  "test_shared": {
+   "images": 12559,
+   "trips": 10027,
+   "frames_per_trip_mean": 1.2525182008576843,
+   "share_images_in_multiframe_trips": 0.3083048013376861,
+   "image_ba": 0.38008784458905515,
+   "trip_ba": 0.3946329774257392,
+   "trip_ba_ci95": [
+    0.37956194656321457,
+    0.4091538767113151
+   ],
+   "multiframe_trips": 1340,
+   "multiframe_trip_ba": 0.5007438433476641,
+   "multiframe_single_image_ba": 0.3729217809483888
+  }
+ },
+ "runs/ft_imagenet/eval": {
+  "test": {
+   "images": 12800,
+   "trips": 10658,
+   "frames_per_trip_mean": 1.2009757928316758,
+   "share_images_in_multiframe_trips": 0.2553125,
+   "image_ba": 0.31851562499999997,
+   "trip_ba": 0.3224558934114553,
+   "trip_ba_ci95": [
+    0.3097457240184357,
+    0.33429728099008876
+   ],
+   "multiframe_trips": 1126,
+   "multiframe_trip_ba": 0.4067331239103105,
+   "multiframe_single_image_ba": 0.3385231204094912
+  },
+  "test_shared": {
+   "images": 12559,
+   "trips": 10027,
+   "frames_per_trip_mean": 1.2525182008576843,
+   "share_images_in_multiframe_trips": 0.3083048013376861,
+   "image_ba": 0.3701656013014962,
+   "trip_ba": 0.37893627958816994,
+   "trip_ba_ci95": [
+    0.36398228239960073,
+    0.39398140097068746
+   ],
+   "multiframe_trips": 1340,
+   "multiframe_trip_ba": 0.476824922411289,
+   "multiframe_single_image_ba": 0.36865023334201164
+  }
+ },
+ "runs/ft_imagenet_fp/eval": {
+  "test": {
+   "images": 12800,
+   "trips": 10658,
+   "frames_per_trip_mean": 1.2009757928316758,
+   "share_images_in_multiframe_trips": 0.2553125,
+   "image_ba": 0.28203125,
+   "trip_ba": 0.2831370274111745,
+   "trip_ba_ci95": [
+    0.2704755721614683,
+    0.29484880933956076
+   ],
+   "multiframe_trips": 1126,
+   "multiframe_trip_ba": 0.36374184891740513,
+   "multiframe_single_image_ba": 0.3014521091702495
+  },
+  "test_shared": {
+   "images": 12559,
+   "trips": 10027,
+   "frames_per_trip_mean": 1.2525182008576843,
+   "share_images_in_multiframe_trips": 0.3083048013376861,
+   "image_ba": 0.31310352723406437,
+   "trip_ba": 0.3177131524308461,
+   "trip_ba_ci95": [
+    0.30361975230177,
+    0.33290556713801855
+   ],
+   "multiframe_trips": 1340,
+   "multiframe_trip_ba": 0.4019266879565539,
+   "multiframe_single_image_ba": 0.31345441172036137
+  }
+ }
+}

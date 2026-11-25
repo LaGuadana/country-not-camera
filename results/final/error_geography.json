@@ -1,0 +1,26 @@
+{
+ "stage_3": {
+  "n_test": 12800,
+  "error_rate": 0.6934375,
+  "median_km_errors": 2864.696603931592,
+  "median_km_correct": 219.34768254618888,
+  "share_errors_over_1500km": 0.6442091031996395,
+  "share_errors_over_4000km": 0.4539206849932402
+ },
+ "ft_imagenet": {
+  "n_test": 12800,
+  "error_rate": 0.681484375,
+  "median_km_errors": 2457.1753874601122,
+  "median_km_correct": 221.28448960178036,
+  "share_errors_over_1500km": 0.6166456494325346,
+  "share_errors_over_4000km": 0.4223317665940617
+ },
+ "ft_imagenet_fp": {
+  "n_test": 12800,
+  "error_rate": 0.71796875,
+  "median_km_errors": 2742.6034919706194,
+  "median_km_correct": 222.2898722255202,
+  "share_errors_over_1500km": 0.6322089227421109,
+  "share_errors_over_4000km": 0.4527747551686616
+ }
+}

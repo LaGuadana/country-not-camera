@@ -1,0 +1,22 @@
+{
+ "baseline": "runs/ft_imagenet/eval",
+ "runs": {
+  "runs/ft_imagenet_fp/eval": {
+   "test_change": -0.03644227193590935,
+   "test_change_ci95": [
+    -0.04454201066405979,
+    -0.02842301692816368
+   ],
+   "test_shared_change": -0.05705310519505967,
+   "test_shared_change_ci95": [
+    -0.06552112799974132,
+    -0.04878377915606643
+   ],
+   "gap_change": -0.020610833259150318,
+   "gap_change_ci95": [
+    -0.032517158819629154,
+    -0.009169872018725048
+   ]
+  }
+ }
+}
