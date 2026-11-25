@@ -172,7 +172,7 @@ def gradcam(a):
             ax.set_xticks([])
             ax.set_yticks([])
             if j == 0:
-                ax.set_ylabel(n, fontsize=6.5)
+                ax.set_ylabel({"stage_3": "partial FT\n+3 chunks", "ft_imagenet": "end-to-end", "ft_imagenet_fp": "end-to-end\n+FP removal"}.get(n, n), fontsize=6.5)
             if i == 0:
                 ax.set_title(rows["country"].iloc[j], fontsize=7)
     fig.tight_layout(pad=0.2)
