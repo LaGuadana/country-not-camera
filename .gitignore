@@ -12,6 +12,7 @@ dist/
 # model checkpoints and per-split feature exports (35-45 MB each; regenerate by training
 # or `evaluate.py --features`). metrics, predictions and analysis JSONs in runs/ ARE tracked.
 runs/**/*.pt
+!runs/stage_3/best.pt
 runs/**/features_*.npz
 
 # the assignment brief is course material, not ours to redistribute

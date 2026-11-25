@@ -99,6 +99,9 @@ $PY scripts/train.py --data-dir data/smoke --out-dir runs/smoke --init imagenet 
 $PY scripts/evaluate.py --ckpt runs/smoke/best.pt --features --workers 2
 ```
 
+> **Final model:** the stage-3 ResNet-18 weights are committed at `runs/stage_3/best.pt` (43 MB).
+> Other checkpoints are not tracked; regenerate them by training.
+
 ## 3. Training on Kaggle
 
 ```sh
