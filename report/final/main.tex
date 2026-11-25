@@ -17,6 +17,8 @@
 \usepackage{caption}
 \usepackage{tabularx}
 \usepackage{float}
+\usepackage[section]{placeins}
+\usepackage{titlesec}
 
 \captionsetup{font=small,labelfont=bf,labelsep=period,skip=4pt}
 \setlist{topsep=2pt,itemsep=1pt,parsep=0pt}
@@ -25,6 +27,16 @@
 \lhead{\small Street-Level Country Classification}\rhead{\small Bachelor in Applied Mathematics}
 \cfoot{\thepage}
 \setlength{\headheight}{14pt}
+\titlespacing*{\section}{0pt}{10pt plus 2pt minus 2pt}{5pt plus 1pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 2pt minus 2pt}{3pt plus 1pt}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 2pt minus 1pt}{2pt plus 1pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{0.9}\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}\renewcommand{\floatpagefraction}{0.8}
+\setcounter{topnumber}{3}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{4}
+\AtBeginDocument{\setlength{\abovedisplayskip}{4pt plus 2pt minus 2pt}\setlength{\belowdisplayskip}{4pt plus 2pt minus 2pt}}
 \raggedbottom
 \interlinepenalty=10000
 \predisplaypenalty=10000
@@ -151,7 +163,7 @@ training images and 142 at least 1{,}000. Photographers are more concentrated st
 number of photographers is unrelated to the number of images: the United States has 1.2M images but only 14
 effective photographers, Germany a quarter of the images but 86, and Pakistan 1.1. A country's size thus says little about how many independent viewpoints its data contain, which is what matters for learning the country rather than a few dominant cameras; hence we select countries by photographers, not images.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.78\textwidth]{fig_a_country_counts}
 \caption{Country imbalance in the OSV-5M training split. Left: the 30 countries with most images (log
@@ -160,7 +172,7 @@ the 4.89M images.}
 \label{fig:eda_countries}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig_photographers}
 \caption{Photographer concentration in the OSV-5M training split (photographers with an ID). (a)
@@ -176,9 +188,9 @@ images all carry the same timestamp overlay along the bottom edge, the second's 
 bonnet, and the third's share a lens, mount and framing that put the horizon low and fill most of the frame
 with sky. None says anything about the country, yet each is constant within a photographer and, since most photographers drive in one country, perfectly predicts the training label.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.74\textwidth]{fig_f_same_photographer}
+\includegraphics[width=0.7\textwidth]{fig_f_same_photographer}
 \caption{The camera fingerprint: four images by each of three OSV-5M photographers (Australia, United
 States, Canada), each from a different trip. Within a row the timestamp overlay, the bonnet or the framing
 and colour of the camera stay the same while the roads change. Photos: OSV-5M / Mapillary photographers,
@@ -199,13 +211,15 @@ $n_i$ eligible images and the budget is $B$ images, every photographer receives
 and the few remaining slots, $B-\sum_i\min(n_i,c^\ast)$, go one each to randomly chosen photographers with
 $n_i>c^\ast$. The cap $c^\ast$ is the largest one the budget allows, so the budget is spread over as many
 photographers as possible and no photographer can dominate a country; within a photographer, images are taken
-round-robin over its trips (Table~\ref{tab:data}). The selection script checks that no photographer is shared between training,
+round-robin over its trips (Table~\ref{tab:data}).
+
+The selection script checks that no photographer is shared between training,
 validation and test and that no sequence is shared between training and any evaluation split. Images
 are centre-cropped to 4:3, since the aspect ratio (4:3 or 16:9) is itself a camera property, and stored
 at $128\times170$ pixels. Single images are fetched from the remote archives by HTTP range requests, so
 the 139{,}696-image subset takes 1.0\,GB instead of about 245\,GB of archives.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \caption{The 32-country subset. test and \tsh\ differ only in whether the photographer is in the training set.}
 \label{tab:data}
@@ -320,7 +334,7 @@ the probe, and the epoch at which each network is kept. For the CNNs we used sta
 instead of a grid search, which our compute did not allow; the one change, the end-to-end learning rate,
 followed a failed trial judged on the training loss. Test and \tsh\ were never used for any choice.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \caption{Training configuration. val is the photographer-disjoint validation set.}
 \label{tab:config}
@@ -348,7 +362,7 @@ Before building the 32-country subset, we balanced the ten most frequent countri
 recall for Australia, where most images come from one photographer, drops from 81\% to 19\%. This made a
 photographer-disjoint protocol the basis of our comparison.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \caption{Pilot study: top-1 accuracy on ten balanced countries from one OSV-5M shard (chance 10\%; about $\pm5$ percentage points).}
 \label{tab:pilot}
@@ -364,7 +378,7 @@ Frozen ResNet-18 + logistic regression & 48.1\% & 28.1\% \\
 \end{table}
 
 \subsection{Model comparison}\label{sec:comparison}
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \caption{Balanced accuracy (\%) on unseen (test) and seen (\tsh) photographers with 95\%
 photographer-bootstrap CIs, the gap $\Delta$, top-3 accuracy on test and the median distance (km) from
@@ -410,7 +424,7 @@ training photographers, which is what $\Delta$ measures. The usual symptom of ov
 since accuracy on unseen photographers keeps improving while $\Delta$ grows, so image-level validation would
 not reveal the shortcut.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{scaling_decomposition}
 \caption{(a) Accuracy on seen photographers (\tsh) grows faster with more training images than accuracy
@@ -447,7 +461,7 @@ from the seven left-hand-traffic countries go to a left-hand-traffic country 32\
 classical baseline but 68 to 70\% for every fine-tuned model, against 22\% for a uniform guess, which is why
 we never flip images.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \caption{Structure of the errors on test (unseen photographers). ``Same region'': share of misclassified
 images whose predicted country lies in the same world region as the true one; chance assumes a uniform
@@ -467,7 +481,7 @@ Model & error rate & same region (chance) & left $\to$ left & median error (km) 
 \end{tabular}
 \end{table}
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{fig_countries}
 \caption{(a) Recall per country (ISO codes), sorted by the end-to-end model's recall on unseen
@@ -497,7 +511,7 @@ is flat. With
 fingerprint removal the curve keeps its shape but is lower throughout ($+6.3$\pp\ [4.3, 8.1] in the top
 bin): memorisation is weakened, not removed.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{fig_exposure}
 \caption{Exposure dose--response of the end-to-end models: excess accuracy on new trips of seen
@@ -520,7 +534,7 @@ their camera, and a camera part of about 2\pp\ that fingerprint removal removes.
 photographers also have more training images near their new trips, distance and exposure are correlated,
 and this analysis does not fully separate them.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \caption{Place or camera: excess accuracy (pp) on new trips of seen photographers by distance to the same
 photographer's nearest training image, for trips in a country where the photographer has training images;
@@ -564,7 +578,7 @@ coarse, so these region shares are indicative rather than a precise localisation
 evidence for the \emph{country}, not for the photographer, so this is consistent with the band mattering
 mainly for photographers the model has seen, which the blanking experiments below confirm.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{gradcam_panel}
 \caption{Grad-CAM maps of the predicted class for test-set images (country codes above). Photos:
@@ -593,7 +607,7 @@ correlated ($r=0.91$): fingerprint removal scales the shortcut down rather than 
 cost falls on countries such as Switzerland, Thailand and Mexico ($-7$ to $-8$\pp), because the bottom of
 the frame shows road surface and markings, which are genuine country cues. Taiwan and India have strongly negative gaps under both models, plausibly because a few heavy photographers gave a narrow view of those countries; with 400 images per country this is a hypothesis.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.88\textwidth]{fig_e2e}\\[2pt]\includegraphics[width=0.88\textwidth]{fig_curves}
 \caption{Top: balanced accuracy on unseen and seen photographers and the photographer gap with 95\% CIs (E2E: end-to-end; blank: bottom 20\% blanked at test time; +FP: trained with fingerprint removal), for
@@ -724,7 +738,7 @@ generative AI (Claude models by Anthropic, used through the Claude Code assistan
 
 \subsection*{What the AI did}
 \begin{itemize}[leftmargin=*]
-\item \emph{Code.} Code in the repository was written and debugged by the AI under our direction: the data
+\item \emph{Code.} Part of the code in the repository was written and debugged by the AI under our direction: the data
 pipeline (subset selection, range-request download, image packing), the training and evaluation scripts,
 the analysis scripts (photographer probe, retrieval, exposure, error geography, Grad-CAM, trip aggregation,
 per-country and error-structure analyses) and the figure scripts. Commits it co-authored are marked as such
