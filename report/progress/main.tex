@@ -1,7 +1,7 @@
-% Progress report — Machine Learning project, Bachelor in Applied Mathematics, IE University.
+% Progress report, Machine Learning project, Bachelor in Applied Mathematics, IE University.
 % Two pages of text excluding references. Compile: tectonic main.tex
-\documentclass[9pt,twocolumn]{extarticle}
-\usepackage[margin=0.75in,columnsep=0.25in]{geometry}
+\documentclass[9pt]{extarticle}
+\usepackage[margin=0.6in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -11,199 +11,227 @@
 \usepackage{amsmath,amssymb}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{titlesec}
-\usepackage{enumitem}\setlist[itemize]{topsep=2pt,leftmargin=1.2em}
+\usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
-\usepackage{xcolor}
-\setcitestyle{sep={,}}
-\setlength{\bibsep}{2pt}
-\titlespacing*{\section}{0pt}{6pt plus 2pt minus 1pt}{3pt plus 1pt}
-\titlespacing*{\subsection}{0pt}{5pt plus 2pt minus 1pt}{2pt plus 1pt}
+\usepackage{caption}
 
-\title{\vspace{-1.4em}\textbf{Learning the Country, Not the Camera:\\ Measuring and Explaining Contributor Shortcuts\\ in CNN-Based Country Recognition}\vspace{-0.6em}}
-\author{Guillermo Gonz\'alez, Kwanhyung Kim\\[-2pt]
-\small Bachelor in Applied Mathematics, IE University\\[-2pt]
-\small Machine Learning \& Communication Skills --- Progress Report, Fall 2026}
-\date{}
+\setcitestyle{sep={,}}
+\setlength{\bibsep}{1pt}
+\renewcommand{\bibfont}{\footnotesize}
+\setlength{\emergencystretch}{1.5em}
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+\setlist{topsep=2pt,itemsep=1pt,parsep=0pt}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{0.6em}{}
+\titlespacing*{\section}{0pt}{5pt plus 1pt minus 1pt}{2pt plus 1pt}
+\titleformat{\paragraph}[runin]{\normalfont\bfseries}{}{0pt}{}[.]
+\titlespacing*{\paragraph}{0pt}{2pt plus 1pt}{0.5em}
+
+% Split names, consistent with the code (test, test_shared, val, val_shared).
+\newcommand{\tsh}{test\textsubscript{shared}}
+\newcommand{\vsh}{val\textsubscript{shared}}
+\newcommand{\pp}{\,pp}
 
 \begin{document}
-\twocolumn[{\maketitle}]
 
-\section*{Research question and design}
-Can a convolutional network classify the country of a street-level photo from geographic
-cues, or does it instead recognise the \emph{photographer}? Mapillary imagery in
-OpenStreetView-5M (OSV-5M) \citep{astruc2024osv5m} is heavily contributed: most photos of a
-country come from few recurring contributors whose cameras, mounts and colour profiles are
-persistent identifiers \citep{lukas2006camera}, a textbook shortcut \citep{geirhos2020shortcut,
-torralba2011unbiased, zech2018pneumonia}. Our question is quantitative: \emph{how much of the
-accuracy of a country classifier is contributor identity, and where in the pipeline does it
-enter?} We study it with ResNet-18 \citep{he2016resnet} on 32 countries (those with
-$\geq$200 contributors), using a contributor-disjoint protocol: contributors are split
-70/10/20 into train/val/test (stratified by main country), budgets per country are filled by
-water-filling with a per-contributor cap, and two additional evaluation sets hold out entire
-trips (linked by sequence or a $\sim$11\,km cell) of \emph{training} contributors. This yields
-\emph{test} (12{,}800 images, 3{,}043 unseen contributors) and \emph{test$_{shared}$}
-(12{,}559 images, 3{,}037 seen contributors; $\leq$400 images per country each), over a
-training pool of 101{,}578 images from 11{,}132 contributors \citep{roberts2017crossvalidation,
-kaufman2012leakage}. Images are centre-cropped to 4:3 (removing the 16:9/4:3 camera cue) and
-stored at $128\times170$. We report balanced accuracy
-$\mathrm{BA}=\tfrac1K\sum_k R_k$ (mean per-class recall; chance $1/K=3.1\%$) with 95\% CIs
-from a bootstrap that resamples \emph{contributors}, not images \citep{field2007bootstrap};
-the statistic of interest is the contributor gap
-$\Delta=\mathrm{BA}(\text{test}_{shared})-\mathrm{BA}(\text{test})$, computed on paired
-bootstrap draws so its interval is for the difference itself.
+\begin{center}
+{\Large\bfseries Learning Where, Not Whose: Does a Street-Level Country\\[2pt]
+Classifier Generalise to Unseen Photographers?\par}
+\vspace{5pt}
+{\normalsize Guillermo Gonz\'alez and Kwanhyung Kim\par}
+\vspace{1pt}
+{\small Bachelor in Applied Mathematics, IE University. Machine Learning and Communication
+Skills, Progress Report, Fall 2026.\\
+Code and run artifacts: \url{https://github.com/LaGuadana/country-not-camera}\par}
+\end{center}
+\vspace{-4pt}
 
-\section*{Models compared}
-All models share the same data, splits and input resolution, forming an ablation ladder over
-\emph{how much of the network is fitted to the contributors}.
-\textbf{Backbone.} Every network is the standard ResNet-18 \citep{he2016resnet}: a
-stride-2 $7\times7$ stem convolution with max-pooling, then four stages of two basic
-residual blocks ($x \mapsto x + F(x)$, two $3\times3$ convolutions with BatchNorm each),
-widening 64--128--256--512 channels with stride 2 between stages. For our $128\times170$
-inputs the final map is $4\times6$; global average pooling gives a 512-d feature, followed
-by dropout 0.2 and a 32-way linear head (11.2\,M parameters). The CPU runs freeze the stem
-and stages 1--2 (0.68\,M, 6\%; BatchNorm statistics fixed) and train stages 3--4 plus the
-head (10.5\,M):
-\textbf{(i)~Linear probe.} Frozen ImageNet \citep{deng2009imagenet,kornblith2019transfer}
-ResNet-18 features (512-d global average pool) with $L_2$-penalised softmax regression,
-$\min_{W,b}\tfrac1n\sum_i \mathrm{CE}(W^\top f_i+b,y_i)+\lambda\lVert W\rVert_F^2$, fitted by
-L-BFGS on 9{,}600 images (300 per country); $\lambda$ chosen on \emph{val} (unseen
-contributors). \textbf{(ii)~Partial fine-tune} (CPU interim, no GPU access so far): stages 3--4 and the
-head train for 24 epochs of 20{,}480 images ($\approx$4.7 passes) with SGD (Nesterov, lr $0.02$ per 256
-images scaled by batch, cosine decay after 0.5-epoch warm-up, weight decay $10^{-4}$ off
-BatchNorm/bias), dropout 0.2, label-smoothed cross-entropy
-($\varepsilon=0.1$: $q_y=1-\varepsilon+\varepsilon/K$, $q_{k\neq y}=\varepsilon/K$), random
-resized crops (scale 0.6--1), and \emph{no} horizontal flip (mirroring swaps the driving
-side). \textbf{(iii)~Staged data extension}: 261{,}572 additional images exist for our
-countries under a 100-image-per-contributor cap (contributor concentration again), dealt into
-three $\sim$87k chunks; each chunk is trained for five coverage epochs (every image exactly
-once) from the previous best checkpoint, with inverse-frequency class weights and a 1{,}600
-replay floor per country, giving cumulative distinct-image counts of
-$189\mathrm{k}/276\mathrm{k}/363\mathrm{k}$.
-\textbf{(iv)~$k$-nearest neighbours} on the same pooled features (z-scored on the gallery,
-cosine, $k\in\{1,15\}$): a non-parametric alternative that also makes the shortcut directly
-observable in retrieval.
+\section{Introduction}
+\label{sec:intro}
+Our proposal asked to what extent a convolutional neural network (CNN) trained on
+crowd-sourced street-level imagery learns country-discriminative features that generalise
+beyond the contributors seen during training. The concern comes from OpenStreetView-5M
+(OSV-5M; CC BY-SA 4.0) \citep{astruc2024osv5m}. Its 20{,}394 contributors have a median of 8 images each, yet
+the top 100 supplied 45.7\% of the data; photos by one contributor share camera artefacts such
+as the bonnet, windscreen reflections and colour profile \citep{lukas2006camera}; and 98.2\%
+of the official test images come from contributors who also appear in the official training
+split. A model can therefore score well by recognising photographers rather than countries, a
+known form of shortcut learning
+\citep{geirhos2020shortcut,torralba2011unbiased,zech2018pneumonia}. As planned for this
+report, the splits, the classical baseline and the first CNNs on about 100k images are
+complete; end-to-end training still waits for GPU access (Section~\ref{sec:problems}).
 
-\begin{table}[t]
-\centering\scriptsize
-\caption{Balanced accuracy (\%) on the two test protocols with 95\% contributor-clustered
-CIs (test$_{shared}$ point estimates; CIs omitted for width) and the median great-circle
-distance of \emph{errors} to the predicted country's centroid. Paired bootstrap vs.\ the
-fine-tune: stage 3 test $+2.0$ $[1.4,2.5]$, gap $+1.6$ $[0.6,2.5]$.}
+\section{Data and evaluation protocol}
+\label{sec:protocol}
+As proposed, we keep the 32 countries with at least 200 contributors, cap the number of
+images per contributor, and assign contributors, not images, 70/10/20 to training,
+validation and test, stratified by each contributor's main country
+\citep{roberts2017crossvalidation,kaufman2012leakage}. The initial training pool has
+101{,}578 images from 11{,}132 contributors. Two evaluation sets differ only in who took the
+photos. The test set has 12{,}800 images (400 per country) by 3{,}043 contributors never seen
+in training, while \tsh\ has 12{,}559 images (at most 400 per country) from held-out trips
+(whole sequences or 11\,km grid cells) of 3{,}037 training contributors. Validation sets val
+and \vsh\ are built the same way. Accuracy on test answers the research
+question, and the contributor gap
+$\Delta=\mathrm{BA}(\text{\tsh})-\mathrm{BA}(\text{test})$ measures how much accuracy still depends on having seen the photographer. Balanced accuracy
+(BA) is the mean per-class recall (chance 3.1\%) and equals top-1 accuracy on the balanced
+test set. All intervals are 95\% bootstrap confidence intervals (CIs) that resample
+contributors rather than images, because one photographer's photos are correlated
+\citep{field2007bootstrap}; $\Delta$ uses paired draws. Images are centre-cropped to 4:3,
+since the aspect ratio is itself a camera property, and stored at $128\times170$ pixels.
+
+\section{Models}
+\label{sec:models}
+All CNNs are ResNet-18 \citep{he2016resnet}: a $7\times7$ stem and four stages of two
+residual blocks with 64 to 512 channels. At our resolution the final $4\times6$ map is
+average-pooled to a 512-dimensional feature, followed by dropout 0.2 and a 32-way linear
+layer (11.2\,M parameters). The five models share data, splits and input size, and differ
+mainly in how much of the model is fitted to the training contributors.
+
+The (1) classical baseline follows IM2GPS \citep{hays2008im2gps}: an HSV colour histogram and
+HOG features \citep{dalal2005hog} (2{,}268 dimensions) are reduced by PCA to 256 components to
+limit the curse of dimensionality \citep{beyer1999nearest} and classified by a
+distance-weighted 15-nearest-neighbour ($k$-NN) rule with cosine distance ($k$ and the
+distance chosen on val), over a gallery of 9{,}600 training images, 300 per country. The (2)
+linear probe fits an $L_2$-penalised softmax regression on frozen ImageNet features
+\citep{deng2009imagenet,kornblith2019transfer} by L-BFGS on the same 9{,}600 images, with the
+penalty chosen on val, so models (1) and (2) differ only in the representation. The (3)
+partial fine-tune trains the last two stages and the linear layer for 24 epochs of 20{,}480
+images with SGD (Nesterov momentum, cosine learning-rate decay, weight decay $10^{-4}$), label
+smoothing 0.1 and random resized crops; images are never flipped, because mirroring swaps the
+driving side. For (4) more data, we use the 261{,}572 further images that exist for our
+countries under a cap of 100 images per contributor: model (3) continues on three chunks of
+about 87k (five passes each, inverse-frequency class weights, 1{,}600 replayed images per
+country), reaching 189k, 276k and 363k distinct training images. Finally, (5) 1-NN and 15-NN
+(cosine) on the pooled features of models (2) and (4), with val as gallery for test and \vsh\
+for \tsh, make same-photographer retrieval directly observable.
+
+\begin{table}[b]
+\begin{minipage}[c]{0.33\textwidth}
+\caption{Balanced accuracy (\%) on unseen (test) and seen (\tsh) contributors with 95\%
+contributor-bootstrap CIs, and the median distance (km) from misclassified test images to the
+predicted country's centroid. The 15-NN rows report top-1 accuracy.}
 \label{tab:main}
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{lcccc}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.63\textwidth}
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lllll@{}}
 \toprule
-model & test & test$_{sh.}$ & $\Delta$ & err.\,km \\
+Model & test & \tsh & $\Delta$ (pp) & km \\
 \midrule
-probe (frozen)  & 13.5 [12.8,14.3] & 13.7 & $+0.2$ [$-1.1,1.4$] & 5543 \\
-fine-tune       & 28.7 [27.5,29.8] & 34.5 & $+5.8$ [$4.1,7.5$]   & 2439 \\
-\;+ chunk 1     & 29.8 [28.6,31.0] & 36.8 & $+7.0$ [$5.2,8.8$]   & 2679 \\
-\;+ chunk 2     & 30.1 [28.9,31.3] & 37.7 & $+7.6$ [$5.8,9.4$]   & 2852 \\
-\;+ chunk 3     & \textbf{30.7} [29.4,31.9] & \textbf{38.0} & $+7.4$ [$5.6,9.2$] & 2865 \\
+(1) Classical & 5.6 {\scriptsize[5.1, 6.2]} & 6.5 & $+$0.9 {\scriptsize[0.0, 1.7]} & 6{,}252 \\
+(2) Linear probe & 13.5 {\scriptsize[12.8, 14.3]} & 13.7 & $+$0.2 {\scriptsize[$-$1.1, 1.4]} & 5{,}543 \\
+(3) Fine-tune & 28.7 {\scriptsize[27.5, 29.8]} & 34.5 & $+$5.8 {\scriptsize[4.1, 7.5]} & 2{,}439 \\
+(4) + chunk 1 & 29.8 {\scriptsize[28.6, 31.0]} & 36.8 & $+$7.0 {\scriptsize[5.2, 8.8]} & 2{,}679 \\
+\phantom{(4)} + chunk 2 & 30.1 {\scriptsize[28.9, 31.3]} & 37.7 & $+$7.6 {\scriptsize[5.8, 9.4]} & 2{,}852 \\
+\phantom{(4)} + chunk 3 & \textbf{30.7} {\scriptsize[29.4, 31.9]} & \textbf{38.0} & $+$7.4 {\scriptsize[5.6, 9.2]} & 2{,}865 \\
 \midrule
-15-NN (frozen)  & 9.7$^{\dagger}$  & 11.5$^{\dagger}$ & --- & --- \\
-15-NN (stage 3) & 25.3$^{\dagger}$ & 32.8$^{\dagger}$ & --- & --- \\
+(5) 15-NN on (2) & 9.7 & 11.5 & $+$1.8 & \\
+(5) 15-NN on (4) & 25.3 & 32.8 & $+$7.5 & \\
 \bottomrule
 \end{tabular}
-\\[2pt]{\footnotesize $^{\dagger}$top-1; gallery val $\to$ test, val$_{shared}\to$test$_{shared}$.}
+\end{minipage}
 \end{table}
-
-\section*{Results: scaling buys little and widens the gap}
-Table~\ref{tab:main} and Fig.~\ref{fig:main}a give the headline. Fitting the upper network
-\emph{doubles} accuracy over frozen features (13.5$\to$28.7\% BA). Tripling the data again
-adds only $+2.0$\,pp on unseen contributors while contributors already seen gain $+3.5$\,pp:
-$\Delta$ widens from $+5.8$ to $+7.4$\,pp. Because new images are mostly \emph{more trips of
-the same contributors}, scale adds contributor identity faster than geographic knowledge ---
-consistent with the per-epoch curve, where the val gap
-$\mathrm{BA}(\mathrm{val}_{shared})-\mathrm{BA}(\mathrm{val})$ stays near zero below
-$\sim$37\% training accuracy (epochs 0--7) and grows to $+3$--$4$\,pp once the network fits
-the training set ($>50\%$). Errors are not random either: confusions stay local
-(Spain$\to$Italy, Czechia$\to$Poland), the worst classes are western-European (France 5\%),
-and the median misclassification lands 5{,}543\,km from the truth for the probe but
-2{,}439\,km after fine-tuning (correct answers sit $\sim$220\,km from their centroid):
-fine-tuning mostly removes continent-level mistakes, and lifts top-3 test accuracy from 29.4
-to 52.4\%. On frozen features a 15-NN reaches only 9.7\% top-1 (its trained head: 13.5\%);
-after fine-tuning the gap narrows to 25.3 vs 30.7\%, so fine-tuning chiefly makes the
-features \emph{metrically} country-ordered.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/scaling_decomposition}
-\caption{(a) Balanced accuracy versus distinct training images: the two protocols diverge as
-data grows. (b) Country-adjusted excess accuracy on test$_{shared}$ (held-out trips of seen
-contributors), binned by the contributor's number of training images, relative to the same
-countries' accuracy on the disjoint test split; whiskers are 95\% contributor-bootstrap CIs.
-Frozen features show no trend; fine-tuned models gain up to $+8.8$\,pp for the most-exposed
+\includegraphics[width=0.72\textwidth]{figures/scaling_decomposition}
+\caption{(a) Balanced accuracy against the number of distinct training images: accuracy on
+seen contributors (\tsh) grows faster than on unseen ones (test). (b) Excess accuracy on
+held-out trips of seen contributors, binned by the contributor's number of training images,
+relative to the same countries' accuracy on test; whiskers are 95\% contributor-bootstrap CIs.
+The probe stays flat, while the fine-tuned models gain up to 8.8\pp\ for the most-exposed
 contributors.}
 \label{fig:main}
 \end{figure}
 
-\section*{Anatomy of the shortcut: three convergent analyses}
-\textbf{(1) Exposure dose--response.} If $\Delta$ were geography (seen contributors
-photographing typical places), accuracy on their held-out trips would be flat in their
-training exposure. Instead, we bin each test$_{shared}$ contributor by training images and
-compute the country-adjusted excess
-$E_B=\tfrac1{|B|}\sum_{i\in B}\big(\mathbf{1}[\hat y_i=y_i]-a_{c(i)}\big)$, where $a_c$ is the
-same model's accuracy on country $c$ in the disjoint test split. The probe is flat
-($+0.3$\,pp, CI $[-0.7,+1.4]$, for contributors with $\geq$52 images), whereas stage~3 gives
-$+1.7$ $[-1.3,+4.8]$ at 22--51 images and $+8.8$\,pp $[+7.3,+10.3]$ at $\geq$52 images (median
-exposure 99; 84\% of images; Fig.~\ref{fig:main}b). The advantage
-is a \emph{memorisation dose--response}, not a sampling artefact.
-\textbf{(2) Retrieval view.} In the 1-NN classifier (val$_{shared}$ gallery), 6.9\% of
-test$_{shared}$ queries retrieve a photo by the \emph{same contributor} as nearest neighbour;
-those queries are 90.6\% correct, the others 22.0\%. This single mechanism contributes
-$0.069\times(0.906-0.220)\approx+4.7$\,pp of top-1 --- most of the +7.0\,pp top-1 gap
-(37.6\% vs 30.7\%) --- and the comparison is within the same query set, so it is paired.
-The same holds on frozen features (5.0\% of queries, then 89.6\% vs 7.0\% correct): the
-retrieval cue is available to any photographer-clustered representation; only the
-\emph{fitted classifier} turns it into an accuracy gap.
-\textbf{(3) Feature-space verification.} We score pairs of \emph{test} images (contributors
-never seen in training) by cosine similarity: same-photographer pairs from different
-sequences versus different-photographer pairs from the same country, so country information
-cannot help; AUC is 0.5 at chance. Frozen ImageNet features already separate photographers
-(AUC $0.59$); fine-tuned features score $0.57$, with a 14\% nearest-neighbour
-same-contributor rate against a 0.1\% random-pair chance. Photographer style is thus present
-in the representation regardless of training --- yet the probe, built on the
-\emph{more} photographer-decodable features, shows no gap and no exposure trend
-(Fig.~\ref{fig:main}b). Decodable style alone does not create the shortcut; it appears only
-when the classifier is fitted to specific contributors (analyses 1--2).
+\section{Results: model comparison}
+\label{sec:results}
+Table~\ref{tab:main} and Figure~\ref{fig:main}a summarise the comparison. The classical
+baseline reaches 5.6\% BA, less than twice chance, with errors a median 6{,}252\,km from the
+predicted country: colour and gradient statistics carry little country information. Frozen
+ImageNet features more than double this (13.5\%), and fine-tuning the upper network doubles
+it again (28.7\%). The median error distance falls from 5{,}543 to 2{,}439\,km, top-3
+accuracy rises from 29.4\% to 51.1\%, and most remaining errors are between neighbours
+(Spain predicted as Italy, Czechia as Poland). The 15-NN jump is similar (9.7\% to
+25.3\%): fine-tuning mainly reorganises the feature space so that images of one country lie
+close together.
 
-\section*{Problems encountered and decisions}
-\begin{itemize}\itemsep1pt\parskip0pt
-\item \emph{No GPU access yet.} Kaggle GPU quotas remain unconfigured, so we redesigned the
-plan rather than the question: freeze stem and stages 1--2 (17 vs 10\,img/s), subsample
-epochs to 20{,}480 images, make training resumable (checkpointed RNG and data order), and
-train the data extension chunk-by-chunk. The GPU protocol (below) is unchanged and ready.
-\item \emph{Static-pixel camera masks failed.} Temporally-static pixels should mark bonnets
-and dashboards, but no pixel had across-photo std $<15$ for the 60 largest contributors, and
-the few stable regions were roads, snow and sky --- country cues whose shapes would
-themselves be fingerprints. Masks stay opt-in and frame-capped; instead we blank the bottom
-20\% of every image, re-encode JPEG (quality 30--95) and jitter white
-balance/brightness/contrast/saturation. Hue is deliberately \emph{not} jittered
-(road-marking colour is a country cue); blanking---not cropping---keeps geometry identical.
-This pipeline is implemented but awaits the GPU runs.
-\item \emph{Warm restarts.} Stage~1 restarted at lr 0.01 and lost 3\,pp of val BA before
-recovering; stages 2--3 restart at 0.004 with no dip. Stage~1 also introduced
-inverse-frequency class weights together with new data, so that step does not cleanly
-separate data from objective; the within-stage trajectories and the exposure analysis
-(which is unaffected) carry the interpretation.
-\item \emph{Data engineering.} 139{,}696 single JPEGs read out of 98 remote OSV-5M zips by
-HTTP range requests (42\,min) instead of a 245\,GB download.
-\end{itemize}
+The contributor gap behaves differently. It is within 1\pp\ of zero for the classical
+baseline and the probe, but $+5.8$\pp\ after fine-tuning. More data widens it: tripling the
+distinct training images adds 2.0\pp\ [1.4, 2.5] on unseen contributors but 3.5\pp\ on seen
+ones, so $\Delta$ grows by a paired 1.6\pp\ [0.6, 2.5] to $+7.4$\pp. Since the new images
+come mostly from contributors already in training, extra data buys more photographer
+identity than geography. The training curves agree: the validation gap stays near zero while
+training accuracy is below 37\% and reaches 3 to 4\pp\ once it passes 50\%.
 
-\section*{Plan to completion}
-On GPU (Kaggle T4): the $2\times2$ design --- \{ImageNet, from-scratch\} $\times$
-\{standard, fingerprint-removal\} --- testing whether bottom-band blanking and photometric
-jitter close $\Delta$ and at what cost in disjoint-test accuracy; end-to-end fine-tuning; a
-wider $\lambda$ grid for the probe (its optimum sits at the grid edge); Grad-CAM
-qualitative analysis; and possibly a domain-adversarial contributor penalty
-\citep{ganin2016dann}. The final report adds per-class and confusion analysis and the
-interactive ``Dashcam Duel'' demonstration.
+\section{Where the contributor gap comes from}
+\label{sec:shortcut}
+Three analyses indicate that $\Delta$ reflects memorised photographers rather than easier
+geography.
 
-\footnotesize\textit{Data: OSV-5M, CC-BY-SA-4.0 \citep{astruc2024osv5m}; code, scripts and run artifacts:
-\url{https://github.com/LaGuadana/country-not-camera}. AI use: ZCode (GLM) assisted with pipeline/analysis code and
-produced a first draft of this text, which the authors revised, verified claim by claim
-against the run artifacts, and take full responsibility for.}
+\paragraph{Exposure} If seen contributors simply photographed more typical places, accuracy
+on their held-out trips would not depend on how many of their images were in training.
+We bin the contributors of \tsh\ by their number of training images and compute the excess
+accuracy
+\[
+E_B=\frac1{|B|}\sum_{i\in B}\big(\mathbf{1}[\hat y_i=y_i]-a_{c(i)}\big),
+\]
+where $a_c$ is the same model's accuracy on country $c$ in test, so each image is compared
+with its own country's benchmark. For the probe, $E_B$ is flat ($+0.3$\pp\ [$-0.7$, 1.4] at
+52 or more images). After the third chunk it rises from $+1.7$\pp\ [$-1.3$, 4.8] at 22 to 51
+images to $+8.8$\pp\ [7.3, 10.3] at 52 or more (84\% of \tsh; Figure~\ref{fig:main}b).
+This dose-response is what memorisation predicts.
+
+\paragraph{Retrieval} With 1-NN on the final features, 6.9\% of \tsh\ queries have a photo by
+the same contributor as their nearest neighbour in \vsh. These queries are 90.6\% correct,
+against 22.0\% for the rest, so this single mechanism adds
+$0.069\times(0.906-0.220)\approx4.7$\pp, most of the 1-NN classifier's 6.7\pp\ gap (26.8\%
+against 20.1\%). Frozen features show the same effect (5.0\% of queries; 89.6\% against
+7.0\% correct), so retrieval can exploit photographer similarity in any representation.
+
+\paragraph{Photographer verification} The proposed logistic regression that predicts the
+contributor from the features fails with at most four training images per held-out
+contributor (balanced accuracy 0.000), so we ask the question with pairs: are
+same-photographer pairs from different sequences more similar (cosine) than
+different-photographer pairs from the same country? The area under the ROC curve (AUC; 0.5
+is chance) is 0.59 on test and 0.62 on \tsh\ for frozen features, and 0.57 after
+fine-tuning. Photographer style is thus decodable from every representation, most of all the
+frozen one, yet the probe shows neither a gap nor an exposure trend. Decodable style alone
+does not create the shortcut; fitting the classifier to specific contributors does.
+
+\section{Problems, decisions and limitations}
+\label{sec:problems}
+\paragraph{No GPU yet} Kaggle GPU access is not configured. On our 4-core laptop CPU, freezing the stem and first two stages (0.68\,M
+parameters, batch-norm statistics fixed) raises throughput from 10 to 17 images/s and turns
+weeks of training into hours. Training checkpoints the random state and data order, so runs
+resume exactly.
+
+\paragraph{Camera masks} Pixels that stay constant across a contributor's photos should mark
+bonnets and dashboards, but no pixel had a standard deviation below 15 for any of the 60
+largest contributors, and the most stable regions were road, snow and sky, which are
+themselves country cues. Fingerprint removal therefore blanks the bottom 20\% of each image
+(blanking, not cropping, keeps the geometry fixed), re-encodes it as JPEG at quality 30
+to 95, and jitters white balance, brightness, contrast and saturation, but not hue, since
+road-marking colour is a country cue.
+
+\paragraph{Limitations} The first chunk added class weights together with new data, and its
+restart at a learning rate of 0.01 cost 3\pp\ of validation BA before recovering; later
+chunks restart at 0.004 without a dip. All runs use one seed and one split, and the intervals
+ignore model selection. Models (1) and (2) saw only 9{,}600 training images, far fewer per
+contributor. At $128\times170$ pixels, an order of magnitude below
+the OSV-5M baseline \citep{astruc2024osv5m}, absolute accuracies are lower bounds; $\Delta$,
+which compares two test sets through one model, is less affected.
+
+\section{Plan to completion}
+\label{sec:plan}
+With GPU access (a Kaggle T4 notebook is ready), we will train end to end in a
+$2\times2$ design, \{ImageNet, from scratch\} $\times$ \{standard, fingerprint removal\}, to
+test whether fingerprint removal shrinks $\Delta$ and at what cost on test. By the sentence
+outline on 15 November we will also widen the probe's penalty grid (its optimum lies at the
+edge) and refit it on the full training pool, compute Grad-CAM maps
+\citep{selvaraju2017gradcam}, and, time permitting, combine predictions over the frames of a
+trip. The class game, \emph{Dashcam Duel}, already runs on our best checkpoint.
 
 \bibliographystyle{plainnat}
 \bibliography{references}

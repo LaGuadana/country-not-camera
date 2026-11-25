@@ -265,19 +265,28 @@ draws. Stage 3 against the CPU fine-tune: test **+2.0 pp [1.4, 2.5]**, gap **+1.
 
 ## 7. Anatomy of the shortcut (progress-report analyses)
 
-Four scripts dissect *why* the shared−disjoint gap exists; all read the exported
+Five scripts dissect *why* the shared−disjoint gap exists; all read the exported
 `eval/features_*.npz` / `eval/predictions.csv` and run in minutes on CPU:
 
 ```sh
+$PY scripts/classical_baseline.py    # proposal's baseline: HSV+HOG -> PCA -> kNN (~25 min)
 $PY scripts/contributor_probe.py runs/probe runs/cpu_ft runs/stage_{1,2,3}
 $PY scripts/shortcut_decomposition.py runs/probe runs/cpu_ft runs/stage_3
 $PY scripts/knn_probe.py runs/cpu_ft runs/stage_{1,2,3}
-$PY scripts/error_geography.py runs/probe runs/cpu_ft runs/stage_{1,2,3}
+$PY scripts/error_geography.py runs/probe runs/cpu_ft runs/classical runs/stage_{1,2,3}
 $PY scripts/report_figures.py        # report/progress/figures/*.pdf
 ```
 
 (the probe run's features were exported later: `evaluate.py --ckpt runs/probe/best.pt
 --features`; see `logs/eval_probe_feats.log`.)
+
+- **Classical baseline** (`classical_baseline.py` → `runs/classical/`): the proposal's HSV
+  colour histogram (16×4×4, sqrt) + HOG (2,268 dims), standardised, PCA (256 comps, 79 % of
+  gallery variance) and distance-weighted kNN; gallery = the probe's 9,600 images
+  (300/country) so the two baselines differ only in representation; k=15 cosine chosen on
+  val. test **5.6 % [5.1, 6.2]** BA, test_shared 6.5 %, gap **+0.9 pp [0.0, 1.7]**, median
+  error 6,252 km — even retrieval on hand-crafted features shows a flicker of the shortcut.
+  Features cached in `runs/classical/features_*.npz`, results in `eval/results.json`.
 
 - **Exposure dose–response** (`shortcut_decomposition.py` → `runs/shortcut_bins.json`):
   bin each test_shared contributor by training images (manifest train + train_extra) and

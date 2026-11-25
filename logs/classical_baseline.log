@@ -1,0 +1,23 @@
+extracting HSV+HOG for train: 9,600 images
+  256/9,600
+  5,376/9,600
+extracting HSV+HOG for val: 6,400 images
+  256/6,400
+  5,376/6,400
+extracting HSV+HOG for test: 12,800 images
+  256/12,800
+  5,376/12,800
+  10,496/12,800
+extracting HSV+HOG for test_shared: 12,559 images
+  256/12,559
+  5,376/12,559
+  10,496/12,559
+PCA: 256 components, 79.08% of gallery variance (from 2524 dims)
+val top-1: k=1 euclidean -> 0.0492
+val top-1: k=1 cosine -> 0.0539
+val top-1: k=15 euclidean -> 0.0553
+val top-1: k=15 cosine -> 0.0603
+test         n=12,800  top1 0.0563 [0.05091916871830448, 0.06168022766912812]  top3 0.1460
+test_shared  n=12,559  top1 0.0650 [0.05857962125968808, 0.07206343805069301]  top3 0.1581
+gap test_shared - test: top1 +0.0087 [-0.00010513666271273565, 0.01675852858838971]
+wrote runs/classical

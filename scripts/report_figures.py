@@ -27,7 +27,7 @@ mpl.rcParams.update({"font.size": 7.6, "axes.titlesize": 8.2, "axes.labelsize": 
                      "xtick.labelsize": 7.0, "ytick.labelsize": 7.0, "legend.fontsize": 7.0,
                      "axes.spines.top": False, "axes.spines.right": False,
                      "figure.dpi": 200, "savefig.bbox": "tight"})
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.9, 2.45))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.9, 2.36))
 
 # ---- (a) scaling on the two protocols ----------------------------------------
 x = np.array([n for _, _, n in RUNS], float)
