@@ -1,0 +1,114 @@
+  data/raw/test.csv: 210,122 rows
+  data/raw/train.csv: 500,000 rows
+  data/raw/train.csv: 1,000,000 rows
+  data/raw/train.csv: 1,500,000 rows
+  data/raw/train.csv: 2,000,000 rows
+  data/raw/train.csv: 2,500,000 rows
+  data/raw/train.csv: 3,000,000 rows
+  data/raw/train.csv: 3,500,000 rows
+  data/raw/train.csv: 4,000,000 rows
+  data/raw/train.csv: 4,500,000 rows
+  data/raw/train.csv: 4,894,684 rows
+{
+  "test": {
+    "n_rows": 210122,
+    "n_sequences": 80950,
+    "n_images": 210122,
+    "n_countries": 219,
+    "n_countries_ge_100": 146,
+    "n_countries_ge_1k": 53,
+    "n_countries_ge_10k": 4,
+    "n_countries_ge_100k": 0,
+    "top1_country": "US",
+    "top1_count": 23875,
+    "top1_share": 0.11362446578654306,
+    "top10_share": 0.44615509085198124,
+    "top30_share": 0.6767925300539687,
+    "median_count": 246.0,
+    "n_countries_lt_100": 73
+  },
+  "train": {
+    "n_rows": 4894684,
+    "n_sequences": 1391425,
+    "n_images": 4894684,
+    "n_countries": 222,
+    "n_countries_ge_100": 185,
+    "n_countries_ge_1k": 142,
+    "n_countries_ge_10k": 58,
+    "n_countries_ge_100k": 11,
+    "top1_country": "US",
+    "top1_count": 1218664,
+    "top1_share": 0.2489770534727063,
+    "top10_share": 0.582644558872442,
+    "top30_share": 0.8122334352942907,
+    "median_count": 2576.5,
+    "n_countries_lt_100": 37
+  },
+  "countries_in_test_not_train": [
+    "KY",
+    "TO",
+    "TV"
+  ],
+  "countries_in_train_not_test": [
+    "AD",
+    "GI",
+    "LI",
+    "MC",
+    "MO",
+    "SM"
+  ],
+  "n_countries_union": 225,
+  "top10_train": [
+    [
+      "US",
+      "United States",
+      1218664
+    ],
+    [
+      "DE",
+      "Germany",
+      272282
+    ],
+    [
+      "FR",
+      "France",
+      242074
+    ],
+    [
+      "RU",
+      "Russia",
+      222351
+    ],
+    [
+      "JP",
+      "Japan",
+      209205
+    ],
+    [
+      "AU",
+      "Australia",
+      162138
+    ],
+    [
+      "BR",
+      "Brazil",
+      140599
+    ],
+    [
+      "GB",
+      "United Kingdom",
+      137648
+    ],
+    [
+      "SE",
+      "Sweden",
+      131816
+    ],
+    [
+      "IT",
+      "Italy",
+      115084
+    ]
+  ],
+  "coord_sample_n": 50000
+}

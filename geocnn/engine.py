@@ -3,7 +3,18 @@ import numpy as np
 import torch
 
 
-def amp_dtype(device):
+def get_device():
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
+
+
+def amp_dtype(device, train=True):
+    """MPS: bf16 autocast for training only; inference in fp32 (matches CPU-evaluated runs)."""
+    if device.type == "mps":
+        return torch.bfloat16 if train else None
     if device.type != "cuda":
         return None
     # is_bf16_supported() also counts emulated bf16 (T4, P100); only use it with hardware support
@@ -16,7 +27,7 @@ def predict(model, loader, device, prep, features=False, channels_last=False):
     Returns logits (n, K) float32, labels (n,), dataset indices (n,) and, if asked, the
     512-d pooled features (n, 512)."""
     model.eval()
-    dtype = amp_dtype(device)
+    dtype = amp_dtype(device, train=False)
     out_logits, out_labels, out_idx, out_feats = [], [], [], []
     for x, y, idx in loader:
         x = prep(x.to(device, non_blocking=True))
