@@ -1,0 +1,4 @@
+# verified against Hugging Face LFS oids (api/datasets/osv5m/osv5m/tree/main), 2026-10-11
+e227f37faf2102d97d10a60b0c78658e896e783b53081d0ca08eb73acdd10206  data/raw/train.csv
+50c1226ece0cf2dd22f1047b495c18fdae61fba5626345967e6afce3390fadfc  data/raw/test.csv
+d02a400185f093369480905abb0fa040bac4ce0240c20d7e294faa4b95bb01c1  data/raw/images_test/04.zip
