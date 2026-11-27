@@ -44,6 +44,8 @@ def main():
     ap.add_argument("--batch-size", type=int, default=512)
     ap.add_argument("--workers", type=int, default=min(8, os.cpu_count() or 1))
     ap.add_argument("--blank-bottom", type=float, default=None, help="test-time: blank this bottom fraction")
+    ap.add_argument("--blank-top", type=float, default=None,
+                    help="test-time control: blank this top fraction (sky) instead; out-dir eval_blank_top")
     a = ap.parse_args()
 
     device = get_device()
@@ -52,7 +54,8 @@ def main():
     targs = cfg["args"]
     data_dir = a.data_dir or targs["data_dir"]
     out_dir = a.out_dir or os.path.join(os.path.dirname(os.path.abspath(a.ckpt)),
-                                        "eval" if a.blank_bottom is None else "eval_blank")
+                                        "eval_blank_top" if a.blank_top is not None
+                                        else "eval" if a.blank_bottom is None else "eval_blank")
     os.makedirs(out_dir, exist_ok=True)
 
     man, classes, reader, masks = open_data(data_dir)
@@ -61,6 +64,9 @@ def main():
     aug = AugConfig(**{k: tuple(v) if isinstance(v, list) else v for k, v in cfg["aug"].items()})
     if a.blank_bottom is not None:
         aug.fingerprint, aug.bottom_frac = True, a.blank_bottom
+        aug.fp_blank = True
+    if a.blank_top is not None:
+        aug.top_frac = a.blank_top
     if aug.fingerprint and aug.static_mask and masks is None:
         print("WARNING: the model was trained with static masks but --data-dir has no masks.npz")
     # architecture only; the weights come from the checkpoint

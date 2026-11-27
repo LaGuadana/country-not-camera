@@ -1,0 +1,30 @@
+runs/ft_imagenet_s1
+  exposure 2-5   | <25 km:  +0.6 (n=632)  25-100 km:  +2.2 (n=312)  >=100 km:  -6.3 (n=205) | other-country share 11.3%  excess all  -1.9 -> same-country only  -0.2
+  exposure 6-12  | <25 km:  +2.1 (n=811)  25-100 km:  +4.9 (n=309)  >=100 km:  -3.7 (n=203) | other-country share  5.8%  excess all  +1.3 -> same-country only  +1.9
+  exposure 13-25 | <25 km:  +9.6 (n=1665)  25-100 km:  +1.6 (n=698)  >=100 km:  -6.7 (n=311) | other-country share  5.6%  excess all  +4.9 -> same-country only  +5.6
+  exposure 26+   | <25 km: +13.1 (n=4704)  25-100 km:  +7.3 (n=1605)  >=100 km:  +0.8 (n=498) | other-country share  3.1%  excess all +10.2 -> same-country only +10.8
+runs/ft_imagenet_fp_s1
+  exposure 2-5   | <25 km:  -1.4 (n=632)  25-100 km:  -1.6 (n=312)  >=100 km:  -1.9 (n=205) | other-country share 11.3%  excess all  -2.8 -> same-country only  -1.5
+  exposure 6-12  | <25 km:  -0.4 (n=811)  25-100 km:  +0.1 (n=309)  >=100 km:  -2.9 (n=203) | other-country share  5.8%  excess all  -0.7 -> same-country only  -0.6
+  exposure 13-25 | <25 km:  +1.8 (n=1665)  25-100 km:  -2.2 (n=698)  >=100 km:  -8.6 (n=311) | other-country share  5.6%  excess all  -0.8 -> same-country only  -0.4
+  exposure 26+   | <25 km:  +8.2 (n=4704)  25-100 km:  +2.9 (n=1605)  >=100 km:  +1.0 (n=498) | other-country share  3.1%  excess all  +6.0 -> same-country only  +6.4
+runs/ft_imagenet_s2
+  exposure 2-5   | <25 km:  -1.5 (n=632)  25-100 km:  -2.5 (n=312)  >=100 km:  -4.7 (n=205) | other-country share 11.3%  excess all  -4.1 -> same-country only  -2.4
+  exposure 6-12  | <25 km:  +3.1 (n=811)  25-100 km:  +4.1 (n=309)  >=100 km:  -6.3 (n=203) | other-country share  5.8%  excess all  +1.0 -> same-country only  +1.9
+  exposure 13-25 | <25 km:  +6.1 (n=1665)  25-100 km:  +0.1 (n=698)  >=100 km:  -2.8 (n=311) | other-country share  5.6%  excess all  +2.9 -> same-country only  +3.5
+  exposure 26+   | <25 km: +12.2 (n=4704)  25-100 km:  +6.3 (n=1605)  >=100 km:  +0.5 (n=498) | other-country share  3.1%  excess all  +9.4 -> same-country only  +9.9
+runs/ft_imagenet_fp_s2
+  exposure 2-5   | <25 km:  +0.7 (n=632)  25-100 km:  -4.0 (n=312)  >=100 km:  -1.0 (n=205) | other-country share 11.3%  excess all  -2.4 -> same-country only  -0.9
+  exposure 6-12  | <25 km:  -0.5 (n=811)  25-100 km:  -4.5 (n=309)  >=100 km:  -0.0 (n=203) | other-country share  5.8%  excess all  -1.7 -> same-country only  -1.4
+  exposure 13-25 | <25 km:  +3.2 (n=1665)  25-100 km:  -0.4 (n=698)  >=100 km:  -6.4 (n=311) | other-country share  5.6%  excess all  +0.7 -> same-country only  +1.1
+  exposure 26+   | <25 km:  +9.8 (n=4704)  25-100 km:  +4.2 (n=1605)  >=100 km:  +0.9 (n=498) | other-country share  3.1%  excess all  +7.3 -> same-country only  +7.8
+runs/scratch_s1
+  exposure 2-5   | <25 km:  +3.6 (n=632)  25-100 km:  +7.4 (n=312)  >=100 km:  -0.9 (n=205) | other-country share 11.3%  excess all  +1.7 -> same-country only  +3.8
+  exposure 6-12  | <25 km:  +6.9 (n=811)  25-100 km: +11.0 (n=309)  >=100 km:  +2.5 (n=203) | other-country share  5.8%  excess all  +6.1 -> same-country only  +7.2
+  exposure 13-25 | <25 km:  +9.5 (n=1665)  25-100 km:  +4.0 (n=698)  >=100 km:  -4.3 (n=311) | other-country share  5.6%  excess all  +5.5 -> same-country only  +6.5
+  exposure 26+   | <25 km: +17.8 (n=4704)  25-100 km: +10.4 (n=1605)  >=100 km:  +0.0 (n=498) | other-country share  3.1%  excess all +14.1 -> same-country only +14.8
+runs/scratch_fp_s1
+  exposure 2-5   | <25 km:  +2.3 (n=632)  25-100 km:  -2.3 (n=312)  >=100 km:  -3.0 (n=205) | other-country share 11.3%  excess all  -1.2 -> same-country only  +0.1
+  exposure 6-12  | <25 km:  +3.8 (n=811)  25-100 km:  +0.3 (n=309)  >=100 km:  -3.9 (n=203) | other-country share  5.8%  excess all  +1.5 -> same-country only  +1.8
+  exposure 13-25 | <25 km:  +7.5 (n=1665)  25-100 km:  +2.3 (n=698)  >=100 km:  -4.7 (n=311) | other-country share  5.6%  excess all  +3.9 -> same-country only  +4.7
+  exposure 26+   | <25 km: +11.2 (n=4704)  25-100 km:  +4.8 (n=1605)  >=100 km:  -1.3 (n=498) | other-country share  3.1%  excess all  +8.2 -> same-country only  +8.7

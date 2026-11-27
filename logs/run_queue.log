@@ -1,0 +1,10 @@
+20:55:06 ft_imagenet_fpblank_s1 training
+21:35:24 ft_imagenet_fpblank_s1 done: gap test_shared - test: top1 +0.039 [0.019, 0.058]  bacc +0.042 [0.025, 0.058]
+21:35:24 ft_imagenet_fpjitter_s1 training
+22:17:03 ft_imagenet_fpjitter_s1 done: gap test_shared - test: top1 +0.048 [0.030, 0.069]  bacc +0.051 [0.034, 0.070]
+22:29:26 band controls done
+22:29:26 scratch_s1 training
+03:37:29 scratch_s1 done: gap test_shared - test: top1 +0.098 [0.079, 0.118]  bacc +0.100 [0.083, 0.119]
+03:37:29 scratch_fp_s1 training
+08:57:29 scratch_fp_s1 done: gap test_shared - test: top1 +0.052 [0.035, 0.071]  bacc +0.055 [0.039, 0.072]
+08:57:29 QUEUE DONE

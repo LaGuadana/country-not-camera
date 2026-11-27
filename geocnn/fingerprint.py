@@ -55,12 +55,14 @@ def static_mask(stack, seq_ids, std_thresh=10.0, min_images=8, min_sequences=4, 
     return m, info
 
 
-def apply_blanking(arr, mask=None, bottom_frac=0.0):
-    """Fill masked pixels and the bottom band of an (H, W, 3) uint8 array in place."""
+def apply_blanking(arr, mask=None, bottom_frac=0.0, top_frac=0.0):
+    """Fill masked pixels, the bottom band and (control) the top band of an (H, W, 3) uint8 array in place."""
     if mask is not None:
         arr[mask] = FILL_RGB
     if bottom_frac > 0:
         arr[int(round(arr.shape[0] * (1 - bottom_frac))):] = FILL_RGB
+    if top_frac > 0:
+        arr[:int(round(arr.shape[0] * top_frac))] = FILL_RGB
     return arr
 
 

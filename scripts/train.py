@@ -50,6 +50,8 @@ def parse_args(argv=None):
                     help="local ResNet-18 ImageNet .pth (resnet18-f37072fd.pth); default: torchvision download")
     ap.add_argument("--fingerprint", action="store_true", help="enable the fingerprint-removal pipeline")
     ap.add_argument("--bottom-frac", type=float, default=0.2)
+    ap.add_argument("--fp-parts", default="blank,jpeg,color",
+                    help="with --fingerprint: which parts to apply (ablation), comma-separated subset of blank,jpeg,color")
     ap.add_argument("--static-mask", action="store_true",
                     help="with --fingerprint, also blank each contributor's static-pixel mask (masks.npz)")
     ap.add_argument("--epochs", type=int, default=None)
@@ -150,7 +152,11 @@ def main(argv=None):
     os.makedirs(a.out_dir, exist_ok=True)
 
     man, classes, reader, masks = open_data(a.data_dir)
-    aug = AugConfig(fingerprint=a.fingerprint, bottom_frac=a.bottom_frac, static_mask=a.static_mask)
+    parts = set(a.fp_parts.split(","))
+    if not parts <= {"blank", "jpeg", "color"}:
+        raise SystemExit(f"unknown --fp-parts {a.fp_parts}")
+    aug = AugConfig(fingerprint=a.fingerprint, bottom_frac=a.bottom_frac, static_mask=a.static_mask,
+                    fp_blank="blank" in parts, fp_jpeg="jpeg" in parts, fp_color="color" in parts)
     if a.fingerprint and aug.static_mask and masks is None:
         print("note: no masks.npz in --data-dir; fingerprint removal uses the bottom band only")
     train_rows = chunk_rows(a.data_dir, man, a.chunk, a.replay_floor, a.seed) if a.chunk else man[man["split"] == "train"]

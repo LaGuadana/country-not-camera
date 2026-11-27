@@ -44,6 +44,12 @@ class AugConfig:
     color_jitter: float = 0.25    # brightness / contrast / saturation strength
     jpeg_prob: float = 0.8
     jpeg_quality: tuple = (30, 95)
+    # ablation of fingerprint removal (all True = the full pipeline); read with getattr so that
+    # configs saved before these fields existed keep their original behaviour
+    fp_blank: bool = True         # bottom-band blanking
+    fp_jpeg: bool = True          # JPEG re-encoding at random quality (training only)
+    fp_color: bool = True         # white-balance / brightness / contrast / saturation jitter (training only)
+    top_frac: float = 0.0         # control: blank the top band instead (evaluation-time intervention)
 
 
 class Masks:
@@ -78,12 +84,14 @@ class OSVDataset(Dataset):
     def __getitem__(self, i):
         img = self.reader.image(self.ids[i])
         aug = self.aug
-        if aug.fingerprint:
-            mask = self.masks.get(self.creators[i]) if (aug.static_mask and self.masks) else None
-            img = Image.fromarray(apply_blanking(np.array(img), mask, aug.bottom_frac))
+        blank = aug.fingerprint and getattr(aug, "fp_blank", True)
+        top = getattr(aug, "top_frac", 0.0)
+        if blank or top > 0:
+            mask = self.masks.get(self.creators[i]) if (blank and aug.static_mask and self.masks) else None
+            img = Image.fromarray(apply_blanking(np.array(img), mask, aug.bottom_frac if blank else 0.0, top))
         if self.train:
             img = self.crop(img)
-            if aug.fingerprint and random.random() < aug.jpeg_prob:
+            if aug.fingerprint and getattr(aug, "fp_jpeg", True) and random.random() < aug.jpeg_prob:
                 buf = io.BytesIO()
                 img.save(buf, "JPEG", quality=random.randint(*aug.jpeg_quality))
                 img = Image.open(io.BytesIO(buf.getvalue())).convert("RGB")
@@ -96,7 +104,7 @@ class Prep(nn.Module):
 
     def __init__(self, aug, train):
         super().__init__()
-        self.jitter = train and aug.fingerprint
+        self.jitter = train and aug.fingerprint and getattr(aug, "fp_color", True)
         self.wb, self.c = aug.white_balance, aug.color_jitter
         self.register_buffer("mean", torch.tensor(MEAN).view(1, 3, 1, 1))
         self.register_buffer("std", torch.tensor(STD).view(1, 3, 1, 1))

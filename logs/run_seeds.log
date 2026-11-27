@@ -1,0 +1,9 @@
+17:53:40 ft_imagenet_s1 training
+18:51:15 ft_imagenet_s1 done: gap test_shared - test: top1 +0.065 [0.046, 0.084]  bacc +0.067 [0.049, 0.085]
+18:51:15 ft_imagenet_fp_s1 training
+19:31:53 ft_imagenet_fp_s1 done: gap test_shared - test: top1 +0.024 [0.005, 0.043]  bacc +0.027 [0.011, 0.044]
+19:31:53 ft_imagenet_s2 training
+20:12:25 ft_imagenet_s2 done: gap test_shared - test: top1 +0.053 [0.035, 0.073]  bacc +0.056 [0.038, 0.073]
+20:12:25 ft_imagenet_fp_s2 training
+20:54:48 ft_imagenet_fp_s2 done: gap test_shared - test: top1 +0.034 [0.015, 0.055]  bacc +0.038 [0.020, 0.055]
+20:54:48 ALL SEEDS DONE

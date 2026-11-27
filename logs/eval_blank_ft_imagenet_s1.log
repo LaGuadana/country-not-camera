@@ -1,0 +1,7 @@
+test         n=12,800  top1 0.224 [0.212, 0.236]  bacc 0.224 [0.215, 0.233]  top3 0.421
+test_shared  n=12,559  top1 0.246 [0.232, 0.261]  bacc 0.249 [0.237, 0.261]  top3 0.447
+val          n= 6,400  top1 0.241 [0.223, 0.261]  bacc 0.241 [0.227, 0.257]  top3 0.437
+val_shared   n= 6,359  top1 0.247 [0.226, 0.271]  bacc 0.249 [0.233, 0.262]  top3 0.444
+gap test_shared - test: top1 +0.023 [0.005, 0.042]  bacc +0.026 [0.010, 0.041]
+gap val_shared - val: top1 +0.006 [-0.024, 0.036]  bacc +0.008 [-0.015, 0.028]
+wrote /Users/kwanhyungkim/Desktop/MLProject/country-not-camera/runs/ft_imagenet_s1/eval_blank

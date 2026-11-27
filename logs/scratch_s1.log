@@ -1,0 +1,482 @@
+device mps; train 101,578 images, 32 classes (2649-3200 per class); eval val 6,400, val_shared 6,359
+  epoch 0 step 50/396  loss 3.4749  acc 0.0354  lr 0.00842  496 img/s
+  epoch 0 step 100/396  loss 3.4581  acc 0.0429  lr 0.01684  542 img/s
+  epoch 0 step 150/396  loss 3.4458  acc 0.0469  lr 0.02525  559 img/s
+  epoch 0 step 200/396  loss 3.4373  acc 0.0507  lr 0.03367  567 img/s
+  epoch 0 step 250/396  loss 3.4305  acc 0.0544  lr 0.04209  572 img/s
+  epoch 0 step 300/396  loss 3.4257  acc 0.0570  lr 0.05051  575 img/s
+  epoch 0 step 350/396  loss 3.4203  acc 0.0590  lr 0.05892  576 img/s
+epoch 0: train loss 3.4168 top1 0.0606 | val top1 0.0677 bacc 0.0677 | val_shared top1 0.0758 bacc 0.0777 | 4.2 min  *best*
+  epoch 1 step 50/396  loss 3.3864  acc 0.0749  lr 0.07508  482 img/s
+  epoch 1 step 100/396  loss 3.3856  acc 0.0763  lr 0.08350  529 img/s
+  epoch 1 step 150/396  loss 3.3802  acc 0.0766  lr 0.09192  546 img/s
+  epoch 1 step 200/396  loss 3.3784  acc 0.0773  lr 0.10034  554 img/s
+  epoch 1 step 250/396  loss 3.3752  acc 0.0780  lr 0.10875  557 img/s
+  epoch 1 step 300/396  loss 3.3708  acc 0.0798  lr 0.11717  551 img/s
+  epoch 1 step 350/396  loss 3.3652  acc 0.0816  lr 0.12559  545 img/s
+epoch 1: train loss 3.3594 top1 0.0830 | val top1 0.0819 bacc 0.0819 | val_shared top1 0.0780 bacc 0.0805 | 4.4 min  *best*
+  epoch 2 step 50/396  loss 3.2934  acc 0.1010  lr 0.14175  479 img/s
+  epoch 2 step 100/396  loss 3.2857  acc 0.1044  lr 0.15017  526 img/s
+  epoch 2 step 150/396  loss 3.2787  acc 0.1051  lr 0.15859  543 img/s
+  epoch 2 step 200/396  loss 3.2700  acc 0.1074  lr 0.16700  551 img/s
+  epoch 2 step 250/396  loss 3.2647  acc 0.1088  lr 0.17542  546 img/s
+  epoch 2 step 300/396  loss 3.2559  acc 0.1109  lr 0.18384  535 img/s
+  epoch 2 step 350/396  loss 3.2493  acc 0.1133  lr 0.19226  523 img/s
+epoch 2: train loss 3.2424 top1 0.1152 | val top1 0.1155 bacc 0.1155 | val_shared top1 0.1117 bacc 0.1145 | 4.6 min  *best*
+  epoch 3 step 50/396  loss 3.1643  acc 0.1363  lr 0.20000  477 img/s
+  epoch 3 step 100/396  loss 3.1536  acc 0.1403  lr 0.19999  525 img/s
+  epoch 3 step 150/396  loss 3.1496  acc 0.1422  lr 0.19998  542 img/s
+  epoch 3 step 200/396  loss 3.1441  acc 0.1434  lr 0.19996  549 img/s
+  epoch 3 step 250/396  loss 3.1398  acc 0.1452  lr 0.19994  546 img/s
+  epoch 3 step 300/396  loss 3.1326  acc 0.1473  lr 0.19991  537 img/s
+  epoch 3 step 350/396  loss 3.1267  acc 0.1494  lr 0.19988  527 img/s
+epoch 3: train loss 3.1210 top1 0.1515 | val top1 0.1283 bacc 0.1283 | val_shared top1 0.1269 bacc 0.1284 | 4.6 min  *best*
+  epoch 4 step 50/396  loss 3.0450  acc 0.1753  lr 0.19981  462 img/s
+  epoch 4 step 100/396  loss 3.0366  acc 0.1781  lr 0.19976  508 img/s
+  epoch 4 step 150/396  loss 3.0349  acc 0.1798  lr 0.19971  523 img/s
+  epoch 4 step 200/396  loss 3.0334  acc 0.1802  lr 0.19966  522 img/s
+  epoch 4 step 250/396  loss 3.0290  acc 0.1815  lr 0.19960  511 img/s
+  epoch 4 step 300/396  loss 3.0245  acc 0.1821  lr 0.19953  500 img/s
+  epoch 4 step 350/396  loss 3.0196  acc 0.1831  lr 0.19946  493 img/s
+epoch 4: train loss 3.0151 top1 0.1849 | val top1 0.1062 bacc 0.1062 | val_shared top1 0.1095 bacc 0.1114 | 4.8 min
+  epoch 5 step 50/396  loss 2.9664  acc 0.2059  lr 0.19932  455 img/s
+  epoch 5 step 100/396  loss 2.9567  acc 0.2045  lr 0.19923  495 img/s
+  epoch 5 step 150/396  loss 2.9483  acc 0.2048  lr 0.19914  501 img/s
+  epoch 5 step 200/396  loss 2.9479  acc 0.2051  lr 0.19905  492 img/s
+  epoch 5 step 250/396  loss 2.9484  acc 0.2039  lr 0.19895  482 img/s
+  epoch 5 step 300/396  loss 2.9446  acc 0.2059  lr 0.19885  475 img/s
+  epoch 5 step 350/396  loss 2.9403  acc 0.2074  lr 0.19874  472 img/s
+epoch 5: train loss 2.9381 top1 0.2085 | val top1 0.1789 bacc 0.1789 | val_shared top1 0.1640 bacc 0.1664 | 4.9 min  *best*
+  epoch 6 step 50/396  loss 2.8783  acc 0.2267  lr 0.19852  457 img/s
+  epoch 6 step 100/396  loss 2.8839  acc 0.2259  lr 0.19840  502 img/s
+  epoch 6 step 150/396  loss 2.8825  acc 0.2248  lr 0.19827  519 img/s
+  epoch 6 step 200/396  loss 2.8803  acc 0.2257  lr 0.19814  517 img/s
+  epoch 6 step 250/396  loss 2.8801  acc 0.2264  lr 0.19801  505 img/s
+  epoch 6 step 300/396  loss 2.8800  acc 0.2270  lr 0.19787  493 img/s
+  epoch 6 step 350/396  loss 2.8757  acc 0.2285  lr 0.19772  487 img/s
+epoch 6: train loss 2.8735 top1 0.2294 | val top1 0.1877 bacc 0.1877 | val_shared top1 0.1747 bacc 0.1761 | 4.8 min  *best*
+  epoch 7 step 50/396  loss 2.8096  acc 0.2510  lr 0.19743  464 img/s
+  epoch 7 step 100/396  loss 2.8159  acc 0.2476  lr 0.19727  508 img/s
+  epoch 7 step 150/396  loss 2.8197  acc 0.2463  lr 0.19711  524 img/s
+  epoch 7 step 200/396  loss 2.8139  acc 0.2488  lr 0.19694  522 img/s
+  epoch 7 step 250/396  loss 2.8169  acc 0.2467  lr 0.19676  510 img/s
+  epoch 7 step 300/396  loss 2.8165  acc 0.2469  lr 0.19659  497 img/s
+  epoch 7 step 350/396  loss 2.8164  acc 0.2467  lr 0.19640  489 img/s
+epoch 7: train loss 2.8143 top1 0.2475 | val top1 0.1678 bacc 0.1678 | val_shared top1 0.1848 bacc 0.1868 | 4.8 min
+  epoch 8 step 50/396  loss 2.7704  acc 0.2611  lr 0.19604  466 img/s
+  epoch 8 step 100/396  loss 2.7702  acc 0.2630  lr 0.19584  511 img/s
+  epoch 8 step 150/396  loss 2.7753  acc 0.2596  lr 0.19564  525 img/s
+  epoch 8 step 200/396  loss 2.7759  acc 0.2603  lr 0.19544  525 img/s
+  epoch 8 step 250/396  loss 2.7717  acc 0.2617  lr 0.19523  511 img/s
+  epoch 8 step 300/396  loss 2.7697  acc 0.2626  lr 0.19501  495 img/s
+  epoch 8 step 350/396  loss 2.7697  acc 0.2626  lr 0.19479  488 img/s
+epoch 8: train loss 2.7686 top1 0.2632 | val top1 0.1831 bacc 0.1831 | val_shared top1 0.1760 bacc 0.1778 | 4.8 min
+  epoch 9 step 50/396  loss 2.7085  acc 0.2815  lr 0.19436  467 img/s
+  epoch 9 step 100/396  loss 2.7212  acc 0.2794  lr 0.19413  511 img/s
+  epoch 9 step 150/396  loss 2.7218  acc 0.2785  lr 0.19389  526 img/s
+  epoch 9 step 200/396  loss 2.7221  acc 0.2779  lr 0.19365  527 img/s
+  epoch 9 step 250/396  loss 2.7238  acc 0.2773  lr 0.19340  516 img/s
+  epoch 9 step 300/396  loss 2.7246  acc 0.2775  lr 0.19315  503 img/s
+  epoch 9 step 350/396  loss 2.7265  acc 0.2778  lr 0.19289  496 img/s
+epoch 9: train loss 2.7253 top1 0.2781 | val top1 0.2123 bacc 0.2123 | val_shared top1 0.2323 bacc 0.2349 | 4.7 min  *best*
+  epoch 10 step 50/396  loss 2.6611  acc 0.3015  lr 0.19239  466 img/s
+  epoch 10 step 100/396  loss 2.6741  acc 0.2970  lr 0.19212  510 img/s
+  epoch 10 step 150/396  loss 2.6804  acc 0.2953  lr 0.19185  523 img/s
+  epoch 10 step 200/396  loss 2.6834  acc 0.2940  lr 0.19157  520 img/s
+  epoch 10 step 250/396  loss 2.6849  acc 0.2939  lr 0.19129  509 img/s
+  epoch 10 step 300/396  loss 2.6852  acc 0.2931  lr 0.19100  497 img/s
+  epoch 10 step 350/396  loss 2.6881  acc 0.2920  lr 0.19071  491 img/s
+epoch 10: train loss 2.6889 top1 0.2910 | val top1 0.2217 bacc 0.2217 | val_shared top1 0.2305 bacc 0.2329 | 4.8 min  *best*
+  epoch 11 step 50/396  loss 2.6417  acc 0.3049  lr 0.19014  466 img/s
+  epoch 11 step 100/396  loss 2.6448  acc 0.3046  lr 0.18984  510 img/s
+  epoch 11 step 150/396  loss 2.6547  acc 0.3011  lr 0.18953  526 img/s
+  epoch 11 step 200/396  loss 2.6525  acc 0.3017  lr 0.18922  527 img/s
+  epoch 11 step 250/396  loss 2.6524  acc 0.3020  lr 0.18890  516 img/s
+  epoch 11 step 300/396  loss 2.6529  acc 0.3018  lr 0.18858  504 img/s
+  epoch 11 step 350/396  loss 2.6522  acc 0.3022  lr 0.18826  496 img/s
+epoch 11: train loss 2.6546 top1 0.3009 | val top1 0.2036 bacc 0.2036 | val_shared top1 0.2148 bacc 0.2162 | 4.8 min
+  epoch 12 step 50/396  loss 2.6091  acc 0.3197  lr 0.18762  452 img/s
+  epoch 12 step 100/396  loss 2.6087  acc 0.3160  lr 0.18728  497 img/s
+  epoch 12 step 150/396  loss 2.6118  acc 0.3159  lr 0.18694  509 img/s
+  epoch 12 step 200/396  loss 2.6143  acc 0.3143  lr 0.18660  499 img/s
+  epoch 12 step 250/396  loss 2.6140  acc 0.3146  lr 0.18625  485 img/s
+  epoch 12 step 300/396  loss 2.6144  acc 0.3148  lr 0.18589  478 img/s
+  epoch 12 step 350/396  loss 2.6167  acc 0.3138  lr 0.18553  474 img/s
+epoch 12: train loss 2.6204 top1 0.3132 | val top1 0.1944 bacc 0.1944 | val_shared top1 0.2164 bacc 0.2182 | 4.9 min
+  epoch 13 step 50/396  loss 2.5646  acc 0.3330  lr 0.18483  466 img/s
+  epoch 13 step 100/396  loss 2.5769  acc 0.3301  lr 0.18446  510 img/s
+  epoch 13 step 150/396  loss 2.5767  acc 0.3289  lr 0.18409  525 img/s
+  epoch 13 step 200/396  loss 2.5856  acc 0.3266  lr 0.18371  520 img/s
+  epoch 13 step 250/396  loss 2.5873  acc 0.3266  lr 0.18333  505 img/s
+  epoch 13 step 300/396  loss 2.5906  acc 0.3259  lr 0.18294  489 img/s
+  epoch 13 step 350/396  loss 2.5902  acc 0.3260  lr 0.18255  480 img/s
+epoch 13: train loss 2.5915 top1 0.3248 | val top1 0.2314 bacc 0.2314 | val_shared top1 0.2379 bacc 0.2388 | 4.8 min  *best*
+  epoch 14 step 50/396  loss 2.5336  acc 0.3420  lr 0.18179  468 img/s
+  epoch 14 step 100/396  loss 2.5443  acc 0.3413  lr 0.18138  511 img/s
+  epoch 14 step 150/396  loss 2.5466  acc 0.3402  lr 0.18098  525 img/s
+  epoch 14 step 200/396  loss 2.5525  acc 0.3378  lr 0.18057  525 img/s
+  epoch 14 step 250/396  loss 2.5574  acc 0.3365  lr 0.18015  515 img/s
+  epoch 14 step 300/396  loss 2.5594  acc 0.3361  lr 0.17974  502 img/s
+  epoch 14 step 350/396  loss 2.5607  acc 0.3352  lr 0.17931  495 img/s
+epoch 14: train loss 2.5629 top1 0.3347 | val top1 0.2109 bacc 0.2109 | val_shared top1 0.2378 bacc 0.2398 | 4.7 min
+  epoch 15 step 50/396  loss 2.5001  acc 0.3561  lr 0.17849  463 img/s
+  epoch 15 step 100/396  loss 2.5117  acc 0.3519  lr 0.17806  506 img/s
+  epoch 15 step 150/396  loss 2.5155  acc 0.3491  lr 0.17762  521 img/s
+  epoch 15 step 200/396  loss 2.5219  acc 0.3469  lr 0.17718  519 img/s
+  epoch 15 step 250/396  loss 2.5272  acc 0.3452  lr 0.17674  507 img/s
+  epoch 15 step 300/396  loss 2.5294  acc 0.3444  lr 0.17629  496 img/s
+  epoch 15 step 350/396  loss 2.5313  acc 0.3436  lr 0.17584  490 img/s
+epoch 15: train loss 2.5330 top1 0.3436 | val top1 0.2284 bacc 0.2284 | val_shared top1 0.2466 bacc 0.2490 | 4.8 min
+  epoch 16 step 50/396  loss 2.4686  acc 0.3617  lr 0.17496  470 img/s
+  epoch 16 step 100/396  loss 2.4704  acc 0.3641  lr 0.17450  512 img/s
+  epoch 16 step 150/396  loss 2.4867  acc 0.3599  lr 0.17403  527 img/s
+  epoch 16 step 200/396  loss 2.4928  acc 0.3572  lr 0.17356  528 img/s
+  epoch 16 step 250/396  loss 2.4962  acc 0.3564  lr 0.17309  517 img/s
+  epoch 16 step 300/396  loss 2.4972  acc 0.3552  lr 0.17261  505 img/s
+  epoch 16 step 350/396  loss 2.5004  acc 0.3538  lr 0.17213  496 img/s
+epoch 16: train loss 2.5031 top1 0.3532 | val top1 0.2345 bacc 0.2345 | val_shared top1 0.2670 bacc 0.2696 | 4.7 min  *best*
+  epoch 17 step 50/396  loss 2.4296  acc 0.3795  lr 0.17120  464 img/s
+  epoch 17 step 100/396  loss 2.4410  acc 0.3750  lr 0.17071  509 img/s
+  epoch 17 step 150/396  loss 2.4526  acc 0.3702  lr 0.17022  525 img/s
+  epoch 17 step 200/396  loss 2.4624  acc 0.3687  lr 0.16972  525 img/s
+  epoch 17 step 250/396  loss 2.4660  acc 0.3673  lr 0.16922  513 img/s
+  epoch 17 step 300/396  loss 2.4688  acc 0.3660  lr 0.16872  499 img/s
+  epoch 17 step 350/396  loss 2.4722  acc 0.3651  lr 0.16821  490 img/s
+epoch 17: train loss 2.4761 top1 0.3634 | val top1 0.2398 bacc 0.2398 | val_shared top1 0.2681 bacc 0.2703 | 4.8 min  *best*
+  epoch 18 step 50/396  loss 2.4113  acc 0.3866  lr 0.16722  466 img/s
+  epoch 18 step 100/396  loss 2.4335  acc 0.3804  lr 0.16671  510 img/s
+  epoch 18 step 150/396  loss 2.4391  acc 0.3787  lr 0.16619  526 img/s
+  epoch 18 step 200/396  loss 2.4457  acc 0.3759  lr 0.16566  526 img/s
+  epoch 18 step 250/396  loss 2.4472  acc 0.3750  lr 0.16514  515 img/s
+  epoch 18 step 300/396  loss 2.4512  acc 0.3734  lr 0.16461  502 img/s
+  epoch 18 step 350/396  loss 2.4513  acc 0.3738  lr 0.16408  495 img/s
+epoch 18: train loss 2.4533 top1 0.3731 | val top1 0.2302 bacc 0.2302 | val_shared top1 0.2650 bacc 0.2671 | 4.7 min
+  epoch 19 step 50/396  loss 2.3779  acc 0.3959  lr 0.16304  461 img/s
+  epoch 19 step 100/396  loss 2.3962  acc 0.3911  lr 0.16250  505 img/s
+  epoch 19 step 150/396  loss 2.4026  acc 0.3889  lr 0.16196  516 img/s
+  epoch 19 step 200/396  loss 2.4072  acc 0.3874  lr 0.16141  504 img/s
+  epoch 19 step 250/396  loss 2.4113  acc 0.3852  lr 0.16086  480 img/s
+  epoch 19 step 300/396  loss 2.4159  acc 0.3838  lr 0.16031  463 img/s
+  epoch 19 step 350/396  loss 2.4205  acc 0.3826  lr 0.15975  462 img/s
+epoch 19: train loss 2.4217 top1 0.3824 | val top1 0.2362 bacc 0.2363 | val_shared top1 0.2590 bacc 0.2608 | 5.0 min
+  epoch 20 step 50/396  loss 2.3443  acc 0.4062  lr 0.15867  467 img/s
+  epoch 20 step 100/396  loss 2.3529  acc 0.4069  lr 0.15811  511 img/s
+  epoch 20 step 150/396  loss 2.3592  acc 0.4044  lr 0.15754  524 img/s
+  epoch 20 step 200/396  loss 2.3724  acc 0.3998  lr 0.15697  525 img/s
+  epoch 20 step 250/396  loss 2.3795  acc 0.3977  lr 0.15640  514 img/s
+  epoch 20 step 300/396  loss 2.3858  acc 0.3962  lr 0.15582  501 img/s
+  epoch 20 step 350/396  loss 2.3907  acc 0.3940  lr 0.15524  493 img/s
+epoch 20: train loss 2.3934 top1 0.3934 | val top1 0.2341 bacc 0.2341 | val_shared top1 0.2606 bacc 0.2631 | 4.8 min
+  epoch 21 step 50/396  loss 2.3169  acc 0.4156  lr 0.15412  461 img/s
+  epoch 21 step 100/396  loss 2.3342  acc 0.4105  lr 0.15354  506 img/s
+  epoch 21 step 150/396  loss 2.3439  acc 0.4076  lr 0.15295  522 img/s
+  epoch 21 step 200/396  loss 2.3516  acc 0.4054  lr 0.15236  519 img/s
+  epoch 21 step 250/396  loss 2.3590  acc 0.4021  lr 0.15176  503 img/s
+  epoch 21 step 300/396  loss 2.3642  acc 0.4010  lr 0.15116  493 img/s
+  epoch 21 step 350/396  loss 2.3662  acc 0.4004  lr 0.15057  486 img/s
+epoch 21: train loss 2.3684 top1 0.3999 | val top1 0.2525 bacc 0.2525 | val_shared top1 0.2750 bacc 0.2772 | 4.8 min  *best*
+  epoch 22 step 50/396  loss 2.2970  acc 0.4207  lr 0.14941  467 img/s
+  epoch 22 step 100/396  loss 2.3090  acc 0.4174  lr 0.14880  508 img/s
+  epoch 22 step 150/396  loss 2.3090  acc 0.4179  lr 0.14819  522 img/s
+  epoch 22 step 200/396  loss 2.3204  acc 0.4157  lr 0.14758  518 img/s
+  epoch 22 step 250/396  loss 2.3265  acc 0.4150  lr 0.14697  504 img/s
+  epoch 22 step 300/396  loss 2.3322  acc 0.4131  lr 0.14635  485 img/s
+  epoch 22 step 350/396  loss 2.3387  acc 0.4105  lr 0.14574  472 img/s
+epoch 22: train loss 2.3377 top1 0.4109 | val top1 0.2614 bacc 0.2614 | val_shared top1 0.2988 bacc 0.3011 | 5.0 min  *best*
+  epoch 23 step 50/396  loss 2.2552  acc 0.4430  lr 0.14454  465 img/s
+  epoch 23 step 100/396  loss 2.2641  acc 0.4380  lr 0.14392  508 img/s
+  epoch 23 step 150/396  loss 2.2782  acc 0.4308  lr 0.14329  524 img/s
+  epoch 23 step 200/396  loss 2.2867  acc 0.4272  lr 0.14267  524 img/s
+  epoch 23 step 250/396  loss 2.2947  acc 0.4252  lr 0.14203  509 img/s
+  epoch 23 step 300/396  loss 2.2998  acc 0.4241  lr 0.14140  497 img/s
+  epoch 23 step 350/396  loss 2.3063  acc 0.4225  lr 0.14077  490 img/s
+epoch 23: train loss 2.3094 top1 0.4209 | val top1 0.2461 bacc 0.2461 | val_shared top1 0.2875 bacc 0.2896 | 4.8 min
+  epoch 24 step 50/396  loss 2.1994  acc 0.4600  lr 0.13954  461 img/s
+  epoch 24 step 100/396  loss 2.2348  acc 0.4476  lr 0.13890  499 img/s
+  epoch 24 step 150/396  loss 2.2465  acc 0.4439  lr 0.13826  504 img/s
+  epoch 24 step 200/396  loss 2.2573  acc 0.4406  lr 0.13762  493 img/s
+  epoch 24 step 250/396  loss 2.2677  acc 0.4372  lr 0.13697  481 img/s
+  epoch 24 step 300/396  loss 2.2709  acc 0.4358  lr 0.13632  467 img/s
+  epoch 24 step 350/396  loss 2.2773  acc 0.4338  lr 0.13568  464 img/s
+epoch 24: train loss 2.2820 top1 0.4318 | val top1 0.2470 bacc 0.2470 | val_shared top1 0.2856 bacc 0.2878 | 5.0 min
+  epoch 25 step 50/396  loss 2.1675  acc 0.4719  lr 0.13442  469 img/s
+  epoch 25 step 100/396  loss 2.2032  acc 0.4611  lr 0.13377  512 img/s
+  epoch 25 step 150/396  loss 2.2107  acc 0.4574  lr 0.13311  525 img/s
+  epoch 25 step 200/396  loss 2.2276  acc 0.4506  lr 0.13246  521 img/s
+  epoch 25 step 250/396  loss 2.2359  acc 0.4470  lr 0.13180  504 img/s
+  epoch 25 step 300/396  loss 2.2430  acc 0.4451  lr 0.13114  480 img/s
+  epoch 25 step 350/396  loss 2.2469  acc 0.4433  lr 0.13048  468 img/s
+epoch 25: train loss 2.2510 top1 0.4421 | val top1 0.2639 bacc 0.2639 | val_shared top1 0.3040 bacc 0.3058 | 5.0 min  *best*
+  epoch 26 step 50/396  loss 2.1420  acc 0.4808  lr 0.12920  469 img/s
+  epoch 26 step 100/396  loss 2.1648  acc 0.4742  lr 0.12853  512 img/s
+  epoch 26 step 150/396  loss 2.1800  acc 0.4684  lr 0.12787  514 img/s
+  epoch 26 step 200/396  loss 2.1931  acc 0.4625  lr 0.12720  486 img/s
+  epoch 26 step 250/396  loss 2.2002  acc 0.4602  lr 0.12653  460 img/s
+  epoch 26 step 300/396  loss 2.2094  acc 0.4564  lr 0.12586  447 img/s
+  epoch 26 step 350/396  loss 2.2167  acc 0.4547  lr 0.12518  439 img/s
+epoch 26: train loss 2.2199 top1 0.4538 | val top1 0.2472 bacc 0.2472 | val_shared top1 0.2886 bacc 0.2910 | 5.2 min
+  epoch 27 step 50/396  loss 2.1014  acc 0.4920  lr 0.12389  450 img/s
+  epoch 27 step 100/396  loss 2.1213  acc 0.4855  lr 0.12321  487 img/s
+  epoch 27 step 150/396  loss 2.1508  acc 0.4757  lr 0.12253  472 img/s
+  epoch 27 step 200/396  loss 2.1647  acc 0.4707  lr 0.12185  441 img/s
+  epoch 27 step 250/396  loss 2.1750  acc 0.4669  lr 0.12117  422 img/s
+  epoch 27 step 300/396  loss 2.1802  acc 0.4652  lr 0.12049  415 img/s
+  epoch 27 step 350/396  loss 2.1840  acc 0.4644  lr 0.11981  412 img/s
+epoch 27: train loss 2.1905 top1 0.4624 | val top1 0.2517 bacc 0.2517 | val_shared top1 0.2834 bacc 0.2855 | 5.5 min
+  epoch 28 step 50/396  loss 2.0847  acc 0.5016  lr 0.11850  449 img/s
+  epoch 28 step 100/396  loss 2.1027  acc 0.4914  lr 0.11782  476 img/s
+  epoch 28 step 150/396  loss 2.1188  acc 0.4845  lr 0.11713  455 img/s
+  epoch 28 step 200/396  loss 2.1298  acc 0.4824  lr 0.11645  425 img/s
+  epoch 28 step 250/396  loss 2.1370  acc 0.4805  lr 0.11576  409 img/s
+  epoch 28 step 300/396  loss 2.1425  acc 0.4784  lr 0.11507  397 img/s
+  epoch 28 step 350/396  loss 2.1504  acc 0.4764  lr 0.11438  393 img/s
+epoch 28: train loss 2.1537 top1 0.4753 | val top1 0.2436 bacc 0.2436 | val_shared top1 0.2890 bacc 0.2891 | 5.7 min
+  epoch 29 step 50/396  loss 2.0442  acc 0.5151  lr 0.11306  448 img/s
+  epoch 29 step 100/396  loss 2.0639  acc 0.5081  lr 0.11237  464 img/s
+  epoch 29 step 150/396  loss 2.0787  acc 0.5022  lr 0.11168  436 img/s
+  epoch 29 step 200/396  loss 2.0862  acc 0.4988  lr 0.11099  400 img/s
+  epoch 29 step 250/396  loss 2.0975  acc 0.4951  lr 0.11030  387 img/s
+  epoch 29 step 300/396  loss 2.1067  acc 0.4921  lr 0.10960  380 img/s
+  epoch 29 step 350/396  loss 2.1141  acc 0.4896  lr 0.10891  377 img/s
+epoch 29: train loss 2.1187 top1 0.4876 | val top1 0.2348 bacc 0.2348 | val_shared top1 0.2838 bacc 0.2858 | 5.8 min
+  epoch 30 step 50/396  loss 1.9988  acc 0.5337  lr 0.10758  450 img/s
+  epoch 30 step 100/396  loss 2.0214  acc 0.5242  lr 0.10688  472 img/s
+  epoch 30 step 150/396  loss 2.0385  acc 0.5172  lr 0.10619  446 img/s
+  epoch 30 step 200/396  loss 2.0528  acc 0.5120  lr 0.10549  415 img/s
+  epoch 30 step 250/396  loss 2.0629  acc 0.5069  lr 0.10480  398 img/s
+  epoch 30 step 300/396  loss 2.0693  acc 0.5046  lr 0.10410  389 img/s
+  epoch 30 step 350/396  loss 2.0765  acc 0.5023  lr 0.10341  384 img/s
+epoch 30: train loss 2.0830 top1 0.4994 | val top1 0.2758 bacc 0.2758 | val_shared top1 0.3164 bacc 0.3180 | 5.8 min  *best*
+  epoch 31 step 50/396  loss 1.9453  acc 0.5461  lr 0.10207  449 img/s
+  epoch 31 step 100/396  loss 1.9704  acc 0.5374  lr 0.10138  468 img/s
+  epoch 31 step 150/396  loss 1.9828  acc 0.5337  lr 0.10068  432 img/s
+  epoch 31 step 200/396  loss 2.0014  acc 0.5267  lr 0.09999  386 img/s
+  epoch 31 step 250/396  loss 2.0158  acc 0.5226  lr 0.09929  360 img/s
+  epoch 31 step 300/396  loss 2.0265  acc 0.5203  lr 0.09859  350 img/s
+  epoch 31 step 350/396  loss 2.0362  acc 0.5171  lr 0.09790  349 img/s
+epoch 31: train loss 2.0432 top1 0.5151 | val top1 0.2692 bacc 0.2692 | val_shared top1 0.3118 bacc 0.3139 | 6.2 min
+  epoch 32 step 50/396  loss 1.9031  acc 0.5663  lr 0.09656  447 img/s
+  epoch 32 step 100/396  loss 1.9334  acc 0.5547  lr 0.09587  465 img/s
+  epoch 32 step 150/396  loss 1.9512  acc 0.5467  lr 0.09517  430 img/s
+  epoch 32 step 200/396  loss 1.9682  acc 0.5400  lr 0.09448  397 img/s
+  epoch 32 step 250/396  loss 1.9819  acc 0.5346  lr 0.09378  383 img/s
+  epoch 32 step 300/396  loss 1.9911  acc 0.5313  lr 0.09309  377 img/s
+  epoch 32 step 350/396  loss 1.9986  acc 0.5294  lr 0.09239  374 img/s
+epoch 32: train loss 2.0047 top1 0.5269 | val top1 0.2461 bacc 0.2461 | val_shared top1 0.2887 bacc 0.2911 | 5.9 min
+  epoch 33 step 50/396  loss 1.8653  acc 0.5799  lr 0.09106  440 img/s
+  epoch 33 step 100/396  loss 1.8783  acc 0.5736  lr 0.09037  459 img/s
+  epoch 33 step 150/396  loss 1.8995  acc 0.5652  lr 0.08968  431 img/s
+  epoch 33 step 200/396  loss 1.9156  acc 0.5595  lr 0.08899  399 img/s
+  epoch 33 step 250/396  loss 1.9282  acc 0.5549  lr 0.08829  386 img/s
+  epoch 33 step 300/396  loss 1.9407  acc 0.5506  lr 0.08760  380 img/s
+  epoch 33 step 350/396  loss 1.9481  acc 0.5479  lr 0.08691  376 img/s
+epoch 33: train loss 1.9569 top1 0.5446 | val top1 0.2628 bacc 0.2628 | val_shared top1 0.3186 bacc 0.3206 | 5.9 min
+  epoch 34 step 50/396  loss 1.8057  acc 0.6027  lr 0.08559  444 img/s
+  epoch 34 step 100/396  loss 1.8268  acc 0.5910  lr 0.08490  457 img/s
+  epoch 34 step 150/396  loss 1.8480  acc 0.5823  lr 0.08421  419 img/s
+  epoch 34 step 200/396  loss 1.8678  acc 0.5746  lr 0.08353  389 img/s
+  epoch 34 step 250/396  loss 1.8803  acc 0.5705  lr 0.08284  375 img/s
+  epoch 34 step 300/396  loss 1.8933  acc 0.5656  lr 0.08216  370 img/s
+  epoch 34 step 350/396  loss 1.9034  acc 0.5620  lr 0.08147  367 img/s
+epoch 34: train loss 1.9119 top1 0.5585 | val top1 0.2722 bacc 0.2722 | val_shared top1 0.3356 bacc 0.3378 | 6.0 min
+  epoch 35 step 50/396  loss 1.7624  acc 0.6196  lr 0.08016  381 img/s
+  epoch 35 step 100/396  loss 1.7787  acc 0.6123  lr 0.07948  379 img/s
+  epoch 35 step 150/396  loss 1.7992  acc 0.6028  lr 0.07880  367 img/s
+  epoch 35 step 200/396  loss 1.8176  acc 0.5953  lr 0.07812  359 img/s
+  epoch 35 step 250/396  loss 1.8314  acc 0.5901  lr 0.07744  356 img/s
+  epoch 35 step 300/396  loss 1.8411  acc 0.5865  lr 0.07676  356 img/s
+  epoch 35 step 350/396  loss 1.8501  acc 0.5837  lr 0.07609  355 img/s
+epoch 35: train loss 1.8583 top1 0.5806 | val top1 0.2700 bacc 0.2700 | val_shared top1 0.3340 bacc 0.3360 | 6.1 min
+  epoch 36 step 50/396  loss 1.7212  acc 0.6350  lr 0.07479  438 img/s
+  epoch 36 step 100/396  loss 1.7278  acc 0.6266  lr 0.07412  454 img/s
+  epoch 36 step 150/396  loss 1.7529  acc 0.6177  lr 0.07345  425 img/s
+  epoch 36 step 200/396  loss 1.7718  acc 0.6104  lr 0.07278  394 img/s
+  epoch 36 step 250/396  loss 1.7858  acc 0.6048  lr 0.07211  381 img/s
+  epoch 36 step 300/396  loss 1.7923  acc 0.6024  lr 0.07144  374 img/s
+  epoch 36 step 350/396  loss 1.8026  acc 0.5994  lr 0.07077  371 img/s
+epoch 36: train loss 1.8111 top1 0.5956 | val top1 0.2527 bacc 0.2527 | val_shared top1 0.3106 bacc 0.3126 | 5.9 min
+  epoch 37 step 50/396  loss 1.6523  acc 0.6555  lr 0.06950  441 img/s
+  epoch 37 step 100/396  loss 1.6704  acc 0.6480  lr 0.06884  454 img/s
+  epoch 37 step 150/396  loss 1.6854  acc 0.6425  lr 0.06818  414 img/s
+  epoch 37 step 200/396  loss 1.7056  acc 0.6352  lr 0.06752  384 img/s
+  epoch 37 step 250/396  loss 1.7179  acc 0.6301  lr 0.06686  359 img/s
+  epoch 37 step 300/396  loss 1.7328  acc 0.6245  lr 0.06620  344 img/s
+  epoch 37 step 350/396  loss 1.7446  acc 0.6198  lr 0.06555  338 img/s
+epoch 37: train loss 1.7520 top1 0.6169 | val top1 0.2708 bacc 0.2708 | val_shared top1 0.3441 bacc 0.3460 | 6.3 min
+  epoch 38 step 50/396  loss 1.5813  acc 0.6801  lr 0.06430  440 img/s
+  epoch 38 step 100/396  loss 1.6086  acc 0.6697  lr 0.06365  455 img/s
+  epoch 38 step 150/396  loss 1.6262  acc 0.6636  lr 0.06300  422 img/s
+  epoch 38 step 200/396  loss 1.6439  acc 0.6576  lr 0.06236  393 img/s
+  epoch 38 step 250/396  loss 1.6599  acc 0.6516  lr 0.06171  380 img/s
+  epoch 38 step 300/396  loss 1.6739  acc 0.6462  lr 0.06107  374 img/s
+  epoch 38 step 350/396  loss 1.6844  acc 0.6419  lr 0.06043  371 img/s
+epoch 38: train loss 1.6937 top1 0.6385 | val top1 0.2742 bacc 0.2742 | val_shared top1 0.3479 bacc 0.3499 | 5.9 min
+  epoch 39 step 50/396  loss 1.5179  acc 0.7100  lr 0.05921  438 img/s
+  epoch 39 step 100/396  loss 1.5476  acc 0.6964  lr 0.05857  449 img/s
+  epoch 39 step 150/396  loss 1.5672  acc 0.6877  lr 0.05794  421 img/s
+  epoch 39 step 200/396  loss 1.5799  acc 0.6831  lr 0.05731  389 img/s
+  epoch 39 step 250/396  loss 1.5927  acc 0.6778  lr 0.05668  359 img/s
+  epoch 39 step 300/396  loss 1.6059  acc 0.6729  lr 0.05606  363 img/s
+  epoch 39 step 350/396  loss 1.6184  acc 0.6683  lr 0.05543  373 img/s
+epoch 39: train loss 1.6276 top1 0.6648 | val top1 0.2652 bacc 0.2652 | val_shared top1 0.3423 bacc 0.3445 | 5.7 min
+  epoch 40 step 50/396  loss 1.4694  acc 0.7241  lr 0.05424  478 img/s
+  epoch 40 step 100/396  loss 1.4777  acc 0.7202  lr 0.05362  525 img/s
+  epoch 40 step 150/396  loss 1.4941  acc 0.7128  lr 0.05301  543 img/s
+  epoch 40 step 200/396  loss 1.5176  acc 0.7025  lr 0.05239  545 img/s
+  epoch 40 step 250/396  loss 1.5321  acc 0.6969  lr 0.05178  540 img/s
+  epoch 40 step 300/396  loss 1.5401  acc 0.6937  lr 0.05117  529 img/s
+  epoch 40 step 350/396  loss 1.5482  acc 0.6905  lr 0.05057  514 img/s
+epoch 40: train loss 1.5560 top1 0.6877 | val top1 0.2605 bacc 0.2605 | val_shared top1 0.3502 bacc 0.3515 | 4.7 min
+  epoch 41 step 50/396  loss 1.3907  acc 0.7584  lr 0.04941  478 img/s
+  epoch 41 step 100/396  loss 1.4018  acc 0.7509  lr 0.04881  525 img/s
+  epoch 41 step 150/396  loss 1.4202  acc 0.7424  lr 0.04821  542 img/s
+  epoch 41 step 200/396  loss 1.4375  acc 0.7346  lr 0.04762  542 img/s
+  epoch 41 step 250/396  loss 1.4511  acc 0.7295  lr 0.04703  530 img/s
+  epoch 41 step 300/396  loss 1.4644  acc 0.7240  lr 0.04644  519 img/s
+  epoch 41 step 350/396  loss 1.4751  acc 0.7195  lr 0.04585  511 img/s
+epoch 41: train loss 1.4855 top1 0.7146 | val top1 0.2687 bacc 0.2688 | val_shared top1 0.3485 bacc 0.3504 | 4.6 min
+  epoch 42 step 50/396  loss 1.3284  acc 0.7801  lr 0.04474  483 img/s
+  epoch 42 step 100/396  loss 1.3353  acc 0.7749  lr 0.04416  528 img/s
+  epoch 42 step 150/396  loss 1.3460  acc 0.7697  lr 0.04358  545 img/s
+  epoch 42 step 200/396  loss 1.3628  acc 0.7624  lr 0.04301  547 img/s
+  epoch 42 step 250/396  loss 1.3809  acc 0.7549  lr 0.04244  538 img/s
+  epoch 42 step 300/396  loss 1.3912  acc 0.7513  lr 0.04187  527 img/s
+  epoch 42 step 350/396  loss 1.4015  acc 0.7476  lr 0.04130  518 img/s
+epoch 42: train loss 1.4103 top1 0.7443 | val top1 0.2659 bacc 0.2659 | val_shared top1 0.3496 bacc 0.3515 | 4.6 min
+  epoch 43 step 50/396  loss 1.2368  acc 0.8130  lr 0.04023  480 img/s
+  epoch 43 step 100/396  loss 1.2571  acc 0.8040  lr 0.03967  526 img/s
+  epoch 43 step 150/396  loss 1.2708  acc 0.7996  lr 0.03912  544 img/s
+  epoch 43 step 200/396  loss 1.2901  acc 0.7912  lr 0.03857  545 img/s
+  epoch 43 step 250/396  loss 1.3032  acc 0.7860  lr 0.03802  535 img/s
+  epoch 43 step 300/396  loss 1.3142  acc 0.7813  lr 0.03748  522 img/s
+  epoch 43 step 350/396  loss 1.3234  acc 0.7782  lr 0.03693  512 img/s
+epoch 43: train loss 1.3312 top1 0.7751 | val top1 0.2758 bacc 0.2758 | val_shared top1 0.3611 bacc 0.3632 | 4.7 min
+  epoch 44 step 50/396  loss 1.1890  acc 0.8310  lr 0.03590  415 img/s
+  epoch 44 step 100/396  loss 1.1942  acc 0.8262  lr 0.03537  448 img/s
+  epoch 44 step 150/396  loss 1.2090  acc 0.8210  lr 0.03484  453 img/s
+  epoch 44 step 200/396  loss 1.2166  acc 0.8182  lr 0.03431  453 img/s
+  epoch 44 step 250/396  loss 1.2257  acc 0.8148  lr 0.03379  453 img/s
+  epoch 44 step 300/396  loss 1.2327  acc 0.8120  lr 0.03327  454 img/s
+  epoch 44 step 350/396  loss 1.2401  acc 0.8090  lr 0.03275  455 img/s
+epoch 44: train loss 1.2490 top1 0.8057 | val top1 0.2745 bacc 0.2745 | val_shared top1 0.3568 bacc 0.3585 | 5.0 min
+  epoch 45 step 50/396  loss 1.1230  acc 0.8602  lr 0.03177  468 img/s
+  epoch 45 step 100/396  loss 1.1259  acc 0.8572  lr 0.03126  512 img/s
+  epoch 45 step 150/396  loss 1.1322  acc 0.8551  lr 0.03076  526 img/s
+  epoch 45 step 200/396  loss 1.1415  acc 0.8508  lr 0.03026  522 img/s
+  epoch 45 step 250/396  loss 1.1471  acc 0.8479  lr 0.02976  509 img/s
+  epoch 45 step 300/396  loss 1.1556  acc 0.8438  lr 0.02927  495 img/s
+  epoch 45 step 350/396  loss 1.1645  acc 0.8399  lr 0.02878  487 img/s
+epoch 45: train loss 1.1696 top1 0.8377 | val top1 0.2703 bacc 0.2703 | val_shared top1 0.3480 bacc 0.3496 | 4.8 min
+  epoch 46 step 50/396  loss 1.0570  acc 0.8857  lr 0.02785  467 img/s
+  epoch 46 step 100/396  loss 1.0551  acc 0.8849  lr 0.02737  509 img/s
+  epoch 46 step 150/396  loss 1.0625  acc 0.8822  lr 0.02689  524 img/s
+  epoch 46 step 200/396  loss 1.0674  acc 0.8800  lr 0.02642  520 img/s
+  epoch 46 step 250/396  loss 1.0697  acc 0.8790  lr 0.02595  506 img/s
+  epoch 46 step 300/396  loss 1.0739  acc 0.8774  lr 0.02548  493 img/s
+  epoch 46 step 350/396  loss 1.0776  acc 0.8756  lr 0.02502  486 img/s
+epoch 46: train loss 1.0817 top1 0.8737 | val top1 0.2892 bacc 0.2892 | val_shared top1 0.3757 bacc 0.3777 | 4.8 min  *best*
+  epoch 47 step 50/396  loss 0.9924  acc 0.9121  lr 0.02414  465 img/s
+  epoch 47 step 100/396  loss 0.9903  acc 0.9114  lr 0.02369  510 img/s
+  epoch 47 step 150/396  loss 0.9934  acc 0.9106  lr 0.02324  523 img/s
+  epoch 47 step 200/396  loss 0.9956  acc 0.9095  lr 0.02280  518 img/s
+  epoch 47 step 250/396  loss 0.9983  acc 0.9084  lr 0.02236  502 img/s
+  epoch 47 step 300/396  loss 1.0029  acc 0.9065  lr 0.02192  490 img/s
+  epoch 47 step 350/396  loss 1.0065  acc 0.9049  lr 0.02149  484 img/s
+epoch 47: train loss 1.0098 top1 0.9032 | val top1 0.2697 bacc 0.2697 | val_shared top1 0.3681 bacc 0.3700 | 4.8 min
+  epoch 48 step 50/396  loss 0.9342  acc 0.9330  lr 0.02067  467 img/s
+  epoch 48 step 100/396  loss 0.9343  acc 0.9332  lr 0.02025  511 img/s
+  epoch 48 step 150/396  loss 0.9361  acc 0.9323  lr 0.01983  525 img/s
+  epoch 48 step 200/396  loss 0.9357  acc 0.9329  lr 0.01942  519 img/s
+  epoch 48 step 250/396  loss 0.9392  acc 0.9315  lr 0.01901  498 img/s
+  epoch 48 step 300/396  loss 0.9411  acc 0.9307  lr 0.01860  486 img/s
+  epoch 48 step 350/396  loss 0.9432  acc 0.9298  lr 0.01820  480 img/s
+epoch 48: train loss 0.9445 top1 0.9293 | val top1 0.2814 bacc 0.2814 | val_shared top1 0.3716 bacc 0.3735 | 4.8 min
+  epoch 49 step 50/396  loss 0.8867  acc 0.9532  lr 0.01744  457 img/s
+  epoch 49 step 100/396  loss 0.8852  acc 0.9538  lr 0.01704  505 img/s
+  epoch 49 step 150/396  loss 0.8854  acc 0.9532  lr 0.01666  521 img/s
+  epoch 49 step 200/396  loss 0.8848  acc 0.9533  lr 0.01628  517 img/s
+  epoch 49 step 250/396  loss 0.8866  acc 0.9522  lr 0.01590  504 img/s
+  epoch 49 step 300/396  loss 0.8876  acc 0.9517  lr 0.01552  490 img/s
+  epoch 49 step 350/396  loss 0.8874  acc 0.9518  lr 0.01515  484 img/s
+epoch 49: train loss 0.8875 top1 0.9518 | val top1 0.2856 bacc 0.2856 | val_shared top1 0.3802 bacc 0.3822 | 4.8 min
+  epoch 50 step 50/396  loss 0.8476  acc 0.9645  lr 0.01445  466 img/s
+  epoch 50 step 100/396  loss 0.8474  acc 0.9653  lr 0.01409  510 img/s
+  epoch 50 step 150/396  loss 0.8471  acc 0.9654  lr 0.01374  525 img/s
+  epoch 50 step 200/396  loss 0.8466  acc 0.9656  lr 0.01339  522 img/s
+  epoch 50 step 250/396  loss 0.8463  acc 0.9657  lr 0.01304  507 img/s
+  epoch 50 step 300/396  loss 0.8469  acc 0.9655  lr 0.01270  494 img/s
+  epoch 50 step 350/396  loss 0.8479  acc 0.9649  lr 0.01237  487 img/s
+epoch 50: train loss 0.8480 top1 0.9650 | val top1 0.2877 bacc 0.2877 | val_shared top1 0.3881 bacc 0.3901 | 4.8 min
+  epoch 51 step 50/396  loss 0.8187  acc 0.9769  lr 0.01173  460 img/s
+  epoch 51 step 100/396  loss 0.8176  acc 0.9764  lr 0.01141  506 img/s
+  epoch 51 step 150/396  loss 0.8191  acc 0.9759  lr 0.01108  520 img/s
+  epoch 51 step 200/396  loss 0.8199  acc 0.9750  lr 0.01077  516 img/s
+  epoch 51 step 250/396  loss 0.8201  acc 0.9749  lr 0.01046  501 img/s
+  epoch 51 step 300/396  loss 0.8192  acc 0.9751  lr 0.01015  486 img/s
+  epoch 51 step 350/396  loss 0.8196  acc 0.9747  lr 0.00985  479 img/s
+epoch 51: train loss 0.8197 top1 0.9745 | val top1 0.2919 bacc 0.2919 | val_shared top1 0.3946 bacc 0.3965 | 4.9 min  *best*
+  epoch 52 step 50/396  loss 0.7976  acc 0.9811  lr 0.00928  463 img/s
+  epoch 52 step 100/396  loss 0.7964  acc 0.9814  lr 0.00898  506 img/s
+  epoch 52 step 150/396  loss 0.7967  acc 0.9811  lr 0.00870  520 img/s
+  epoch 52 step 200/396  loss 0.7975  acc 0.9808  lr 0.00842  513 img/s
+  epoch 52 step 250/396  loss 0.7969  acc 0.9810  lr 0.00814  495 img/s
+  epoch 52 step 300/396  loss 0.7964  acc 0.9815  lr 0.00787  483 img/s
+  epoch 52 step 350/396  loss 0.7961  acc 0.9816  lr 0.00760  475 img/s
+epoch 52: train loss 0.7958 top1 0.9815 | val top1 0.2938 bacc 0.2938 | val_shared top1 0.3939 bacc 0.3960 | 4.9 min  *best*
+  epoch 53 step 50/396  loss 0.7799  acc 0.9865  lr 0.00710  468 img/s
+  epoch 53 step 100/396  loss 0.7783  acc 0.9867  lr 0.00684  511 img/s
+  epoch 53 step 150/396  loss 0.7790  acc 0.9863  lr 0.00659  525 img/s
+  epoch 53 step 200/396  loss 0.7797  acc 0.9859  lr 0.00634  523 img/s
+  epoch 53 step 250/396  loss 0.7795  acc 0.9860  lr 0.00610  508 img/s
+  epoch 53 step 300/396  loss 0.7790  acc 0.9861  lr 0.00587  494 img/s
+  epoch 53 step 350/396  loss 0.7789  acc 0.9859  lr 0.00563  487 img/s
+epoch 53: train loss 0.7787 top1 0.9860 | val top1 0.2977 bacc 0.2977 | val_shared top1 0.3950 bacc 0.3969 | 4.8 min  *best*
+  epoch 54 step 50/396  loss 0.7685  acc 0.9870  lr 0.00520  467 img/s
+  epoch 54 step 100/396  loss 0.7705  acc 0.9863  lr 0.00498  511 img/s
+  epoch 54 step 150/396  loss 0.7712  acc 0.9862  lr 0.00477  525 img/s
+  epoch 54 step 200/396  loss 0.7710  acc 0.9865  lr 0.00456  515 img/s
+  epoch 54 step 250/396  loss 0.7709  acc 0.9867  lr 0.00435  496 img/s
+  epoch 54 step 300/396  loss 0.7706  acc 0.9868  lr 0.00415  484 img/s
+  epoch 54 step 350/396  loss 0.7705  acc 0.9867  lr 0.00395  472 img/s
+epoch 54: train loss 0.7700 top1 0.9869 | val top1 0.3003 bacc 0.3003 | val_shared top1 0.3947 bacc 0.3967 | 4.9 min  *best*
+  epoch 55 step 50/396  loss 0.7608  acc 0.9905  lr 0.00359  464 img/s
+  epoch 55 step 100/396  loss 0.7619  acc 0.9894  lr 0.00341  509 img/s
+  epoch 55 step 150/396  loss 0.7609  acc 0.9895  lr 0.00323  524 img/s
+  epoch 55 step 200/396  loss 0.7610  acc 0.9895  lr 0.00306  521 img/s
+  epoch 55 step 250/396  loss 0.7608  acc 0.9898  lr 0.00289  506 img/s
+  epoch 55 step 300/396  loss 0.7607  acc 0.9897  lr 0.00272  492 img/s
+  epoch 55 step 350/396  loss 0.7608  acc 0.9896  lr 0.00257  485 img/s
+epoch 55: train loss 0.7604 top1 0.9897 | val top1 0.3002 bacc 0.3002 | val_shared top1 0.4023 bacc 0.4043 | 4.8 min
+  epoch 56 step 50/396  loss 0.7548  acc 0.9912  lr 0.00227  469 img/s
+  epoch 56 step 100/396  loss 0.7571  acc 0.9899  lr 0.00213  512 img/s
+  epoch 56 step 150/396  loss 0.7576  acc 0.9899  lr 0.00199  526 img/s
+  epoch 56 step 200/396  loss 0.7571  acc 0.9901  lr 0.00185  520 img/s
+  epoch 56 step 250/396  loss 0.7560  acc 0.9906  lr 0.00172  505 img/s
+  epoch 56 step 300/396  loss 0.7558  acc 0.9906  lr 0.00160  491 img/s
+  epoch 56 step 350/396  loss 0.7559  acc 0.9906  lr 0.00147  483 img/s
+epoch 56: train loss 0.7557 top1 0.9905 | val top1 0.2989 bacc 0.2989 | val_shared top1 0.4004 bacc 0.4023 | 4.8 min
+  epoch 57 step 50/396  loss 0.7526  acc 0.9909  lr 0.00125  464 img/s
+  epoch 57 step 100/396  loss 0.7533  acc 0.9908  lr 0.00115  509 img/s
+  epoch 57 step 150/396  loss 0.7528  acc 0.9909  lr 0.00104  523 img/s
+  epoch 57 step 200/396  loss 0.7525  acc 0.9910  lr 0.00095  518 img/s
+  epoch 57 step 250/396  loss 0.7520  acc 0.9910  lr 0.00085  504 img/s
+  epoch 57 step 300/396  loss 0.7516  acc 0.9911  lr 0.00076  491 img/s
+  epoch 57 step 350/396  loss 0.7512  acc 0.9914  lr 0.00068  484 img/s
+epoch 57: train loss 0.7510 top1 0.9915 | val top1 0.3033 bacc 0.3033 | val_shared top1 0.4038 bacc 0.4059 | 4.8 min  *best*
+  epoch 58 step 50/396  loss 0.7535  acc 0.9910  lr 0.00053  457 img/s
+  epoch 58 step 100/396  loss 0.7514  acc 0.9914  lr 0.00046  503 img/s
+  epoch 58 step 150/396  loss 0.7505  acc 0.9917  lr 0.00040  516 img/s
+  epoch 58 step 200/396  loss 0.7506  acc 0.9915  lr 0.00034  508 img/s
+  epoch 58 step 250/396  loss 0.7499  acc 0.9916  lr 0.00029  493 img/s
+  epoch 58 step 300/396  loss 0.7498  acc 0.9917  lr 0.00024  479 img/s
+  epoch 58 step 350/396  loss 0.7497  acc 0.9919  lr 0.00019  469 img/s
+epoch 58: train loss 0.7500 top1 0.9918 | val top1 0.3039 bacc 0.3039 | val_shared top1 0.4012 bacc 0.4032 | 5.0 min  *best*
+  epoch 59 step 50/396  loss 0.7477  acc 0.9916  lr 0.00012  468 img/s
+  epoch 59 step 100/396  loss 0.7484  acc 0.9915  lr 0.00009  511 img/s
+  epoch 59 step 150/396  loss 0.7481  acc 0.9919  lr 0.00006  523 img/s
+  epoch 59 step 200/396  loss 0.7485  acc 0.9918  lr 0.00004  516 img/s
+  epoch 59 step 250/396  loss 0.7482  acc 0.9919  lr 0.00002  501 img/s
+  epoch 59 step 300/396  loss 0.7486  acc 0.9920  lr 0.00001  489 img/s
+  epoch 59 step 350/396  loss 0.7487  acc 0.9921  lr 0.00000  479 img/s
+epoch 59: train loss 0.7484 top1 0.9923 | val top1 0.3017 bacc 0.3017 | val_shared top1 0.4007 bacc 0.4027 | 4.9 min
+done; best val balanced acc 0.3039; checkpoints in runs/scratch_s1
