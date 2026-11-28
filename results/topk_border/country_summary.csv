@@ -1,0 +1,33 @@
+country,name,recall,hardest_to_tell_apart_from,pairwise_accuracy_vs_hardest,mean_pairwise_accuracy
+AT,Austria,0.175,Switzerland,0.5712,0.8142
+AU,Australia,0.4875,United States,0.7975,0.8648
+BE,Belgium,0.1975,Poland,0.6575,0.8175
+BR,Brazil,0.2775,Mexico,0.7338,0.8558
+CA,Canada,0.245,United States,0.6512,0.8249
+CH,Switzerland,0.265,Austria,0.5712,0.8247
+CO,Colombia,0.3925,Brazil,0.7575,0.8673
+CZ,Czechia,0.1275,Poland,0.5675,0.7861
+DE,Germany,0.095,Czechia,0.6438,0.8143
+DK,Denmark,0.19,Germany,0.66,0.8161
+ES,Spain,0.1475,Portugal,0.635,0.8213
+ET,Ethiopia,0.685,Mexico,0.8762,0.9223
+FR,France,0.0825,Croatia,0.6888,0.7873
+GB,United Kingdom,0.46,Belgium,0.77,0.8547
+GR,Greece,0.3,Portugal,0.6788,0.8398
+HR,Croatia,0.1975,Italy,0.6575,0.8004
+HU,Hungary,0.315,Czechia,0.6712,0.8306
+ID,Indonesia,0.3625,Malaysia,0.7288,0.8679
+IN,India,0.62,Indonesia,0.7388,0.8962
+IT,Italy,0.185,Croatia,0.6575,0.8002
+JP,Japan,0.52,Turkey,0.7925,0.8493
+MX,Mexico,0.275,Brazil,0.7338,0.8431
+MY,Malaysia,0.37,Indonesia,0.7288,0.8557
+NL,Netherlands,0.4825,Belgium,0.67,0.8378
+PL,Poland,0.135,Czechia,0.5675,0.8006
+PT,Portugal,0.1875,Spain,0.635,0.7995
+RU,Russia,0.2575,Poland,0.7275,0.8235
+SE,Sweden,0.2725,Denmark,0.6938,0.8508
+TH,Thailand,0.3625,Indonesia,0.7562,0.8658
+TR,Turkey,0.25,Greece,0.7,0.819
+TW,Taiwan,0.605,Malaysia,0.7875,0.8655
+US,United States,0.285,Canada,0.6512,0.8373

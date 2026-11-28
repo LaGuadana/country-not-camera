@@ -6,9 +6,9 @@ histogram (L1-normalised, square-rooted) and HOG (Dalal and Triggs 2005; 9 orien
 standardised and reduced with PCA fitted on the training sample (the curse of
 dimensionality at work; Beyer et al. 1999). Classification is distance-weighted kNN.
 
-The training gallery is the SAME sample as the linear probe (first 300 manifest images per
-country, 9,600 images), so the two baselines differ only in the representation: hand-crafted
-descriptors versus frozen ImageNet features. k and the distance are chosen on val (unseen
+The training gallery comprises the first 300 manifest images per country (9,600 images).
+The linear probe instead uses a seeded shuffled sample, and a different classifier, so the
+comparison is not an isolated representation ablation. k and the distance are chosen on val (unseen
 contributors); test and test_shared are then scored once, with contributor-clustered
 bootstrap CIs and the shared-disjoint gap, in the same format as the CNN runs.
 
@@ -142,7 +142,8 @@ def main():
         pred = clf.predict(X[split])
         correct = (pred == y[split]).astype(np.float64)
         b_top1, b_bacc = cluster_bootstrap(correct, y[split], rows["creator_id"].to_numpy(),
-                                           len(classes), n_boot=a.n_boot)
+                                           len(classes), n_boot=a.n_boot,
+                                           seed=101 if split == "test" else 102)
         boot[split] = (b_top1, b_bacc)
         top3 = np.argsort(-clf.predict_proba(X[split]), axis=1)[:, :3]
         out["splits"][split] = {
@@ -155,7 +156,16 @@ def main():
     gap = boot["test_shared"][1] - boot["test"][1]
     out["gap_test_shared_minus_test"] = {"top1": out["splits"]["test_shared"]["top1"] - out["splits"]["test"]["top1"],
                                          "top1_ci95": ci(boot["test_shared"][0] - boot["test"][0]),
-                                         "balanced_acc": float(np.mean(gap)), "balanced_acc_ci95": ci(gap)}
+                                         "balanced_acc": float(
+                                             pd.DataFrame({"y": y["test_shared"],
+                                                           "correct": (preds[1]["pred"].to_numpy()
+                                                                       == rows_by["test_shared"]["country"].to_numpy())})
+                                             .groupby("y")["correct"].mean().mean()
+                                             - pd.DataFrame({"y": y["test"],
+                                                             "correct": (preds[0]["pred"].to_numpy()
+                                                                         == rows_by["test"]["country"].to_numpy())})
+                                             .groupby("y")["correct"].mean().mean()),
+                                         "balanced_acc_ci95": ci(gap)}
     with open(os.path.join(a.out_dir, "results.json"), "w") as f:
         json.dump(out, f, indent=1)
     pd.concat(preds).to_csv(os.path.join(a.out_dir, "predictions.csv"), index=False)

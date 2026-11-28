@@ -43,7 +43,15 @@ def main():
     ap.add_argument("--n-boot", type=int, default=1000)
     ap.add_argument("--batch-size", type=int, default=512)
     ap.add_argument("--workers", type=int, default=min(8, os.cpu_count() or 1))
+    ap.add_argument("--eval-bottom-frac", type=float, default=None,
+                    help="test-time sensitivity analysis: blank this fraction of the image bottom; "
+                         "does not change training. Use a separate --out-dir.")
     a = ap.parse_args()
+    if a.eval_bottom_frac is not None:
+        if not 0 <= a.eval_bottom_frac <= 1:
+            ap.error("--eval-bottom-frac must be between 0 and 1")
+        if a.out_dir is None:
+            ap.error("--eval-bottom-frac requires a separate --out-dir")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     ck = torch.load(a.ckpt, map_location="cpu", weights_only=False)
@@ -57,6 +65,12 @@ def main():
     if classes != cfg["classes"]:
         raise SystemExit("class list of --data-dir differs from the checkpoint's")
     aug = AugConfig(**{k: tuple(v) if isinstance(v, list) else v for k, v in cfg["aug"].items()})
+    if a.eval_bottom_frac is not None:
+        aug.fingerprint = True
+        aug.bottom_frac = a.eval_bottom_frac
+        aug.static_mask = False
+        print(f"TEST-TIME INTERVENTION: blank bottom {a.eval_bottom_frac:.0%}; "
+              "this does not mean the model was trained with fingerprint removal")
     if aug.fingerprint and aug.static_mask and masks is None:
         print("WARNING: the model was trained with static masks but --data-dir has no masks.npz")
     # architecture only; the weights come from the checkpoint
@@ -69,7 +83,7 @@ def main():
         model = model.to(memory_format=torch.channels_last)
 
     results = {"checkpoint": os.path.abspath(a.ckpt), "epoch": ck.get("epoch"), "classes": classes,
-               "train_args": targs, "splits": {}}
+               "train_args": targs, "eval_bottom_frac": a.eval_bottom_frac, "splits": {}}
     boot = {}
     preds = []
     for split in a.splits.split(","):
@@ -82,8 +96,11 @@ def main():
         rows = rows.iloc[r["idx"]].reset_index(drop=True)
         m = summarize(r["logits"], r["labels"], len(classes))
         correct = (r["logits"].argmax(1) == r["labels"]).astype(np.float64)
+        # Disjoint and shared splits contain different contributors. Their bootstrap
+        # samples must be independent even when the number of clusters happens to match.
+        seed = {"test": 101, "test_shared": 102, "val": 103, "val_shared": 104}.get(split, 105)
         b_top1, b_bacc = cluster_bootstrap(correct, r["labels"], rows["creator_id"].to_numpy(),
-                                           len(classes), n_boot=a.n_boot)
+                                           len(classes), n_boot=a.n_boot, seed=seed)
         boot[split] = (b_top1, b_bacc)
         m["top1_ci95"], m["balanced_acc_ci95"] = ci(b_top1), ci(b_bacc)
         m["contributors"] = int(rows["creator_id"].nunique())

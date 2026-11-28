@@ -72,7 +72,7 @@ def main():
                 continue
             preds, nn = knn_predict(G["features"], G["labels"], Q["features"], ks)
             same = G["creator_id"].astype(str)[nn] == Q["creator_id"].astype(str)
-            row = {"gallery": gallery, "query": query, "n_query": int(len(Q)),
+            row = {"gallery": gallery, "query": query, "n_query": int(len(Q["labels"])),
                    "nn_same_contributor": float(same.mean())}
             for k, p in preds.items():
                 row[f"top1_k{k}"] = float((p == Q["labels"]).mean())

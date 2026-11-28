@@ -1,0 +1,287 @@
+{
+  "bootstrap_draws": 1000,
+  "runs": {
+    "probe": {
+      "checkpoint": {
+        "distinct_images": 9600,
+        "selected_epoch": 0
+      },
+      "bins": [
+        {
+          "bin": "1",
+          "images": 2157,
+          "contributors": 742,
+          "accuracy": 0.11543810848400557,
+          "adjusted_excess": -0.017764255910987483,
+          "excess_ci95": [
+            -0.03856059791560119,
+            0.0012134379213336452
+          ]
+        },
+        {
+          "bin": "2-6",
+          "images": 5494,
+          "contributors": 1026,
+          "accuracy": 0.1345103749544958,
+          "adjusted_excess": 0.006357844921732793,
+          "excess_ci95": [
+            -0.010423193228631772,
+            0.022117332512396896
+          ]
+        },
+        {
+          "bin": "7-21",
+          "images": 2477,
+          "contributors": 169,
+          "accuracy": 0.18328623334679048,
+          "adjusted_excess": 0.03525837706903512,
+          "excess_ci95": [
+            0.002625314084850733,
+            0.0741713369899989
+          ]
+        },
+        {
+          "bin": "22-51",
+          "images": 276,
+          "contributors": 6,
+          "accuracy": 0.11594202898550725,
+          "adjusted_excess": 0.012463768115942025,
+          "excess_ci95": [
+            -0.031581207059558525,
+            0.05479242737001467
+          ]
+        },
+        {
+          "bin": "52+",
+          "images": 125,
+          "contributors": 1,
+          "accuracy": 0.184,
+          "adjusted_excess": 0.008399999999999996,
+          "excess_ci95": [
+            -0.018175281463784613,
+            0.030237412673907317
+          ]
+        }
+      ],
+      "shared_without_training_images": 2030
+    },
+    "cpu_ft": {
+      "checkpoint": {
+        "distinct_images": 101578,
+        "selected_epoch": 18
+      },
+      "bins": [
+        {
+          "bin": "2-6",
+          "images": 1577,
+          "contributors": 1046,
+          "accuracy": 0.25745085605580215,
+          "adjusted_excess": -0.03422479391249209,
+          "excess_ci95": [
+            -0.061561763555068476,
+            -0.003449694983050699
+          ]
+        },
+        {
+          "bin": "7-21",
+          "images": 2978,
+          "contributors": 1056,
+          "accuracy": 0.29650772330423103,
+          "adjusted_excess": 0.014237743451981198,
+          "excess_ci95": [
+            -0.012074138642578041,
+            0.04156379691138181
+          ]
+        },
+        {
+          "bin": "22-51",
+          "images": 4394,
+          "contributors": 696,
+          "accuracy": 0.3957669549385526,
+          "adjusted_excess": 0.096566909421939,
+          "excess_ci95": [
+            0.06968709296545259,
+            0.12126217595029803
+          ]
+        },
+        {
+          "bin": "52+",
+          "images": 3610,
+          "contributors": 239,
+          "accuracy": 0.34958448753462606,
+          "adjusted_excess": 0.08676108033240996,
+          "excess_ci95": [
+            0.056112111625982695,
+            0.11990049323971465
+          ]
+        }
+      ],
+      "shared_without_training_images": 0
+    },
+    "stage_1": {
+      "checkpoint": {
+        "distinct_images": 188768,
+        "selected_epoch": 4,
+        "epochs_seen_in_stage": 5,
+        "stage_candidate_images": 103122
+      },
+      "bins": [
+        {
+          "bin": "2-6",
+          "images": 137,
+          "contributors": 135,
+          "accuracy": 0.21897810218978103,
+          "adjusted_excess": -0.02771897810218979,
+          "excess_ci95": [
+            -0.09776115465218348,
+            0.04771008095532074
+          ]
+        },
+        {
+          "bin": "7-21",
+          "images": 1146,
+          "contributors": 756,
+          "accuracy": 0.26352530541012215,
+          "adjusted_excess": -0.011677574171029671,
+          "excess_ci95": [
+            -0.04040733955527775,
+            0.0165023274883229
+          ]
+        },
+        {
+          "bin": "22-51",
+          "images": 4585,
+          "contributors": 1486,
+          "accuracy": 0.359432933478735,
+          "adjusted_excess": 0.05405288985823337,
+          "excess_ci95": [
+            0.03093354596099735,
+            0.07785604933640491
+          ]
+        },
+        {
+          "bin": "52+",
+          "images": 6691,
+          "contributors": 660,
+          "accuracy": 0.3884322223882828,
+          "adjusted_excess": 0.09816320430428933,
+          "excess_ci95": [
+            0.07390027836300021,
+            0.12245334650358605
+          ]
+        }
+      ],
+      "shared_without_training_images": 0
+    },
+    "stage_2": {
+      "checkpoint": {
+        "distinct_images": 258677,
+        "selected_epoch": 3,
+        "epochs_seen_in_stage": 4,
+        "stage_candidate_images": 103124
+      },
+      "bins": [
+        {
+          "bin": "2-6",
+          "images": 80,
+          "contributors": 80,
+          "accuracy": 0.2125,
+          "adjusted_excess": -0.079875,
+          "excess_ci95": [
+            -0.16537304243462683,
+            0.003634869074626821
+          ]
+        },
+        {
+          "bin": "7-21",
+          "images": 829,
+          "contributors": 605,
+          "accuracy": 0.2617611580217129,
+          "adjusted_excess": -0.01743365500603137,
+          "excess_ci95": [
+            -0.05027764902091169,
+            0.015810751398051753
+          ]
+        },
+        {
+          "bin": "22-51",
+          "images": 1640,
+          "contributors": 638,
+          "accuracy": 0.32621951219512196,
+          "adjusted_excess": 0.03357926829268292,
+          "excess_ci95": [
+            0.003924870289684542,
+            0.06518224951275355
+          ]
+        },
+        {
+          "bin": "52+",
+          "images": 10010,
+          "contributors": 1714,
+          "accuracy": 0.3914085914085914,
+          "adjusted_excess": 0.09212587412587413,
+          "excess_ci95": [
+            0.0732742901914398,
+            0.11103506910654287
+          ]
+        }
+      ],
+      "shared_without_training_images": 0
+    },
+    "stage_3": {
+      "checkpoint": {
+        "distinct_images": 346197,
+        "selected_epoch": 4,
+        "epochs_seen_in_stage": 5,
+        "stage_candidate_images": 103120
+      },
+      "bins": [
+        {
+          "bin": "2-6",
+          "images": 52,
+          "contributors": 52,
+          "accuracy": 0.25,
+          "adjusted_excess": -0.1051442307692308,
+          "excess_ci95": [
+            -0.21705923656650428,
+            0.01685333949519858
+          ]
+        },
+        {
+          "bin": "7-21",
+          "images": 657,
+          "contributors": 500,
+          "accuracy": 0.2602739726027397,
+          "adjusted_excess": -0.03528158295281583,
+          "excess_ci95": [
+            -0.07112324810783437,
+            3.1283347072148655e-05
+          ]
+        },
+        {
+          "bin": "22-51",
+          "images": 1314,
+          "contributors": 567,
+          "accuracy": 0.30441400304414,
+          "adjusted_excess": 0.013500761035007611,
+          "excess_ci95": [
+            -0.01742144044000727,
+            0.04654946660864331
+          ]
+        },
+        {
+          "bin": "52+",
+          "images": 10536,
+          "contributors": 1918,
+          "accuracy": 0.3930334092634776,
+          "adjusted_excess": 0.08890209757023539,
+          "excess_ci95": [
+            0.07021943384769254,
+            0.10741932872950212
+          ]
+        }
+      ],
+      "shared_without_training_images": 0
+    }
+  }
+}

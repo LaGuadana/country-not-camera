@@ -18,7 +18,10 @@ from geocnn.metrics import ci, cluster_bootstrap  # noqa: E402
 
 
 def load(run, splits):
-    p = pd.read_csv(os.path.join(run, "eval", "predictions.csv"), dtype=str, keep_default_na=False)
+    path = os.path.join(run, "eval", "predictions.csv")
+    if not os.path.isfile(path):
+        path = os.path.join(run, "predictions.csv")
+    p = pd.read_csv(path, dtype=str, keep_default_na=False)
     return p[p["split"].isin(splits)].set_index("id")
 
 
@@ -41,8 +44,10 @@ def main():
     def bacc_draws(p, split):
         m = base["split"] == split
         correct = (p["pred"][m] == p["country"][m]).to_numpy(np.float64)
+        # Match draws across models, not across independent contributor groups.
+        seed = a.seed + (0 if split == a.disjoint else 1)
         return cluster_bootstrap(correct, base["country"][m].map(label).to_numpy(),
-                                 base["creator_id"][m].to_numpy(), len(classes), a.n_boot, a.seed)[1]
+                                 base["creator_id"][m].to_numpy(), len(classes), a.n_boot, seed)[1]
 
     b = {s: bacc_draws(base, s) for s in (a.disjoint, a.shared)}
     print(f"change vs {a.baseline} (balanced accuracy, paired contributor bootstrap, 95% CI)")
